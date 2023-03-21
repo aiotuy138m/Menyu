@@ -18,9 +18,9 @@
 <自身が食べたメニューに対しての記録、他者のレビューをみて該当店舗に訪れた際のメニュー選びの参考>
 
 ## 設計書
-< ER図: https://drive.google.com/file/d/1Z0__T6A3wLPwbE2l34Kb1yRJl7Mic9Wc/view?usp=sharing
- テーブル定義書: https://docs.google.com/spreadsheets/d/1k_ecqGaVn0pGaQPHsIItygX_U4OYDOF-JGHHlVtRyxE/edit?usp=sharing
- 実装機能リスト: https://docs.google.com/spreadsheets/d/1TiYwpm9_Yw4ipzxSmeHwZfcB7a7sslbdahmEhNVXS7g/edit?usp=sharing >
+- ER図: https://drive.google.com/file/d/1Z0__T6A3wLPwbE2l34Kb1yRJl7Mic9Wc/view?usp=sharing
+- テーブル定義書: https://docs.google.com/spreadsheets/d/1k_ecqGaVn0pGaQPHsIItygX_U4OYDOF-JGHHlVtRyxE/edit?usp=sharing
+- 実装機能リスト: https://docs.google.com/spreadsheets/d/1TiYwpm9_Yw4ipzxSmeHwZfcB7a7sslbdahmEhNVXS7g/edit?usp=sharing
 
 ## 開発環境
 - OS：Linux(CentOS)
