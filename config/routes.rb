@@ -1,42 +1,42 @@
 Rails.application.routes.draw do
+  # 管理者用
   namespace :admin do
-    get 'shop_infos/index'
-    get 'shop_infos/edit'
+    root to: 'homes#top'
+    resources :customers, only: [:index, :edit, :show, :update]
+    resources :genres, only: [:index, :create, :edit, :update, :destroy]
+    resources :posts, only: [:index, :destroy]
+    resources :shop_infos, only: [:index, :edit, :update, :destroy]
   end
-  namespace :admin do
-    get 'posts/index'
-    get 'posts/edit'
+
+  # URL /admin/sign_in ...
+  devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
+    sessions: "admin/sessions"
+  }
+
+
+  # 顧客用
+  scope module: :public do
+    root to: "homes#top"
+    resources :customers, except: [:new, :create, :index, :edit, :update, :destroy, :show] do
+      collection do
+        get 'my_page', action: 'show'
+        patch 'information', action: 'update'
+        get 'information/edit', action: 'edit'
+        post 'confirm'
+        patch 'whithdraw'
+      end
+    end
+    resources :posts, only: [:index, :new, :create, :edit, :update, :destroy] do
+      resources :post_comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
+    end
+    resources :shop_infos, only: [:index, :show, :edit, :update, :destroy]
   end
-  namespace :admin do
-    get 'genres/index'
-    get 'genres/new'
-  end
-  namespace :public do
-    get 'customers/show'
-    get 'customers/edit'
-  end
-  namespace :admin do
-    get 'customers/index'
-    get 'customers/edit'
-  end
-  namespace :public do
-    get 'homes/top'
-  end
-  namespace :public do
-    get 'posts/index'
-    get 'posts/edit'
-    get 'posts/show'
-  end
-# 顧客用
+
 # URL /customers/sign_in ...
 devise_for :customers, controllers: {
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
 
-# 管理者用
-# URL /admin/sign_in ...
-devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
-  sessions: "admin/sessions"
-}
 end
