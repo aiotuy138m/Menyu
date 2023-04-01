@@ -22,7 +22,7 @@ Rails.application.routes.draw do
         get 'my_page', action: 'show'
         patch 'information', action: 'update'
         get 'information/edit', action: 'edit'
-        post 'confirm'
+        get 'confirm'
         patch 'whithdraw'
       end
     end
