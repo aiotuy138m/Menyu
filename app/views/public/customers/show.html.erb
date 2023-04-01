@@ -1,2 +1,31 @@
-<h1>Public::Customers#show</h1>
-<p>Find me in app/views/public/customers/show.html.erb</p>
+<h4 class="ml-5">マイページ</h4>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <div class="d-flex p-3">
+        <p class="mr-4 h5 font-weight-bold">登録情報</p>
+        <%= link_to "編集する", information_edit_customers_path, class:"btn btn-success" %>
+      </div>
+      <table class="table table-bordered col-8">
+        <tr>
+          <th class="col-3">ニックネーム</th>
+          <td>
+            <%= @customer.nickname %>
+          </td>
+        </tr>
+          <th class="col-3">メールアドレス</th>
+          <td><%= @customer.email %></td>
+      </table>
+      <table class="table table-borderless">
+        </tr>
+          <th class="col-1">投稿</th>
+          <td><%= link_to "一覧を見る", posts_path, class:"btn btn-primary" %></td>
+        </tr>
+        <tr>
+          <th class="col-1">次食べたいリスト</th>
+          <!--<td><= link_to "一覧を見る", orders_path, class:"btn btn-primary" ></td>-->
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

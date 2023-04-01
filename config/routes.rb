@@ -22,8 +22,8 @@ Rails.application.routes.draw do
         get 'my_page', action: 'show'
         patch 'information', action: 'update'
         get 'information/edit', action: 'edit'
-        post 'confirm'
-        patch 'whithdraw'
+        get 'confirm'
+        patch 'withdraw'
       end
     end
     resources :posts, only: [:index, :new, :create, :edit, :update, :destroy] do
