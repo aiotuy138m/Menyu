@@ -23,7 +23,7 @@ Rails.application.routes.draw do
         patch 'information', action: 'update'
         get 'information/edit', action: 'edit'
         get 'confirm'
-        patch 'whithdraw'
+        patch 'withdraw'
       end
     end
     resources :posts, only: [:index, :new, :create, :edit, :update, :destroy] do
