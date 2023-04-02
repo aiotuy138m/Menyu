@@ -1,2 +1,31 @@
-<h1>Public::Posts#index</h1>
-<p>Find me in app/views/public/posts/index.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <% @posts.each do |posts| %>
+      <table class="table tablebordered">
+        <tr>
+          <th>投稿画像</th>
+          <td>
+            <%= link_to post_path(posts.id) do %>
+              <%= image_tag posts.get_image %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>評価</th>
+          <td><%= posts.star %></td>
+        </tr>
+        <tr>
+          <th>コメント・メモ</th>
+          <td><%= posts.comment %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td></td>
+          <td><%= posts.user.nickname %></td>
+        </tr>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>

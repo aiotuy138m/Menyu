@@ -1,2 +1,27 @@
-<h1>Public::Posts#edit</h1>
-<p>Find me in app/views/public/posts/edit.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= form_with model: @post do |f| %>
+      <table class="table tablebordered">
+        <tr>
+          <th>投稿画像</th>
+          <td><%= f.file_field :image, accept: "image/*" %></td>
+        </tr>
+        <tr>
+          <th>評価</th>
+          <td><%= f.text_field :star %></td>
+        </tr>
+        <tr>
+          <th>コメント・メモ</th>
+          <td><%= f.text_area :comment %></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td></td>
+          <td><%= @post.user.nickname %></td>
+        </tr>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>
