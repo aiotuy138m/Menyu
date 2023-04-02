@@ -10,6 +10,8 @@ import "channels"
 import "bootstrap";
 import "../stylesheets/application"
 
+require('jquery_raty.js')
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()

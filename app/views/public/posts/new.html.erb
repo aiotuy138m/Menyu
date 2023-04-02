@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
+      <h5>投稿画面</h5>
       <%= form_with model: @post do |f| %>
       <table class="table tablebordered">
         <tr>
@@ -9,7 +10,18 @@
         </tr>
         <tr>
           <th>評価</th>
-          <td><%= f.text_field :star %></td>
+          <td>
+            <script>
+              $('#star').raty({
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'post[star]',
+                half: true,
+              });
+            </script>
+          </td>
         </tr>
         <tr>
           <th>コメント・メモ</th>

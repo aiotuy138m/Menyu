@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2023_04_02_055353) do
     t.integer "customer_id", null: false
     t.integer "shop_info_id"
     t.integer "genre_id", null: false
-    t.float "star", null: false
+    t.float "star", default: 0.0, null: false
     t.text "comment", null: false
     t.boolean "post_status", default: true, null: false
     t.datetime "created_at", precision: 6, null: false

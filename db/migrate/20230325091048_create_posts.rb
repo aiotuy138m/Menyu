@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       t.integer :customer_id, null: false
       t.integer :shop_info_id
       t.integer :genre_id, null: false
-      t.float :star, null: false
+      t.float :star, null: false, default: 0
       t.text :comment, null: false
       t.boolean :post_status, null: false, default: true
 
