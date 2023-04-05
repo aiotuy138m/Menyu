@@ -11,16 +11,13 @@
         <tr>
           <th>評価</th>
           <td>
-            <script>
-              $('#star').raty({
-                size     : 36,
-                starOff:  '<%= asset_path('star-off.png') %>',
-                starOn : '<%= asset_path('star-on.png') %>',
-                starHalf: '<%= asset_path('star-half.png') %>',
-                scoreName: 'post[star]',
-                half: true,
-              });
-            </script>
+            <%= f.radio_button :rate, 1 %>
+            
+            <input id="review01" type="radio" name="post[rate]" value="1"><label for="review01">★</label>
+            <input id="review02" type="radio" name="post[rate]" value="2"><label for="review02">★</label>
+            <input id="review03" type="radio" name="post[rate]" value="3"><label for="review03">★</label>
+            <input id="review04" type="radio" name="post[rate]" value="4"><label for="review04">★</label>
+            <input id="review05" type="radio" name="post[rate]" value="5"><label for="review05">★</label>
           </td>
         </tr>
         <tr>
