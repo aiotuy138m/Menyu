@@ -5,8 +5,11 @@ class Public::PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    if @post.save
-      redirect_to posts_path
+    @post.customer_id = current_customer.id
+    if @post.save!
+      # genre_list = genre_params[:name].split(/[[:blank:]]+/).select(&:present?)
+      @post.save_genres(genre_list)
+      redirect_to @post
     else
       render :new
     end
@@ -22,6 +25,7 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @genre_list = @post.genres.map { |genre| genre.name }
   end
 
   def update
@@ -38,10 +42,14 @@ class Public::PostsController < ApplicationController
     @post.delete
     redirect_to posts_path
   end
-  
+
   private
 
   def post_params
-    params.require(:post).permit(:star, :comment, :post_status, :image)
+    params.require(:post).permit(:rate, :comment, :post_status, :image, :shop_info_id, genre_id: [])
+  end
+
+  def genre_params
+    params.require(:post).permit(:genre_names)
   end
 end
