@@ -11,11 +11,21 @@
         <tr>
           <th>評価</th>
           <td>
-            <%= f.radio_button :rate, 1 %>
-            <%= f.radio_button :rate, 2 %>
-            <%= f.radio_button :rate, 3 %>
-            <%= f.radio_button :rate, 4 %>
-            <%= f.radio_button :rate, 5 %>
+            <div data-raty>
+              <%= f.hidden_field :rate, id: :rate %>
+　　　　    </div>
+            <script src="/packs/js/raty-675241b45b2049a4300b.js">
+              $('#data-raty').empty();
+　　　　      new Raty(document.querySelector('[data-raty]'), {
+                    size     : 36,
+                    starOff:  '<%= asset_path('star-off.png') %>',
+                    starOn : '<%= asset_path('star-on.png') %>',
+                    starHalf: '<%= asset_path('star-half.png') %>',
+                    scoreName: 'post[rate]',
+                    half: false
+                  });
+            </script>
+            
             <!--<input id="review01" type="radio" name="post[rate]" value="1"><label for="review01">★</label>-->
             <!--<input id="review02" type="radio" name="post[rate]" value="2"><label for="review02">★</label>-->
             <!--<input id="review03" type="radio" name="post[rate]" value="3"><label for="review03">★</label>-->

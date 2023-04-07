@@ -11,9 +11,8 @@ import "jquery";
 import "popper.js";
 import "bootstrap";
 import "../stylesheets/application"
-
-// import '../packs/raty.js';
+import "../packs/raty.js"
 
 Rails.start()
-Turbolinks.start()
+// Turbolinks.start()
 ActiveStorage.start()
