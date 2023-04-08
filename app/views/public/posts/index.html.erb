@@ -1,28 +1,40 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-10">
       <% @posts.each do |posts| %>
       <table class="table tablebordered">
         <tr>
           <th>投稿画像</th>
           <td>
             <%= link_to post_path(posts.id) do %>
-              <%= image_tag posts.get_image %>
+              <%= image_tag posts.get_image(100, 100) %>
             <% end %>
           </td>
         </tr>
         <tr>
+          <th>メニュー名</th>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
           <th>評価</th>
-          <td><%= posts.star %></td>
+          <td><%= posts.rate %></td>
+          <td></td>
         </tr>
         <tr>
           <th>コメント・メモ</th>
           <td><%= posts.comment %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>店名</th>
+          <td><%= posts.shop_info.name %></td>
+          <td></td>
         </tr>
         <tr>
           <th></th>
           <td></td>
-          <td><%= posts.user.nickname %></td>
+          <td><%= posts.customer.nickname %></td>
         </tr>
       </table>
       <% end %>

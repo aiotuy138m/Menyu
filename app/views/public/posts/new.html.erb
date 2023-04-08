@@ -11,44 +11,56 @@
         <tr>
           <th>評価</th>
           <td>
-            <div data-raty>
+            <% begin %>
+            <div id="rate">
               <%= f.hidden_field :rate, id: :rate %>
 　　　　    </div>
-            <script src="/packs/js/raty-675241b45b2049a4300b.js">
-              $('#data-raty').empty();
-　　　　      new Raty(document.querySelector('[data-raty]'), {
-                    size     : 36,
-                    starOff:  '<%= asset_path('star-off.png') %>',
-                    starOn : '<%= asset_path('star-on.png') %>',
-                    starHalf: '<%= asset_path('star-half.png') %>',
-                    scoreName: 'post[rate]',
-                    half: false
-                  });
+            <script>
+              new Raty(document.querySelector('#rate'), {
+                size     : 36,
+                starOff:  '<%= asset_path('star-off.png') %>',
+                starOn : '<%= asset_path('star-on.png') %>',
+                starHalf: '<%= asset_path('star-half.png') %>',
+                scoreName: 'post[rate]',
+                half: false
+              });
             </script>
-            
-            <!--<input id="review01" type="radio" name="post[rate]" value="1"><label for="review01">★</label>-->
-            <!--<input id="review02" type="radio" name="post[rate]" value="2"><label for="review02">★</label>-->
-            <!--<input id="review03" type="radio" name="post[rate]" value="3"><label for="review03">★</label>-->
-            <!--<input id="review04" type="radio" name="post[rate]" value="4"><label for="review04">★</label>-->
-            <!--<input id="review05" type="radio" name="post[rate]" value="5"><label for="review05">★</label>-->
+            <% end %>
+
+            <input type="range" class="form-contro-l-range" id="review01" type="radio" name="post[rate]" value="3" min="0" max="5" step="0.5"><label for="review01"></label>
           </td>
         </tr>
         <tr>
-          <th></th>
+          <th>店名</th>
           <td>
             <%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %>
           </td>
         </tr>
+        <% @genres.each do |genre| %>
         <tr>
-          <th></th>
+          <th>ジャンル</th>
           <td>
-            <%= f.collection_select(:genre_id, Genre.all, :id, :name,{:prompt => 'ジャンルを選択してください' }, {:multiple => true}) %>
+            <%= f.check_box :genre_id,
+                            { muktiple: true,
+                              checked: @post.genre_id.present? ? @post.genre_id.split(",").include?(genre) : false },
+                              genre, nil %>
+            <span><%= genre %></span>
           </td>
         </tr>
+        <% end %>
         <tr>
           <th>コメント・メモ</th>
           <td><%= f.text_area :comment %></td>
         </tr>
+        <tr>
+          <th><%= f.label "公開設定" %></th>
+          <td>
+              <%= f.radio_button :is_active, true, style: "accent-color:black;",checked: true %>
+              <%= f.label :is_active, "公開", value: true %>
+              <%= f.radio_button :is_active, false, class:"ml-5", style: "accent-color:black;" %>
+              <%= f.label :is_active, "非公開", value: false %>
+          </td>
+          </tr>
         <tr>
           <th></th>
           <td><%= f.submit '投稿', class:"btn btn-lg btn-block btn-info mt-4" %></td>

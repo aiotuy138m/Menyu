@@ -1,10 +1,12 @@
 class Public::PostsController < ApplicationController
   def new
     @post = Post.new
+    @genres = Genre.all
   end
 
   def create
     @post = Post.new(post_params)
+    @genres = Genre.all
     @post.customer_id = current_customer.id
     if @post.save!
       # genre_list = genre_params[:name].split(/[[:blank:]]+/).select(&:present?)
@@ -46,7 +48,7 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:rate, :comment, :post_status, :image, :shop_info_id, genre_id: [])
+    params.require(:post).permit(:rate, :comment, :post_status, :image, :shop_info_id, :genre_id)
   end
 
   def genre_params
