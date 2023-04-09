@@ -1,2 +1,56 @@
-<h1>Public::Posts#index</h1>
-<p>Find me in app/views/public/posts/index.html.erb</p>
+<% if @genre.present? %>
+  <h4>ジャンル「<%= @genre.name %>」の投稿一覧</h4>
+<% else %>
+  <h4>投稿一覧</h4>
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-8">
+      <% @posts.each do |posts| %>
+      <table class="table table-borderless">
+        <tr>
+          <th></th>
+          <td>
+            <%= link_to post_path(posts.id) do %>
+              <%= image_tag posts.get_image(500, 500) %>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>メニュー名</th>
+          <td><%= posts.menu %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>ジャンル</th>
+          <td class="text-primary">
+            <% posts.genres.each do |genre| %>
+              #<%= link_to genre.name, posts_path(genre_id: genre.id) %>　
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>評価</th>
+          <td><%= "★" * (posts.rate).to_i %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>コメント・メモ</th>
+          <td><%= posts.comment %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>店名</th>
+          <td><%= posts.shop_info.name %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th></th>
+          <td></td>
+          <td><%= posts.customer.nickname %></td>
+        </tr>
+      </table>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :customers, only: [:index, :edit, :show, :update]
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
     resources :posts, only: [:index, :destroy]
-    resources :shop_infos, only: [:index, :edit, :update, :destroy]
+    resources :shop_infos, only: [:new, :create, :index, :edit, :update, :destroy]
   end
 
   # URL /admin/sign_in ...

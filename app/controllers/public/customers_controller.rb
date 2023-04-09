@@ -1,6 +1,7 @@
 class Public::CustomersController < ApplicationController
   def show
     @customer = Customer.find(current_customer.id)
+    @posts = Post.where(customer_id: current_customer.id).includes(:customer).order("created_at DESC")
   end
 
   def edit

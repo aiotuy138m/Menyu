@@ -1,31 +1,77 @@
 <h4 class="ml-5">マイページ</h4>
 <div class="container">
   <div class="row">
-    <div class="col">
+    <div class="col-md-4">
       <div class="d-flex p-3">
         <p class="mr-4 h5 font-weight-bold">登録情報</p>
         <%= link_to "編集する", information_edit_customers_path, class:"btn btn-success" %>
       </div>
       <table class="table table-bordered col-8">
         <tr>
-          <th class="col-3">ニックネーム</th>
+          <th class="">ニックネーム</th>
           <td>
             <%= @customer.nickname %>
           </td>
         </tr>
-          <th class="col-3">メールアドレス</th>
+          <th class="">メールアドレス</th>
           <td><%= @customer.email %></td>
       </table>
       <table class="table table-borderless">
         </tr>
-          <th class="col-1">投稿</th>
-          <td><%= link_to "一覧を見る", posts_path, class:"btn btn-primary" %></td>
+          <th class="">非公開</th>
+          <td><%= link_to "非公開一覧を見る", posts_path, class:"btn btn-primary" %></td>
         </tr>
         <tr>
-          <th class="col-1">次食べたいリスト</th>
+          <th class="">次食べたいリスト</th>
           <!--<td><= link_to "一覧を見る", orders_path, class:"btn btn-primary" ></td>-->
         </tr>
       </table>
+    </div>
+    <div class="col-md-8">
+      <% @posts.each do |posts| %>
+        <div>
+          <% if posts.post_status == false %>
+            <p>◎</p>
+          <% else %>
+            <p></p>
+          <% end %>
+        </div>
+        <div>
+          <%= link_to post_path(posts.id) do %>
+            <%= image_tag posts.get_image(500, 500), class:"img-responsive img-rounded" %>
+          <% end %>
+        </div>
+      <table class="table table-borderless col-10">
+        <tr>
+          <th>メニュー名</th>
+          <td><%= posts.menu %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>ジャンル</th>
+          <td class="text-primary">
+            <% posts.genres.each do |genre| %>
+              #<%= link_to genre.name, posts_path(genre_id: genre.id) %>　
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th>評価</th>
+          <td><%= "★" * (posts.rate).to_i %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>コメント・メモ</th>
+          <td><%= posts.comment %></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th>店名</th>
+          <td><%= posts.shop_info.name %></td>
+          <td></td>
+        </tr>
+      </table>
+      <% end %>
     </div>
   </div>
 </div>
