@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-3">
-      <%= form_with model: @post do |f| %>
+      <%= form_with model: @post, url: post_path do |f| %>
       <table class="table tablebordered">
         <tr>
           <th>投稿画像</th>
@@ -14,14 +14,13 @@
         <tr>
           <th>評価</th>
           <td>
-            ★　★　★　★　★<br>
-            <input type="range" class="form-contro-l-range" id="rate" type="radio" name="post[rate]" value="3" min="0" max="5" step="0.5"><label for="review01"></label>
+            <input type="range" class="form-contro-l-range" id="rate" type="radio" name="post[rate]" min="0" max="5" step="1"><label for="review01"></label>
           </td>
         </tr>
         <tr>
           <th>店名</th>
           <td>
-            <%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %>
+            <%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :name), class:"custom-select col-12" %>
           </td>
         </tr>
         <tr>

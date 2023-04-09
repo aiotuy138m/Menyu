@@ -9,7 +9,7 @@ class Public::PostsController < ApplicationController
     @genres = Genre.all
     @post.customer_id = current_customer.id
     if @post.save
-      redirect_to my_page_customers_path
+      redirect_to posts_path
     else
       render :new
     end
@@ -20,7 +20,7 @@ class Public::PostsController < ApplicationController
       @genre = Genre.find(params[:genre_id])
       @posts = @genre.posts
     else
-      @posts = Post.all
+      @posts = Post.where(post_status: true).order("created_at DESC")
     end
   end
 
@@ -30,7 +30,6 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
-    @genre_list = @post.genres.map { |genre| genre.name }
   end
 
   def update

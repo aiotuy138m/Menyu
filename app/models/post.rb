@@ -10,12 +10,13 @@ class Post < ApplicationRecord
 
   def get_image(width, hight)
     unless image.attached?
-      file_path = Rails.root.join('app/assets/images/no_image.png')
-      image.attach(io: File.open(file_path), filename: 'default-image.png', content_type: 'image/png')
+      file_path = Rails.root.join('app/assets/images/no-image.png')
+      image.attach(io: File.open(file_path), filename: 'no-image.png', content_type: 'image/png')
+    else
+      image.variant(resize_to_limit: [width, hight]).processed
     end
-    image.variant(resize_to_limit: [width, hight]).processed
   end
-
+  
   validates :rate, numericality: {
     less_than_or_equal_to: 5,
     greater_than_or_equal_to: 0
