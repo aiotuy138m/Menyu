@@ -77,6 +77,7 @@ ActiveRecord::Schema.define(version: 2023_04_06_124854) do
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_genres_on_name", unique: true
   end
 
   create_table "post_comments", force: :cascade do |t|
@@ -88,16 +89,19 @@ ActiveRecord::Schema.define(version: 2023_04_06_124854) do
   end
 
   create_table "post_genres", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "genre_id"
+    t.integer "post_id", null: false
+    t.integer "genre_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["genre_id"], name: "index_post_genres_on_genre_id"
+    t.index ["post_id", "genre_id"], name: "index_post_genres_on_post_id_and_genre_id", unique: true
+    t.index ["post_id"], name: "index_post_genres_on_post_id"
   end
 
   create_table "posts", force: :cascade do |t|
     t.integer "customer_id", null: false
     t.integer "shop_info_id"
-    t.integer "genre_id", null: false
+    t.string "menu", null: false
     t.float "rate", default: 0.0, null: false
     t.text "comment", null: false
     t.boolean "post_status", default: true, null: false
