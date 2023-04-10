@@ -16,7 +16,23 @@
         </tr>
         <tr>
           <th></th>
-          <td></td>
+          <td>
+            <td>
+            <% if @post.favorited_by?(current_customer) %>
+              <p>
+                <%= link_to post_favorites_path(@post), method: :delete do %>
+                  ♥<%= @post.favorites.count %>食べたい
+                <% end %>
+              </p>
+            <% else %>
+              <p>
+                <%= link_to post_favorites_path(@post), method: :post do %>
+                  ♡<%= @post.favorites.count %>食べたい
+                <% end %>
+              </p>
+            <% end %>
+          </td>
+          </td>
           <td><%= @post.user.nickname %></td>
         </tr>
       </table>

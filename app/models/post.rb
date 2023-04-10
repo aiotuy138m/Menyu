@@ -1,13 +1,13 @@
 class Post < ApplicationRecord
   has_one_attached :image
 
-  has_many :favorite, dependent: :destroy
   has_many :posts_coment, dependent: :destroy
   has_many :post_genres, dependent: :destroy
   has_many :genres, -> { order(:name) }, through: :post_genres
   belongs_to :customer
   belongs_to :shop_info
-
+  has_many :favorite_posts, through: :favorites, source: :post
+  
   def get_image(width, hight)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no-image.png')
@@ -22,6 +22,9 @@ class Post < ApplicationRecord
     greater_than_or_equal_to: 0
   }, presence: true
 
+  def favorited_by?(customer)
+    favorites.exists?(customer_id: customer.id)
+  end
   
 
 end
