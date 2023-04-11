@@ -4,11 +4,11 @@
       <table class="table tablebordered">
         <tr>
           <th>投稿画像</th>
-          <td><%= image_tag @post.get_image %></td>
+          <td><%= image_tag @post.get_image(500, 500) %></td>
         </tr>
         <tr>
           <th>評価</th>
-          <td><%= @post.star %></td>
+          <td><%= @post.rate %></td>
         </tr>
         <tr>
           <th>コメント・メモ</th>
@@ -33,7 +33,7 @@
             <% end %>
           </td>
           </td>
-          <td><%= @post.user.nickname %></td>
+          <td><%= @post.customer.nickname %></td>
         </tr>
       </table>
     </div>
