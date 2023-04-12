@@ -18,12 +18,10 @@
       </table>
       <table class="table table-borderless">
         </tr>
-          <th class="">非公開</th>
-          <td><%= link_to "非公開一覧を見る", posts_path, class:"btn btn-primary" %></td>
+          <td><%= link_to "非公開一覧を見る", private_posts_path, class:"btn btn-primary" %></td>
         </tr>
         <tr>
-          <th class="">次食べたいリスト</th>
-          <!--<td><= link_to "一覧を見る", orders_path, class:"btn btn-primary" ></td>-->
+          <td><%= link_to "次食べたいリスト", favorites_posts_path, class:"btn btn-success" %></td>
         </tr>
       </table>
     </div>
@@ -51,7 +49,7 @@
           <th>ジャンル</th>
           <td class="text-primary">
             <% posts.genres.each do |genre| %>
-              #<%= link_to genre.name, posts_path(genre_id: genre.id) %>　
+              #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
             <% end %>
           </td>
         </tr>

@@ -26,7 +26,10 @@ Rails.application.routes.draw do
         patch 'withdraw'
       end
     end
-    resources :posts, only: [:index, :new, :create, :edit, :update, :destroy] do
+    resources :posts, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+      collection do
+        get 'favorites'
+      end
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
