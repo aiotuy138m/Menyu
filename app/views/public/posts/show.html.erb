@@ -1,39 +1,65 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-8">
+      <div class="mx-auto" style="width: 500px;">
+        <%= image_tag @post.get_image(500, 500), class:"img-responsive img-rounded" %>
+      </div>
       <table class="table tablebordered">
         <tr>
-          <th>投稿画像</th>
-          <td><%= image_tag @post.get_image(500, 500) %></td>
+          <th style="width: 20%">メニュー名</th>
+          <td><%= @post.menu %></td>
         </tr>
         <tr>
-          <th>評価</th>
-          <td><%= @post.rate %></td>
-        </tr>
-        <tr>
-          <th>コメント・メモ</th>
-          <td><%= @post.comment %></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td>
-            <td>
-            <% if @post.favorited_by?(current_customer) %>
-              <p>
-                <%= link_to post_favorites_path(@post), method: :delete do %>
-                  ♥<%= @post.favorites.count %>食べたい
-                <% end %>
-              </p>
-            <% else %>
-              <p>
-                <%= link_to post_favorites_path(@post), method: :post do %>
-                  ♡<%= @post.favorites.count %>食べたい
-                <% end %>
-              </p>
+          <th style="width: 20%">ジャンル</th>
+          <td class="text-primary">
+            <% @post.genres.each do |genre| %>
+              #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
             <% end %>
           </td>
-          </td>
-          <td><%= @post.customer.nickname %></td>
+        </tr>
+        <tr>
+          <th style="width: 20%">評価</th>
+          <td><%= "★" * (@post.rate).to_i %></td>
+        </tr>
+        <tr>
+          <th style="width: 20%">コメント・メモ</th>
+          <td><%= @post.comment %></td>
+        </tr>
+        </table>
+          <div>
+            <% if @post.favorited_by?(current_customer) %>
+            <p>
+              <%= link_to post_favorites_path(@post), method: :delete do %>
+                ♥<%= @post.favorites.count %>
+              <% end %>
+            </p>
+            <% else %>
+            <p>
+              <%= link_to post_favorites_path(@post), method: :post do %>
+                ♡<%= @post.favorites.count %>
+              <% end %>
+            </p>
+            <% end %>
+            <p class="text-right">by　<%= @post.customer.nickname %></p>
+          </div>
+    </div>
+    <div class="mt-5">
+      <h4>店情報</h4>
+      <table class="table tablebordered">
+        <tr>
+          <th>店名</th>
+          <td><%= @post.shop_info.name %></td>
+        </tr>
+        <tr>
+          <th>店住所</th>
+          <td><%= @post.shop_info.shop_address %></td>
+          <td></td>
+        </tr>
+          <th></th>
+          <td><%= @post.shop_info.shop_url %></td>
+        </tr>
+        <tr>
+          <!--MAP-->
         </tr>
       </table>
     </div>

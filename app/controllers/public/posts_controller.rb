@@ -47,6 +47,10 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def favorites
+    @post = current_customer.favorite_posts.includes(:customer).order(created_at: :desc)
+  end
+
   private
 
   def post_params

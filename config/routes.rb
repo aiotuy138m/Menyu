@@ -27,6 +27,9 @@ Rails.application.routes.draw do
       end
     end
     resources :posts, only: [:index, :new, :create, :show, :edit, :update, :destroy] do
+      collection do
+        get 'favorites'
+      end
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end

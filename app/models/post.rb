@@ -7,6 +7,7 @@ class Post < ApplicationRecord
   belongs_to :customer
   belongs_to :shop_info
   has_many :favorites, dependent: :destroy
+  has_many :favorite_posts, through: :favorites ,source: :post
   
 
   def get_image(width, hight)
@@ -24,7 +25,7 @@ class Post < ApplicationRecord
   }, presence: true
 
   def favorited_by?(customer)
-    favorites.exists?(customer_id: customer.id)
+    favorites.where(customer_id: customer.id).exists?
   end
 
 

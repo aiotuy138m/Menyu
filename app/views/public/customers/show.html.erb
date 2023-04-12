@@ -18,12 +18,10 @@
       </table>
       <table class="table table-borderless">
         </tr>
-          <th class="">非公開</th>
           <td><%= link_to "非公開一覧を見る", posts_path, class:"btn btn-primary" %></td>
         </tr>
         <tr>
-          <th class="">次食べたいリスト</th>
-          <!--<td><= link_to "一覧を見る", orders_path, class:"btn btn-primary" ></td>-->
+          <td><%= link_to "次食べたいリスト", posts_path(params[:faborites_id]), class:"btn btn-success" %></td>
         </tr>
       </table>
     </div>
