@@ -1,12 +1,7 @@
-<% if @genre.present? %>
-  <h4>ジャンル「<%= @genre.name %>」の投稿一覧</h4>
-<% else %>
-  <h4>投稿一覧</h4>
-<% end %>
 <div class="container">
   <div class="row">
     <div class="col-8">
-      <% @posts.each do |posts| %>
+      <% @post.each do |posts| %>
       <table class="table table-borderless">
         <tr>
           <th></th>
@@ -47,7 +42,7 @@
         <tr>
           <th></th>
           <td>♥<%= posts.favorites.count %></td>
-          <td>by　<%= posts.customer.nickname %></td>
+          <td><%= link_to '編集する', edit_post_path %></td>
         </tr>
       </table>
       <% end %>
