@@ -1,27 +1,24 @@
-<h4>食べたいリスト</h4>
-<% if !@post.exists? %>
- <h2>食べたいリストはありません。</h2>
+<h4>非公開一覧</h4>
+<% if !@posts.exists? %>
+ <h2>非公開設定の投稿はありません。</h2>
 <% else %>
   <div class="container">
     <div class="row">
       <div class="col-8">
-        <% @post.each do |posts| %>
+        <% @posts.each do |posts| %>
+          <div>
+            <%= link_to post_path(posts.id) do %>
+              <%= image_tag posts.get_image(500, 500) %>
+            <% end %>
+          </div>
         <table class="table table-borderless">
           <tr>
-            <th></th>
-            <td>
-              <%= link_to post_path(posts.id) do %>
-                <%= image_tag posts.get_image(500, 500) %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <th>メニュー名</th>
+            <th style="width: 20%">メニュー名</th>
             <td><%= posts.menu %></td>
             <td></td>
           </tr>
           <tr>
-            <th>ジャンル</th>
+            <th style="width: 20%">ジャンル</th>
             <td class="text-primary">
               <% posts.genres.each do |genre| %>
                 #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
@@ -29,24 +26,24 @@
             </td>
           </tr>
           <tr>
-            <th>評価</th>
+            <th style="width: 20%">評価</th>
             <td><%= "★" * (posts.rate).to_i %></td>
             <td></td>
           </tr>
           <tr>
-            <th>コメント・メモ</th>
+            <th style="width: 20%">コメント・メモ</th>
             <td><%= posts.comment %></td>
             <td></td>
           </tr>
           <tr>
-            <th>店名</th>
+            <th style="width: 20%">店名</th>
             <td><%= posts.shop_info.name %></td>
             <td></td>
           </tr>
           <tr>
-            <th></th>
+            <th style="width: 20%"></th>
             <td>♥<%= posts.favorites.count %></td>
-            <td>by　<%= posts.customer.nickname %></td>
+            <td><%= link_to '編集する', edit_post_path(posts.id), class:"btn btn-success" %></td>
           </tr>
         </table>
         <% end %>

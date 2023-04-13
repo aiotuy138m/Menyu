@@ -55,8 +55,7 @@ class Public::PostsController < ApplicationController
   end
 
   def not_active # 非公開一覧、Prefix：private_posts_path
-    
-    @posts = Post.where(post_status: false).order("created_at DESC")
+    @posts = current_customer.post.where(post_status: false).order("created_at DESC")
   end
 
   private
