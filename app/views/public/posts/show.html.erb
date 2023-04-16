@@ -42,6 +42,7 @@
             <% end %>
             <p class="text-right">by　<%= @post.customer.nickname %></p>
           </div>
+          <div class="container text-center"><%= link_to '編集する', edit_post_path(@post.id), class:"btn btn-success" %></div>
     </div>
     <div class="mt-5">
       <h4>店情報</h4>
