@@ -8,11 +8,22 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @genres = Genre.all
     @post.customer_id = current_customer.id
-    if @post.save
-      redirect_to posts_path
+    shop_info = ShopInfo.new
+    @post.shop_info_id = shop_info.id
+    if params[:post][:select_shop] == "0"
+      @post.save
+    elsif params[:post][:select_shop] == "1"
+      shop_info.shop_name = params[:post][:shop_name]
+      shop_info.address = params[:post][:address]
+      shop_info.shop_url = params[:post][:shop_url]
+      shop_info.latitude =
+      shop_info.longitude =
+      shop_info.save
+      @post.save!
     else
       render :new
     end
+    redirect_to posts_path
   end
 
   def index

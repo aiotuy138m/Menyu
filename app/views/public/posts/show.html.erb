@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-7">
       <div class="mx-auto" style="width: 500px;">
         <%= image_tag @post.get_image(500, 500), class:"img-responsive img-rounded" %>
       </div>
@@ -44,25 +44,42 @@
           </div>
           <div class="container text-center"><%= link_to '編集する', edit_post_path(@post.id), class:"btn btn-success" %></div>
     </div>
-    <div class="mt-5">
+    <div class="col-md-5 mt-5">
       <h4>店情報</h4>
       <table class="table tablebordered">
         <tr>
           <th>店名</th>
-          <td><%= @post.shop_info.name %></td>
+          <td><%= @post.shop_info.shop_name %></td>
         </tr>
         <tr>
           <th>店住所</th>
-          <td><%= @post.shop_info.shop_address %></td>
+          <td><%= @post.shop_info.address %></td>
           <td></td>
         </tr>
           <th></th>
           <td><%= @post.shop_info.shop_url %></td>
         </tr>
-        <tr>
-          <!--MAP-->
-        </tr>
       </table>
+      <div id="map" style='height: 300px; width: 450px;'></div>
+    <script>
+      var map;
+      function initMap() {
+        // マップを作成
+        map = new google.maps.Map(document.getElementById('map'), {
+        // マップの中心に表示する場所の緯度経度を指定
+          center: { lat: <%= @post.shop_info.latitude %>, lng: <%= @post.shop_info.longitude %> },
+          zoom: 12,
+        });
+
+        // マーカーを立てる場所の緯度経度を指定
+        marker = new google.maps.Marker({
+          position: { lat: <%= @post.shop_info.latitude %>, lng:<%= @post.shop_info.longitude %> },
+          map: map
+        });
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_JS_API_KEY'] %>&callback=initMap"
+    async defer></script>
     </div>
   </div>
 </div>
