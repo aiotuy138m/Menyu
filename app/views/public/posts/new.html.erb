@@ -3,7 +3,40 @@
     <div class="col">
       <h5>投稿画面</h5>
       <%= form_with model: @post do |f| %>
-      <table class="table tablebordered">
+      <ul class="list-unstyled ml-3">
+          <li>
+            <%= f.radio_button :select_shop, 0 %>
+            <%= f.label "登録済みの店から選択" %></br>
+            <p class="ml-3 col-12"><%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %></p>
+          </li>
+          <%= f.radio_button :select_shop, 1 %>
+          <%= f.label "新しくお店を登録" %>
+          <li>
+            <table class="ml-3 table table-borderless talbe-sm">
+              <tr>
+                <th class="col-4">店名</th>
+                <td>
+                  <%= f.text_field :shop_name %>
+                </td>
+                <td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <th class="col-4">店の住所</th>
+                <td colspan="4">
+                  <%= f.text_field :address, class:"col-12" %>
+                </td>
+              </tr>
+              <tr>
+                <th class="col-4">店のHP等URL</th>
+                <td>
+                  <%= f.text_field :shop_url %>
+                </td>
+                <td></td><td></td><td></td>
+              </tr>
+            </table>
+          </li>
+      </ul>
+      <table class="table table-borderless">
         <tr>
           <th>投稿画像</th>
           <td><%= f.file_field :image, accept: "image/*" %></td>
@@ -17,12 +50,6 @@
           <td>
             　1〜5<br>
             <input type="range" class="form-contro-l-range" id="rate" type="radio" name="post[rate]" value="3" min="0" max="5" step="1"><label for="review01"></label>
-          </td>
-        </tr>
-        <tr>
-          <th>店名</th>
-          <td>
-            <%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %>
           </td>
         </tr>
         <tr>
@@ -49,11 +76,8 @@
             <%= f.label :post_status, "非公開", value: false %>
           </td>
           </tr>
-        <tr>
-          <th></th>
-          <td><%= f.submit '投稿', class:"btn btn-lg btn-block btn-info mt-4" %></td>
-        </tr>
       </table>
+      <div><%= f.submit '投稿', class:"btn btn-lg btn-block btn-info mt-4" %></div>
       <% end %>
     </div>
   </div>

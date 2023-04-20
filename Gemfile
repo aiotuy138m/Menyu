@@ -56,3 +56,11 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'devise'
+
+gem 'dotenv-rails'
+
+gem 'google_places'
+
+gem 'gmaps4rails'
+
+gem 'geocoder'

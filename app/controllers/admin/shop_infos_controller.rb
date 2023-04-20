@@ -16,9 +16,14 @@ class Admin::ShopInfosController < ApplicationController
   end
 
   def edit
+    @shop_info = ShopInfo.find(params[:id])
   end
 
   def update
+    @shop_info = ShopInfo.find(params[:id])
+    if @shop_info.update(shop_info_params)
+      redirect_to new_admin_shop_info_path
+    end
   end
 
   def destroy
