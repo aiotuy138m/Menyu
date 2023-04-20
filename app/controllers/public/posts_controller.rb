@@ -26,7 +26,7 @@ class Public::PostsController < ApplicationController
         @post.save!
       end
     else
-      render :new
+      return
     end
     redirect_to posts_path
   end
@@ -35,6 +35,12 @@ class Public::PostsController < ApplicationController
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
       @posts = @genre.posts
+    else
+      @posts = Post.where(post_status: true).order("created_at DESC")
+    end
+    if params[:shop_info_id]
+      @shop_info = ShopInfo.find(params[:shop_info_id])
+      @posts = @shop_info.post
     else
       @posts = Post.where(post_status: true).order("created_at DESC")
     end

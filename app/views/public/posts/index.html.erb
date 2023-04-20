@@ -1,5 +1,7 @@
 <% if @genre.present? %>
   <h4>ジャンル「<%= @genre.name %>」の投稿一覧</h4>
+<% elsif @shop_info.present? %>
+  <h4>「<%= @shop_info.shop_name %>」の投稿一覧</h4>
 <% else %>
   <h4>投稿一覧</h4>
 <% end %>
@@ -41,15 +43,17 @@
         </tr>
         <tr>
           <th>店名</th>
-          <td><%= posts.shop_info.shop_name %></td>
+          <td class="text-primary">
+            <%= link_to posts.shop_info.shop_name, posts_path(shop_info_id: posts.shop_info.id) %>
+          </td>
           <td></td>
         </tr>
         <tr>
           <th></th>
           <td>♥<%= posts.favorites.count %></td>
-          <td>by　<%= posts.customer.nickname %></td>
         </tr>
       </table>
+      <p class="text-right">by　<%= posts.customer.nickname %></p>
       <% end %>
     </div>
   </div>

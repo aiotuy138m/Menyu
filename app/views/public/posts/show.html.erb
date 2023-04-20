@@ -68,7 +68,7 @@
         map = new google.maps.Map(document.getElementById('map'), {
         // マップの中心に表示する場所の緯度経度を指定
           center: { lat: <%= @post.shop_info.latitude %>, lng: <%= @post.shop_info.longitude %> },
-          zoom: 12,
+          zoom: 15,
         });
 
         // マーカーを立てる場所の緯度経度を指定
