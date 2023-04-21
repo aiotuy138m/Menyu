@@ -15,8 +15,16 @@ class Public::SessionsController < Devise::SessionsController
    end
 
   # DELETE /resource/sign_out
+  # ゲストはログアウト時に投稿・お気に入り・コメント削除
    def destroy
+    if current_customer.email == 'guest@example.com'
+      Post.where(customer_id: current_customer.id).destroy_all
+      Favorite.where(customer_id: current_customer.id).destroy_all
+      PostComment.where(customer_id: current_customer.id).destroy_all
+      super
+    else
      super
+    end
    end
 
    def after_sign_in_path_for(resource)
@@ -44,8 +52,8 @@ class Public::SessionsController < Devise::SessionsController
    def customer_state
      @customer = Customer.find_by(email: params[:customer][:email])
      if @customer.valid_password?(params[:customer][:password])
-       if @customer.is_deleted == "deleted"
-           redirect_to new_customer_registration_path
+       if @customer.is_deleted == true
+         redirect_to new_customer_registration_path
        end
      end
    end

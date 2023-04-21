@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
   has_one_attached :image
 
-  has_many :posts_coment, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
   has_many :post_genres, dependent: :destroy
   has_many :genres, -> { order(:name) }, through: :post_genres
   belongs_to :customer
