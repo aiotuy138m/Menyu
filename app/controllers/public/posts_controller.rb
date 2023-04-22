@@ -48,6 +48,7 @@ class Public::PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post_comment = PostComment.new
     if @post.post_status == false && @post.customer != current_customer
       redirect_to posts_path
     end
