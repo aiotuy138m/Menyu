@@ -1,2 +1,12 @@
-<h1>Public::Homes#top</h1>
-<p>Find me in app/views/public/homes/top.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <h1>Menyuへようこそ！</h1>
+      <p>Menyuとは</br>麺(Men)に特化したメニュー(Menu)レビューサイトです。</p>
+      <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-primary" %>
+      <%= link_to "ログイン", new_customer_session_path, class:"btn btn-success" %>
+      <p>ゲストは投稿・閲覧・コメント機能が使えますが</br>ログアウト時に投稿やコメント、お気に入りデータが削除されます。</p>
+      <%= link_to 'ゲストログイン', customers_guest_sign_in_path, method: :post, class:"btn btn-outline-info" %>
+    </div>
+  </div>
+</div>
