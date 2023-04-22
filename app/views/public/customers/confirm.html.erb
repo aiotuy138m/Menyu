@@ -1,4 +1,8 @@
 <div class="container text-center">
+  <!--ゲストに退会させない-->
+  <% if @customer.email == 'guest@example.com' %>
+    <p>ゲストは退会はできません。</br>ログアウトボタンを押してログアウトしてください。</p>
+  <% else %>
   <h4>本当に退会しますか？</h4>
   <p>退会すると、会員登録情報や</br>
   これまでのレビューが閲覧できなくなります。</br>
@@ -9,4 +13,5 @@
       <%= link_to "退会する", withdraw_customers_path, method: :patch,"data-confirm" => "本当に退会しますか？", class:"btn btn-danger col-2" %>
     </p>
   </div>
+  <% end %>
 </div>

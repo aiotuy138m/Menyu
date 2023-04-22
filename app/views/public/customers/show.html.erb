@@ -4,7 +4,12 @@
     <div class="col-md-4">
       <div class="d-flex p-3">
         <p class="mr-4 h5 font-weight-bold">登録情報</p>
-        <%= link_to "編集する", information_edit_customers_path, class:"btn btn-success" %>
+        <!--ゲストには編集ボタンは表示しない-->
+        <% if @customer.email == 'guest@example.com' %>
+          <div></div>
+        <% else %>
+          <%= link_to "編集する", information_edit_customers_path, class:"btn btn-success" %>
+        <% end %>
       </div>
       <table class="table table-bordered col-8">
         <tr>
