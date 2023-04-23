@@ -8,6 +8,8 @@ class Post < ApplicationRecord
   belongs_to :shop_info
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites ,source: :post
+  has_many :reports, class_name: "Repoet", foreign_key: "reporter_id", dependent: :destroy
+  has_many :reported_post, class_name: "Repoet", foreign_key: "reported_id", dependent: :destroy
   
 
   def get_image(width, hight)
