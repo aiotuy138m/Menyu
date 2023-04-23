@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :customers, only: [:index, :edit, :show, :update]
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
-    resources :posts, only: [:index, :destroy]
+    resources :posts, only: [:index, :destroy, :update]
     resources :shop_infos, only: [:new, :create, :index, :edit, :update, :destroy]
   end
 
