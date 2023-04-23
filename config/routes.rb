@@ -4,8 +4,9 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :customers, only: [:index, :edit, :show, :update]
     resources :genres, only: [:index, :create, :edit, :update, :destroy]
-    resources :posts, only: [:index, :destroy, :update]
+    resources :posts, only: [:index, :destroy, :update, :show]
     resources :shop_infos, only: [:new, :create, :index, :edit, :update, :destroy]
+    resources :reports, only: [:index, :show, :update]
   end
 
   # URL /admin/sign_in ...
@@ -33,6 +34,7 @@ Rails.application.routes.draw do
       end
       resources :post_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
+      resource :reports, only: [:new, :create]
     end
     resources :shop_infos, only: [:index, :show, :edit, :update, :destroy]
   end

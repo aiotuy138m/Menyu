@@ -12,14 +12,20 @@
           <th>評価</th>
           <th>感想</th>
           <th>店名</th>
+          <th>ステータス</th>
+          <th>削除</th>
         </tr>
       <% @posts.each do |posts| %>
         <tr>
           <td><%= posts.customer.id %></td>
           <td><%= posts.customer.nickname %></td>
-          <td><%= image_tag posts.get_image(100, 100) %></td>
+          <td>
+            <%= link_to admin_post_path(posts.id) do %>
+              <%= image_tag posts.get_image(100, 100) %>
+            <% end %>
+          </td>
           <td><%= posts.menu %></td>
-          <td class="text-primary">
+          <td>
             <% posts.genres.each do |genre| %>
               #<%= genre.name %>
             <% end %>
@@ -27,16 +33,8 @@
           <td><%= "★" * (posts.rate).to_i %></td>
           <td><%= posts.comment %></td>
           <td><%= posts.shop_info.shop_name %></td>
-          <%= form_with model: posts, url: admin_post_path(posts.id) do |f| %>
-            <td class="col-4">
-              <%= f.radio_button :post_deleted, false, style: "accent-color:black;" %>
-              <%= f.label :post_deleted, "現状維持", value: false %>
-              <%= f.radio_button :post_deleted, true, class:"ml-5", style: "accent-color:black;" %>
-              <%= f.label :post_deleted, "削除状態", value: true %>
-              <%= f.submit '変更', class:"btn btn-success ml-3", method: :post %>
-            </td>
-          <% end %>
-          <td><%= link_to "完全削除", admin_post_path(posts.id), method: :delete, class:"btn btn-danger" %></td>
+          <td><%= posts.post_status ? '公開' : '非公開' %></td>
+          <td><%= posts.post_deleted ? '済' : '未' %></td>
       <% end %>
       </table>
     </div>

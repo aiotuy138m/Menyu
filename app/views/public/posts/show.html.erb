@@ -43,6 +43,11 @@
             <p class="text-right">by　<%= @post.customer.nickname %></p>
           </div>
           <div>
+            <% if @customer != current_customer %>
+              <%= link_to "通報する", new_post_reports_path(@post), class: "btn btn-danger" %>
+            <% end %>
+          </div>
+          <div>
             <p>コメント件数：<%= @post.post_comments.count %></p>
             <table class="table table-bordered">
             <% @post.post_comments.each do |post_comment| %>
