@@ -1,2 +1,44 @@
-<h1>Admin::Posts#index</h1>
-<p>Find me in app/views/admin/posts/index.html.erb</p>
+  <h4>顧客投稿一覧</h4>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <table class="table table-borderless">
+        <tr>
+          <th>顧客id</th>
+          <th>顧客名</th>
+          <th></th>
+          <th>メニュー名</th>
+          <th>ジャンル</th>
+          <th>評価</th>
+          <th>感想</th>
+          <th>店名</th>
+        </tr>
+      <% @posts.each do |posts| %>
+        <tr>
+          <td><%= posts.customer.id %></td>
+          <td><%= posts.customer.nickname %></td>
+          <td><%= image_tag posts.get_image(100, 100) %></td>
+          <td><%= posts.menu %></td>
+          <td class="text-primary">
+            <% posts.genres.each do |genre| %>
+              #<%= genre.name %>
+            <% end %>
+          </td>
+          <td><%= "★" * (posts.rate).to_i %></td>
+          <td><%= posts.comment %></td>
+          <td><%= posts.shop_info.shop_name %></td>
+          <%= form_with model: posts, url: admin_post_path(posts.id) do |f| %>
+            <td class="col-4">
+              <%= f.radio_button :post_deleted, false, style: "accent-color:black;" %>
+              <%= f.label :post_deleted, "現状維持", value: false %>
+              <%= f.radio_button :post_deleted, true, class:"ml-5", style: "accent-color:black;" %>
+              <%= f.label :post_deleted, "削除状態", value: true %>
+              <%= f.submit '変更', class:"btn btn-success ml-3", method: :post %>
+            </td>
+          <% end %>
+          <td><%= link_to "完全削除", admin_post_path(posts.id), method: :delete, class:"btn btn-danger" %></td>
+      <% end %>
+      </table>
+    </div>
+  </div>
+</div>
