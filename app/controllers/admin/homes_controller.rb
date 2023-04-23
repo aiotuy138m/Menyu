@@ -5,6 +5,6 @@ class Admin::HomesController < ApplicationController
     @post = Post.where(created_at: range)
     @customer = Customer.where(created_at: range)
     @genre = Genre.all
-    @shop_info = ShopInfo
+    @shop_info = ShopInfo.all
   end
 end
