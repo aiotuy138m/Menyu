@@ -4,7 +4,7 @@
       <div class="mx-auto" style="width: 500px;">
         <%= image_tag @post.get_image(500, 500), class:"img-responsive img-rounded" %>
       </div>
-      <table class="table tablebordered">
+      <table class="table table-bordered">
         <tr>
           <th style="width: 20%">メニュー名</th>
           <td><%= @post.menu %></td>
@@ -44,10 +44,21 @@
           </div>
           <div>
             <p>コメント件数：<%= @post.post_comments.count %></p>
+            <table class="table table-bordered">
             <% @post.post_comments.each do |post_comment| %>
-              <%= post_comment.customer.nickname %>
-              <%= post_comment.created_at.strftime('%Y/%m/%d') %>　<%= post_comment.comment %></br>
+              <tr>
+                <th><%= post_comment.customer.nickname %></th>
+                <td><%= post_comment.comment %></td>
+                <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+                <td>
+                  <% if post_comment.customer_id == current_customer.id %>
+                    <%= link_to "削", post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, class:"btn btn-danger" %>
+                  <% end %>
+                </td>
+              </tr>
             <% end %>
+            </table>
+
           </div>
           <div>
           <%= form_with model: [@post, @post_comment] do |f| %>
@@ -59,7 +70,7 @@
     </div>
     <div class="col-md-5 mt-5">
       <h4>店情報</h4>
-      <table class="table tablebordered">
+      <table class="table table-bordered">
         <tr>
           <th>店名</th>
           <td><%= @post.shop_info.shop_name %></td>
@@ -67,9 +78,8 @@
         <tr>
           <th>店住所</th>
           <td><%= @post.shop_info.address %></td>
-          <td></td>
         </tr>
-          <th></th>
+          <th>HP等</th>
           <td><%= @post.shop_info.shop_url %></td>
         </tr>
       </table>
