@@ -73,6 +73,10 @@
           <td><%= posts.shop_info.shop_name %></td>
           <td></td>
         </tr>
+        <tr>
+          <td></td>
+          <td>◆<%= posts.favorites.count %>　　<%= "#{posts.post_comments.count} コメント" %></td>
+        </tr>
       </table>
       <% end %>
     </div>
