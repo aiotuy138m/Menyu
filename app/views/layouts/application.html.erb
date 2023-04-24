@@ -9,7 +9,8 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body><header class="border-bottom border-dark border-3" >
+  <body>
+    <header class="border-bottom border-dark border-3" >
       <nav class="navbar navbar-expand-1g navbar-light">
         <div>
           
@@ -72,6 +73,11 @@
       </nav>
     </header>
     <main class="m-5">
+      <% flash.each do |key, value| %>
+  　     <% key = "info" if key == "notice" %>
+  　     <% key = "danger" if key == "alert" %>
+        <%= content_tag :div, value, class: "alert alert-#{key}" %>
+      <% end %>
     <%= yield %>
     </main>
     <footer class="border-top border-dark border-3 mt-auto">

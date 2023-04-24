@@ -10,7 +10,8 @@ class Public::PostsController < ApplicationController
     @post.customer_id = current_customer.id
     @shop_info = ShopInfo.new
     if params[:post][:select_shop] == "0"  # ラジオボタン0選択した時の処理
-      @post.save!
+      @post.save
+      redirect_to posts_path, success: "投稿しました"
     elsif params[:post][:select_shop] == "1"  # ラジオボタン1選択した時の処理
       @shop_info.shop_name = params[:post][:shop_name]
       @shop_info.address = params[:post][:address]
@@ -18,17 +19,18 @@ class Public::PostsController < ApplicationController
       if shop_info = ShopInfo.where(shop_name: "#{params[:post][:shop_name]}").count >=1 # 名前被り1件以上見つけている
         shop_info = ShopInfo.last
         @post.shop_info_id = shop_info.id
-        @post.save!
+        @post.save
+        redirect_to posts_path, success: "投稿しました"
       else # かぶってなかった時の処理
-        @shop_info.save!
+        @shop_info.save
         shop_info = ShopInfo.last
         @post.shop_info_id = shop_info.id
-        @post.save!
+        @post.save
+        redirect_to posts_path, success: "投稿しました"
       end
     else
-      return
+      redirect_to new_post_path, danger: "投稿に失敗しました"
     end
-    redirect_to posts_path
   end
 
   def index
@@ -50,7 +52,7 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
     if @post.post_status == false && @post.customer != current_customer
-      redirect_to posts_path
+      redirect_to posts_path, danger: "この投稿は非公開設定されており閲覧できません" # もし直接投稿をみようとしてきた時の対策
     end
   end
 
