@@ -4,49 +4,11 @@
 <% else %>
   <div class="container">
     <div class="row">
-      <div class="col-8">
-        <% @posts.each do |posts| %>
-          <div>
-            <%= link_to post_path(posts.id) do %>
-              <%= image_tag posts.get_image(500, 500) %>
-            <% end %>
-          </div>
-        <table class="table table-borderless">
-          <tr>
-            <th style="width: 20%">メニュー名</th>
-            <td><%= posts.menu %></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th style="width: 20%">ジャンル</th>
-            <td class="text-primary">
-              <% posts.genres.each do |genre| %>
-                #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <th style="width: 20%">評価</th>
-            <td><%= "★" * (posts.rate).to_i %></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th style="width: 20%">コメント・メモ</th>
-            <td><%= posts.comment %></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th style="width: 20%">店名</th>
-            <td><%= posts.shop_info.shop_name %></td>
-            <td></td>
-          </tr>
-          <tr>
-            <th style="width: 20%"></th>
-            <td>◆<%= posts.favorites.count %></td>
-            <td><%= link_to '編集する', edit_post_path(posts.id), class:"btn btn-success" %></td>
-          </tr>
-        </table>
-        <% end %>
+        <div class="col-8 mx-auto" style="width: 200px;">
+          <%= render 'layouts/new' %>
+          <%= render 'public/posts/post-index', posts: @posts %>
+    　　　　  <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
+  　　　　  </div>
       </div>
     </div>
   </div>

@@ -1,26 +1,31 @@
 <h4 class="ml-5">マイページ</h4>
 <div class="container">
   <div class="row">
-    <div class="col-md-4">
-      <div class="d-flex p-3">
+    <div class="col-md-4 shadow-lg" style="height: 450px;">
+      <%= render 'layouts/new' %>
+      <div class="d-flex p-3 mt-5">
         <p class="mr-4 h5 font-weight-bold">登録情報</p>
         <!--ゲストには編集ボタンは表示しない-->
         <% if @customer.email == 'guest@example.com' %>
           <div></div>
         <% else %>
-          <%= link_to "編集する", information_edit_customers_path, class:"btn btn-success" %>
+          <%= link_to information_edit_customers_path, class:"text-success" do %>
+            <i class="fas fa-user-edit"></i>
+          <% end %>
         <% end %>
       </div>
-      <table class="table table-bordered col-8">
-        <tr>
-          <th class="">ニックネーム</th>
-          <td>
-            <%= @customer.nickname %>
-          </td>
-        </tr>
-          <th class="">メールアドレス</th>
-          <td><%= @customer.email %></td>
-      </table>
+      <div>
+        <ul class="list-group list-unstyled">
+          <li class="list-item">
+            <h5>ニックネーム</h5>
+            <p>　<%= @customer.nickname %><p>
+          </li>
+          <li class="list-item">
+            <h5>メールアドレス</h5>
+            <p>　<%= @customer.email %></p>
+          </li>
+        </ul>
+      </div>
       <table class="table table-borderless">
         </tr>
           <td><%= link_to "非公開一覧を見る", private_posts_path, class:"btn btn-primary" %></td>
@@ -30,55 +35,9 @@
         </tr>
       </table>
     </div>
-    <div class="col-md-8">
-      <% @posts.each do |posts| %>
-        <div>
-          <% if posts.post_status == false %>
-            <p>◎</p>
-          <% else %>
-            <p></p>
-          <% end %>
-        </div>
-        <div>
-          <%= link_to post_path(posts.id) do %>
-            <%= image_tag posts.get_image(500, 500), class:"img-responsive img-rounded" %>
-          <% end %>
-        </div>
-      <table class="table table-borderless col-10">
-        <tr>
-          <th>メニュー名</th>
-          <td><%= posts.menu %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>ジャンル</th>
-          <td class="text-primary">
-            <% posts.genres.each do |genre| %>
-              #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <th>評価</th>
-          <td><%= "★" * (posts.rate).to_i %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>コメント・メモ</th>
-          <td><%= posts.comment %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>店名</th>
-          <td><%= posts.shop_info.shop_name %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>◆<%= posts.favorites.count %>　　<%= "#{posts.post_comments.count} コメント" %></td>
-        </tr>
-      </table>
-      <% end %>
+    <div class="col-8 mx-auto" style="width: 200px;">
+      <%= render 'public/posts/post-index', posts: @posts %>
+    </div>
     </div>
   </div>
 </div>

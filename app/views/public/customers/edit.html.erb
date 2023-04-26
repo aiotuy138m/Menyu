@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-8">
+      <%= render 'layouts/new' %>
     <!--ゲストには編集させない-->
     <% if @customer.email == 'guest@example.com' %>
       <p>ゲストはユーザー情報の編集はできません。</p>
@@ -22,8 +23,9 @@
       <table class="table table-borderless ml-5">
         <tr>
           <td class="col-2"></td>
+          <td><%= link_to '戻る', :back, class:"btn btn-info col-8" %></td>
           <td><%= f.submit "編集内容を保存", url: information_customers_path, method: :patch, class:"btn btn-success col-8" %></td>
-          <td><%= link_to "退会する", confirm_customers_path, class:"btn btn-danger col-5" %></td>
+          <td><%= link_to "退会する", confirm_customers_path, class:"btn btn-danger col-8" %></td>
         </tr>
       </table>
       <% end %>

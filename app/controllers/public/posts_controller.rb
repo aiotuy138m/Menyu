@@ -63,7 +63,7 @@ class Public::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to post_path
+      redirect_to post_path, success: "投稿を更新しました"
     else
       render :edit
     end

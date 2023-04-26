@@ -2,6 +2,7 @@
   <div class="row">
     <div class="col-md-7">
       <div class="mx-auto" style="width: 500px;">
+        <%= render 'layouts/new' %>
         <%= image_tag @post.get_image(500, 500), class:"img-responsive img-rounded" %>
       </div>
       <table class="table table-bordered">
@@ -25,55 +26,66 @@
           <th style="width: 20%">コメント・メモ</th>
           <td><%= @post.comment %></td>
         </tr>
-        </table>
-          <div>
-            <% if @post.favorited_by?(current_customer) %>
-            <p>
-              <%= link_to post_favorites_path(@post), method: :delete do %>
-                <i class="fas fa-bookmark"></i><%= @post.favorites.count %>
-              <% end %>
-            </p>
-            <% else %>
-            <p>
-              <%= link_to post_favorites_path(@post), method: :post do %>
-                <i class="far fa-bookmark"></i><%= @post.favorites.count %>
-              <% end %>
-            </p>
+      </table>
+      <div class="d-flex col-12">
+        <% if @post.favorited_by?(current_customer) %>
+        <p class="col-2">
+          <%= link_to post_favorites_path(@post), method: :delete do %>
+            <i class="fas fa-bookmark"></i><%= @post.favorites.count %>
+          <% end %>
+        </p>
+        <% else %>
+        <p class="col-2">
+          <%= link_to post_favorites_path(@post), method: :post do %>
+            <i class="far fa-bookmark"></i><%= @post.favorites.count %>
+          <% end %>
+        </p>
+        <% end %>
+        <% if  @post.customer_id == current_customer.id %>
+          <p class="col-1 text-right">
+            <%= link_to edit_post_path(@post.id), class:"text-success" do %>
+              <i class="fas fa-edit"></i>
             <% end %>
-            <p class="text-right">by　<%= @post.customer.nickname %></p>
-          </div>
-          <div>
-            <% if @customer != current_customer %>
-              <%= link_to "通報する", new_post_reports_path(@post), class: "btn btn-danger" %>
-            <% end %>
-          </div>
-          <div>
-            <p>コメント件数：<%= @post.post_comments.count %></p>
-            <table class="table table-bordered">
-            <% @post.post_comments.each do |post_comment| %>
-              <tr>
-                <th><%= post_comment.customer.nickname %></th>
-                <td><%= post_comment.comment %></td>
-                <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
-                <td>
-                  <% if post_comment.customer_id == current_customer.id %>
-                    <%= link_to "削", post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, class:"btn btn-danger" %>
-                  <% end %>
-                </td>
-              </tr>
-            <% end %>
-            </table>
+          </p>
+        <% end %>
+        <% if  @post.customer_id != current_customer.id %>
+          <p class="col-2"><%= link_to "通報する", new_post_reports_path(@post), class: "text-danger" %></p>
+        <% end %>
+        <p class="col-7 text-right">by　<%= @post.customer.nickname %></p>
+      </div>
+      <div>
 
-          </div>
-          <div>
-          <%= form_with model: [@post, @post_comment] do |f| %>
-            <%= f.text_area :comment, rows: '1', placeholder: "コメントをここに", class:"form-control col-4" %>
-            <%= f.submit "送信する", class:"btn btn-success" %>
+      </div>
+      <div>
+      <p>コメント件数：<%= @post.post_comments.count %></p>
+      <table class="table table-bordered">
+        <% @post.post_comments.each do |post_comment| %>
+          <tr>
+            <th><%= post_comment.customer.nickname %></th>
+            <td><%= post_comment.comment %></td>
+            <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+            <td>
+              <% if post_comment.customer_id == current_customer.id %>
+                <%= link_to post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, class:"text-danger" do %>
+                  <i class="fas fa-trash-alt"></i>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      </div>
+      <div>
+        <%= form_with model: [@post, @post_comment], class:"d-flex col-12" do |f| %>
+          <%= f.text_area :comment, rows: '1', placeholder: "このレビューに対してコメント", class:"form-control col-10" %>
+          <%= f.button :type => "submit", style: 'background: none; border-radius: 50%; border-color: green; color: green; padding: 0px 10px 0px 10px' do %>
+            <i class="fas fa-paper-plane"></i>
           <% end %>
-          </div>
-          <% if  @post.customer_id == current_customer.id %>
-            <div class="container text-center"><%= link_to '編集する', edit_post_path(@post.id), class:"btn btn-success" %></div>
-          <% end %>
+        <% end %>
+      </div>
+      <div>
+        <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
+      </div>
     </div>
     <div class="col-md-5 mt-5">
       <h4>店情報</h4>
@@ -91,25 +103,25 @@
         </tr>
       </table>
       <div id="map" style='height: 300px; width: 450px;'></div>
-    <script>
-      var map;
-      function initMap() {
-        // マップを作成
-        map = new google.maps.Map(document.getElementById('map'), {
-        // マップの中心に表示する場所の緯度経度を指定
-          center: { lat: <%= @post.shop_info.latitude %>, lng: <%= @post.shop_info.longitude %> },
-          zoom: 15,
-        });
+      <script>
+        var map;
+        function initMap() {
+          // マップを作成
+          map = new google.maps.Map(document.getElementById('map'), {
+          // マップの中心に表示する場所の緯度経度を指定
+            center: { lat: <%= @post.shop_info.latitude %>, lng: <%= @post.shop_info.longitude %> },
+            zoom: 15,
+          });
 
-        // マーカーを立てる場所の緯度経度を指定
-        marker = new google.maps.Marker({
-          position: { lat: <%= @post.shop_info.latitude %>, lng:<%= @post.shop_info.longitude %> },
-          map: map
-        });
-      }
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_JS_API_KEY'] %>&callback=initMap"
-    async defer></script>
+          // マーカーを立てる場所の緯度経度を指定
+          marker = new google.maps.Marker({
+            position: { lat: <%= @post.shop_info.latitude %>, lng:<%= @post.shop_info.longitude %> },
+            map: map
+          });
+        }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_JS_API_KEY'] %>&callback=initMap"
+      async defer></script>
     </div>
   </div>
 </div>
