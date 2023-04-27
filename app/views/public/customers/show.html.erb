@@ -1,7 +1,7 @@
 <h4 class="ml-5">マイページ</h4>
 <div class="container">
   <div class="row">
-    <div class="col-md-4 shadow-lg" style="height: 450px;">
+    <div class="col-md-4 shadow-lg text-center" style="height: 450px;">
       <%= render 'layouts/new' %>
       <div class="d-flex p-3 mt-5">
         <p class="mr-4 h5 font-weight-bold">登録情報</p>
@@ -36,7 +36,15 @@
       </table>
     </div>
     <div class="col-8 mx-auto" style="width: 200px;">
-      <%= render 'public/posts/post-index', posts: @posts %>
+      <% if @post == nil %>
+        <h2>
+          ご自身の投稿はまだありません。</br>
+          <%= link_to "早速投稿しましよう！", new_post_path %></br>
+          右下の＋マークでも投稿できます！
+        </h2>
+      <% else %>
+        <%= render 'public/posts/post-index', posts: @posts %>
+      <% end %>
     </div>
     </div>
   </div>

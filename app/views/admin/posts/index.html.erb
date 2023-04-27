@@ -1,42 +1,51 @@
+<% if current_admin %>
   <h4>顧客投稿一覧</h4>
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <table class="table table-borderless">
-        <tr>
-          <th>顧客id</th>
-          <th>顧客名</th>
-          <th></th>
-          <th>メニュー名</th>
-          <th>ジャンル</th>
-          <th>評価</th>
-          <th>感想</th>
-          <th>店名</th>
-          <th>ステータス</th>
-          <th>削除</th>
-        </tr>
-      <% @posts.each do |posts| %>
-        <tr>
-          <td><%= posts.customer.id %></td>
-          <td><%= posts.customer.nickname %></td>
-          <td>
-            <%= link_to admin_post_path(posts.id) do %>
-              <%= image_tag posts.get_image(100, 100) %>
-            <% end %>
-          </td>
-          <td><%= posts.menu %></td>
-          <td>
-            <% posts.genres.each do |genre| %>
-              #<%= genre.name %>
-            <% end %>
-          </td>
-          <td><%= "★" * (posts.rate).to_i %></td>
-          <td><%= posts.comment %></td>
-          <td><%= posts.shop_info.shop_name %></td>
-          <td><%= posts.post_status ? '公開' : '非公開' %></td>
-          <td><%= posts.post_deleted ? '済' : '未' %></td>
-      <% end %>
-      </table>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <table class="table table-borderless">
+          <tr>
+            <th>顧客id</th>
+            <th>顧客名</th>
+            <th></th>
+            <th>メニュー名</th>
+            <th>ジャンル</th>
+            <th>評価</th>
+            <th>感想</th>
+            <th>店名</th>
+            <th>ステータス</th>
+            <th>削除</th>
+          </tr>
+        <% @posts.each do |posts| %>
+          <tr>
+            <td><%= posts.customer.id %></td>
+            <td><%= posts.customer.nickname %></td>
+            <td>
+              <%= link_to admin_post_path(posts.id) do %>
+                <%= image_tag posts.get_image(100, 100) %>
+              <% end %>
+            </td>
+            <td><%= posts.menu %></td>
+            <td>
+              <% posts.genres.each do |genre| %>
+                #<%= genre.name %>
+              <% end %>
+            </td>
+            <td><%= "★" * (posts.rate).to_i %></td>
+            <td><%= posts.comment %></td>
+            <td><%= posts.shop_info.shop_name %></td>
+            <td><%= posts.post_status ? '公開' : '非公開' %></td>
+            <td><%= posts.post_deleted ? '済' : '未' %></td>
+        <% end %>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+<% else %>
+  <h2>このページは管理者のみが閲覧できます。</h2>
+  <div class="ml-4 mt-4">
+    <p class="ml-5">
+      <%= link_to "こちら", admin_session_path, class:"border-bottom border-primary" %> からログインしてください。
+    </p>
+  </div>
+<% end %>

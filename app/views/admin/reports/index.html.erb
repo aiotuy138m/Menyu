@@ -1,31 +1,40 @@
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <h3>通報一覧</h3>
+<% if current_admin %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>通報一覧</h3>
 
-      <table class="table">
-        <tr>
-          <th>通報ID</th>
-          <th>会員名</th>
-          <th>通報者</th>
-          <th>ステータス</th>
-        </tr>
-      <% @reports.each do |report| %>
-        <tr>
-          <td>
-            <%= link_to report.id, admin_report_path(report) %>
-          </td>
-          <td>
-            <%= report.reported_id %>
-          </td>
-          <td>
-            <%= report.reporter.customer.nickname %>
-          </td>
-          <td>
-          </td>
-        </tr>
-      <% end %>
-      </table>
+        <table class="table">
+          <tr>
+            <th>通報ID</th>
+            <th>会員名</th>
+            <th>通報者</th>
+            <th>ステータス</th>
+          </tr>
+        <% @reports.each do |report| %>
+          <tr>
+            <td>
+              <%= link_to report.id, admin_report_path(report) %>
+            </td>
+            <td>
+              <%= report.reported_id %>
+            </td>
+            <td>
+              <%= report.reporter.customer.nickname %>
+            </td>
+            <td>
+            </td>
+          </tr>
+        <% end %>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+<% else %>
+  <h2>このページは管理者のみが閲覧できます。</h2>
+  <div class="ml-4 mt-4">
+    <p class="ml-5">
+      <%= link_to "こちら", admin_session_path, class:"border-bottom border-primary" %> からログインしてください。
+    </p>
+  </div>
+<% end %>

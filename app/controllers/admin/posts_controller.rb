@@ -1,6 +1,6 @@
 class Admin::PostsController < ApplicationController
   def index
-    @posts = Post.all
+    @posts = Post.all.order("created_at DESC")
   end
 
   def show
@@ -15,13 +15,13 @@ class Admin::PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     @post.update(post_params)
-    redirect_to admin_posts_path
+    redirect_to admin_posts_path, success: "更新しました"
   end
 
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to admin_posts_path
+    redirect_to admin_posts_path, danger: "削除しました"
   end
   
   private
