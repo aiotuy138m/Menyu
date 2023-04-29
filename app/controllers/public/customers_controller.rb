@@ -11,9 +11,9 @@ class Public::CustomersController < ApplicationController
   def update
     @customer = Customer.find(current_customer.id)
     if @customer.update(customer_params)
-      redirect_to my_page_customers_path, success: "情報更新しました"
+      redirect_to my_page_customers_path, info: "アカウント情報を変更しました"
     else
-      render :edit, danger: "情報更新失敗しました"
+      render :edit, danger: "アカウント情報の変更に失敗しました"
     end
   end
 
