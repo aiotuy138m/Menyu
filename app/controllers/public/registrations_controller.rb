@@ -61,7 +61,13 @@ class Public::RegistrationsController < Devise::RegistrationsController
      super(resource)
    end
    
+   def after_update_path_for(resouce)
+      my_page_customers_path
+   end
+   
+   
    def configure_permitted_parameters
      devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname])
    end
+   
 end
