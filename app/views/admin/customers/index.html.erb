@@ -28,10 +28,5 @@
     </div>
   </div>
 <% else %>
-  <h2>このページは管理者のみが閲覧できます。</h2>
-  <div class="ml-4 mt-4">
-      <p class="ml-5">
-        <%= link_to "こちら", admin_session_path, class:"border-bottom border-primary" %> からログインしてください。
-      </p>
-  </div>
+  <%= render 'admin/admin_only' %>
 <% end %>
