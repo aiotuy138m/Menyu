@@ -6,13 +6,14 @@ class Admin::ShopInfosController < ApplicationController
   def create
     @shop_info = ShopInfo.new(shop_info_params)
     if @shop_info.save
-      redirect_to admin_shop_infos_path
+      redirect_to admin_shop_infos_path, success: "保存しました"
     else
-      render :new
+      render :new, danger: "保存失敗しました"
     end
   end
   
   def index
+    @shop_infos = ShopInfo.all
   end
 
   def edit
@@ -22,11 +23,14 @@ class Admin::ShopInfosController < ApplicationController
   def update
     @shop_info = ShopInfo.find(params[:id])
     if @shop_info.update(shop_info_params)
-      redirect_to new_admin_shop_info_path
+      redirect_to new_admin_shop_info_path, success: "更新しました"
     end
   end
 
   def destroy
+    @shop_info = ShopInfo.find(params[:id])
+    @shop_info.destroy
+    redirect_to admin_posts_path, danger: "削除しました"
   end
   
   private

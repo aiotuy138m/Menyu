@@ -7,54 +7,9 @@
 <% end %>
 <div class="container">
   <div class="row">
-    <div class="col-8">
-      <% @posts.each do |posts| %>
-      <table class="table table-borderless">
-        <tr>
-          <th></th>
-          <td>
-            <%= link_to post_path(posts.id) do %>
-              <%= image_tag posts.get_image(500, 500) %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <th>メニュー名</th>
-          <td><%= posts.menu %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>ジャンル</th>
-          <td class="text-primary">
-            <% posts.genres.each do |genre| %>
-              #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
-            <% end %>
-          </td>
-        </tr>
-        <tr>
-          <th>評価</th>
-          <td><%= "★" * (posts.rate).to_i %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>コメント・メモ</th>
-          <td><%= posts.comment %></td>
-          <td></td>
-        </tr>
-        <tr>
-          <th>店名</th>
-          <td class="text-primary">
-            <%= link_to posts.shop_info.shop_name, posts_path(shop_info_id: posts.shop_info.id) %>
-          </td>
-          <td></td>
-        </tr>
-        <tr>
-          <th></th>
-          <td><i class="fas fa-bookmark"></i><%= posts.favorites.count %>　　<%= "#{posts.post_comments.count} コメント" %></td>
-        </tr>
-      </table>
-      <p class="text-right">by　<%= posts.customer.nickname %></p>
-      <% end %>
+    <div class="col-8 mx-auto" style="width: 200px;">
+      <%= render 'layouts/new' %>
+      <%= render 'public/posts/post-index', posts: @posts %>
     </div>
   </div>
 </div>

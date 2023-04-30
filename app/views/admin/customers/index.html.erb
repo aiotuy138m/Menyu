@@ -1,28 +1,32 @@
-<div class="container">
-  <div class="row">
-    <div class="col-2"></div>
-    <div class="col-8">
-      <h4 class="ml-3 mb-5">会員一覧</h4>
-      <table class="ml-5 table table-borderless col-12">
-        <tr>
-          <th class="col-1">会員ID</th>
-          <th class="col-2">ニックネーム</th>
-          <th class="col-2">メールアドレス</th>
-          <th class="col-3">ステータス</th>
-        </tr>
-      <% @customers.each do |customers| %>
-        <tr>
-          <td><%= customers.id %></td>
-          <td>
-            <%= link_to admin_customer_path(customers.id), class:"border-bottom", :style=>"color:black;" do %>
-              <%= customers.nickname %>
-            <% end %>
-          </td>
-          <td><%= customers.email %></td>
-          <td class="<%= "text-success" if customers.is_deleted == "有効" %><%= "text-muted" if customers.is_deleted == "退会" %>"><%= customers.is_deleted ? '退会' : '有効' %></td>
-        </tr>
-      <% end %>
-      </table>
+<% if current_admin %>
+  <div class="container">
+    <div class="row">
+      <div class="col-2"></div>
+      <div class="col-8">
+        <h4 class="ml-3 mb-5">会員一覧</h4>
+        <table class="ml-5 table table-borderless col-12">
+          <tr>
+            <th class="col-1">会員ID</th>
+            <th class="col-2">ニックネーム</th>
+            <th class="col-2">メールアドレス</th>
+            <th class="col-3">ステータス</th>
+          </tr>
+        <% @customers.each do |customers| %>
+          <tr>
+            <td><%= customers.id %></td>
+            <td>
+              <%= link_to admin_customer_path(customers.id), class:"border-bottom", :style=>"color:black;" do %>
+                <%= customers.nickname %>
+              <% end %>
+            </td>
+            <td><%= customers.email %></td>
+            <td class="<%= "text-success" if customers.is_deleted == "有効" %><%= "text-muted" if customers.is_deleted == "退会" %>"><%= customers.is_deleted ? '退会' : '有効' %></td>
+          </tr>
+        <% end %>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+<% else %>
+  <%= render 'admin/admin_only' %>
+<% end %>

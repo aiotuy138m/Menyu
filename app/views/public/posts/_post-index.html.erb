@@ -1,0 +1,52 @@
+<div>
+  <% posts.each do |posts| %>
+  <div class="m-4 pt-3 shadow-lg">
+    <% if posts.post_status == false && posts.customer_id == current_customer.id %>
+      <p class="key"><i class="fas fa-lock"></i></p>
+    <% else %>
+      <p></p>
+    <% end %>
+    <p class="text-center">
+    <%= link_to post_path(posts.id) do %>
+      <%= image_tag posts.get_image(500, 500), class:"img-fluid rounded", alt:"Responsive image" %>
+    <% end %>
+    </p>
+  <table class="table table-borderless">
+    <tr>
+      <th style="width: 20%">メニュー名</th>
+      <td><%= posts.menu %></td>
+    </tr>
+    <tr>
+      <th style="width: 20%">ジャンル</th>
+      <td class="text-primary">
+        <% posts.genres.each do |genre| %>
+          #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 20%">評価</th>
+      <td><%= "★" * (posts.rate).to_i %></td>
+    </tr>
+    <tr>
+      <th style="width: 20%">感想</th>
+      <td><%= posts.comment %></td>
+    </tr>
+    <tr>
+      <th style="width: 20%">店名</th>
+      <td class="text-primary">
+        <%= link_to posts.shop_info.shop_name, posts_path(shop_info_id: posts.shop_info.id) %>
+      </td>
+    </tr>
+    <tr>
+      <th style="width: 20%"></th>
+      <td><i class="fas fa-bookmark"></i><%= posts.favorites.count %>　　<%= "#{posts.post_comments.count} コメント" %></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td class="text-right">by　<%= posts.customer.nickname %></td>
+    </tr>
+  </table>
+  </div>
+  <% end %>
+</div>

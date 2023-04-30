@@ -11,9 +11,9 @@ class Public::CustomersController < ApplicationController
   def update
     @customer = Customer.find(current_customer.id)
     if @customer.update(customer_params)
-      redirect_to my_page_customers_path
+      redirect_to my_page_customers_path, info: "アカウント情報を変更しました"
     else
-      render :edit
+      render :edit, danger: "アカウント情報の変更に失敗しました"
     end
   end
 
@@ -25,9 +25,9 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(current_customer.id)
     if @customer.update(is_deleted: true)
       reset_session
-      redirect_to root_path
+      redirect_to root_path, info: "退会しました　また機会があればお会いしましょう"
     else
-      render confirm_customers_path
+      render confirm_customers_path, danger: "退会に失敗しました　再度お試しください"
     end
   end
   
