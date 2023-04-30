@@ -3,6 +3,7 @@
   <div class="row">
     <div class="col-md-4 shadow-lg text-center" style="height: 450px;">
       <%= render 'layouts/new' %>
+      <sesstion>
       <div class="d-flex p-3 mt-5">
         <p class="mr-4 h5 font-weight-bold">登録情報</p>
         <!--ゲストには編集ボタンは表示しない-->
@@ -31,12 +32,15 @@
           <td><%= link_to "非公開一覧を見る", private_posts_path, class:"btn btn-primary" %></td>
         </tr>
         <tr>
-          <td><%= link_to "次食べたいリスト", favorites_posts_path, class:"btn btn-success" %></td>
+          <td><%= link_to "食べたいリスト", favorites_posts_path, class:"btn btn-success" %></td>
         </tr>
       </table>
+      <h5><%= @customer.nickname %>さんの投稿したジャンル、お店</h5>
+      <!--豚骨（0）、こってり（1）みたいな羅列で飛べる-->
+      </sesstion>
     </div>
     <div class="col-8 mx-auto" style="width: 200px;">
-      <% if @post == nil %>
+      <% if @posts == nil %>
         <h2>
           ご自身の投稿はまだありません。</br>
           <%= link_to "早速投稿しましよう！", new_post_path %></br>

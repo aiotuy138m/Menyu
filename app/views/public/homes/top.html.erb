@@ -1,5 +1,11 @@
 <div class="container">
   <div class="row">
+    <% if current_customer %>
+      <div class="col">
+        投稿されたお店
+        ジャンル別投稿数
+      </div>
+    <% else %>
     <div class="col">
       <h1>Menyuへようこそ！</h1>
       <p>Menyuとは</br>麺(Men)に特化したメニュー(Menu)レビューサイトです。</p>
@@ -8,5 +14,6 @@
       <p>ゲストは投稿・閲覧・コメント機能が使えますが</br>ログアウト時に投稿やコメント、お気に入りデータが削除されます。</p>
       <%= link_to 'ゲストログイン', customers_guest_sign_in_path, method: :post, class:"btn btn-outline-info" %>
     </div>
+    <% end %>
   </div>
 </div>

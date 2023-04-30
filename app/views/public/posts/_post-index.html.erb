@@ -8,7 +8,7 @@
     <% end %>
     <p class="text-center">
     <%= link_to post_path(posts.id) do %>
-      <%= image_tag posts.get_image(500, 500), class:"img-responsive img-rounded" %>
+      <%= image_tag posts.get_image(500, 500), class:"img-fluid", alt:"Responsive image" %>
     <% end %>
     </p>
   <table class="table table-borderless">
@@ -41,6 +41,9 @@
     <tr>
       <th style="width: 20%"></th>
       <td><i class="fas fa-bookmark"></i><%= posts.favorites.count %>　　<%= "#{posts.post_comments.count} コメント" %></td>
+    </tr>
+    <tr>
+      <th></th>
       <td class="text-right">by　<%= posts.customer.nickname %></td>
     </tr>
   </table>

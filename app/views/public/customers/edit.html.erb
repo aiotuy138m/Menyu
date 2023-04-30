@@ -7,9 +7,6 @@
       <p>ゲストはユーザー情報の編集はできません。</p>
     <% else %>
       <h4 class="ml-5 mb-3">会員情報編集</h4>
-      <%= link_to edit_customer_registration_path do %>
-        パスワードを変更する
-      <% end %>
       <%= form_with model: @customer, url: information_customers_path do |f| %>
       <table class="table table-borderless">
         <tr>
@@ -23,6 +20,9 @@
           <td><%= f.text_field :email %></td>
         </tr>
       </table>
+      <%= link_to edit_customer_registration_path, class:"btn btn-outline-primary" do %>
+        パスワード<i class="fas fa-key"></i>を変更する
+      <% end %>
       <table class="table table-borderless ml-5">
         <tr>
           <td class="col-2"></td>

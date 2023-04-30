@@ -3,7 +3,7 @@ class Post < ApplicationRecord
 
   has_many :post_comments, dependent: :destroy
   has_many :post_genres, dependent: :destroy
-  has_many :genres, -> { order(:name) }, through: :post_genres
+  has_many :genres, -> { order(:name) }, through: :post_genres, source: :genre
   belongs_to :customer
   belongs_to :shop_info
   has_many :favorites, dependent: :destroy

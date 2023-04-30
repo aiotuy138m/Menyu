@@ -36,11 +36,8 @@ class Public::PostsController < ApplicationController
   def index
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @posts = @genre.posts.where(post_status: true).where(post_deleted: false).order("created_at DESC")
-    else
-      @posts = Post.where(post_status: true).where(post_deleted: false).order("created_at DESC")
-    end
-    if params[:shop_info_id]
+      @posts = Post.left_joins(:post_genres).where(:post_genres => {:genre_id => [@genre]}).where(post_status: true).where(post_deleted: false).order("created_at DESC")
+    elsif params[:shop_info_id]
       @shop_info = ShopInfo.find(params[:shop_info_id])
       @posts = @shop_info.post.where(post_status: true).where(post_deleted: false).order("created_at DESC")
     else
