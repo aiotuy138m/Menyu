@@ -51,6 +51,19 @@
             </p>
           <% end %>
           <% if  @post.customer_id != current_customer.id %>
+            <% if @post.liked_by?(current_customer) %>
+              <p class="col-2">
+                <%= link_to post_likes_path(@post), method: :delete do %>
+                  <i class="fas fa-thumbs-up"></i><%= @post.likes.count %>
+                <% end %>
+              </p>
+            <% else %>
+              <p class="col-2">
+                <%= link_to post_likes_path(@post), method: :post do %>
+                  <i class="far fa-thumbs-up"></i><%= @post.likes.count %>
+                <% end %>
+              </p>
+            <% end %>
             <p class="col-2"><%= link_to "通報する", new_post_reports_path(@post), class: "text-danger" %></p>
           <% end %>
           <p class="col-7 text-right">by　<%= @post.customer.nickname %></p>
