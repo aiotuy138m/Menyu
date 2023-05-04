@@ -11,7 +11,7 @@
 
   <body>
     <header class="border-bottom border-dark border-3">
-      <nav class="navbar navbar-expand-lg nav-light" style="background: darkseagreen;">
+      <nav class="navbar navbar-expand-xl nav-light" style="background: darkseagreen;">
         <p class="navbar-brand">
           <%= link_to root_path do %>
             <%= image_tag'menyulogo.png',class:"text-", width:"100", height:"100" %>
@@ -22,6 +22,9 @@
           ようこそ、
             <%= current_customer.nickname %>
             さん！
+          </div>
+          <div>
+            <%= render 'public/searches/search' %>
           </div>
         <% end %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color: white; color: white;">
@@ -56,26 +59,26 @@
             <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-info" %>
           </li>
           <% elsif customer_signed_in? %>
-          <li class="nav-item mr-5 active">
+          <li class="nav-item mr-1 active">
             <%= link_to "マイページ", my_page_customers_path, class:"btn btn-outline-light" %>
           </li>
-          <li class="nav-item mr-5 active">
+          <li class="nav-item mr-1 active">
             <%= link_to "レビュー一覧", posts_path, class:"btn btn-outline-light" %>
           </li>
-          <li class="nav-item mr-5 active">
+          <li class="nav-item mr-1 active">
             <%= link_to "新規投稿", new_post_path, class:"btn btn-outline-light" %>
           </li>
-          <li class="nav-item mr-5 active">
+          <li class="nav-item mr-1 active">
             <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-outline-light" %>
           </li>
           <% else %>
-          <li class="nav-item mr-5 active">
+          <li class="nav-item mr-1 active">
             <%= link_to "トップ", root_path, class:"btn btn-light" %>
           </li>
-          <li class="nav-item mr-5 active">
+          <li class="nav-item mr-1 active">
             <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-light" %>
           </li>
-          <li class="nav-item mr-5 active">
+          <li class="nav-item mr-1 active">
             <%= link_to "ログイン", new_customer_session_path, class:"btn btn-light" %>
           </li>
           <% end %>

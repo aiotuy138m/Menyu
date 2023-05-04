@@ -41,14 +41,14 @@
       </sesstion>
     </div>
     <div class="col-8 mx-auto" style="width: 200px;">
-      <% if @posts == nil %>
+      <% if @posts.first %>
+        <%= render 'public/posts/post-index', posts: @posts %>
+      <% else %>
         <h2>
           ご自身の投稿はまだありません。</br>
           <%= link_to "早速投稿しましよう！", new_post_path %></br>
           右下の＋マークでも投稿できます！
         </h2>
-      <% else %>
-        <%= render 'public/posts/post-index', posts: @posts %>
       <% end %>
     </div>
     </div>
