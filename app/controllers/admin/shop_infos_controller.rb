@@ -23,7 +23,7 @@ class Admin::ShopInfosController < ApplicationController
   def update
     @shop_info = ShopInfo.find(params[:id])
     if @shop_info.update(shop_info_params)
-      redirect_to new_admin_shop_info_path, success: "更新しました"
+      redirect_to admin_shop_infos_path, success: "更新しました"
     end
   end
 
@@ -36,6 +36,6 @@ class Admin::ShopInfosController < ApplicationController
   private
   
   def shop_info_params
-    params.require(:shop_info).permit(:name, :shop_address, :shop_url)
+    params.require(:shop_info).permit(:shop_name, :address, :shop_url, :latitude, :longitude)
   end
 end

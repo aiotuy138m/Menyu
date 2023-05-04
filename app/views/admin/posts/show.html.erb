@@ -23,8 +23,12 @@
             <td><%= "★" * (@post.rate).to_i %></td>
           </tr>
           <tr>
-            <th style="width: 20%">コメント・メモ</th>
+            <th style="width: 20%">感想</th>
             <td><%= @post.comment %></td>
+          </tr>
+          <tr>
+            <th style="width: 20%">投稿者</th>
+            <td><%= @post.customer.nickname %></td>
           </tr>
           </table>
             <div>

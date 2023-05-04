@@ -124,8 +124,8 @@ ActiveRecord::Schema.define(version: 2023_04_23_081858) do
     t.string "shop_name", null: false
     t.string "address", null: false
     t.text "shop_url"
-    t.float "latitude"
-    t.float "longitude"
+    t.float "latitude" # 緯度
+    t.float "longitude" # 経度
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

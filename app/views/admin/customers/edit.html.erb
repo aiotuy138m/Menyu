@@ -10,6 +10,10 @@
             <td><%= @customer.id %></td>
           </tr>
           <tr>
+            <th><%= f.label "アイコン画像" %></th>
+            <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+          </tr>
+          <tr>
             <th><%= f.label "ニックネーム" %></th>
             <td>
               <%= f.text_field :nickname %>
