@@ -21,7 +21,11 @@
           </tr>
           <tr>
             <th style="width: 20%">評価</th>
-            <td><%= "★" * (@post.rate).to_i %></td>
+            <td>
+              <p>
+                <span class="star5_rating" data-rate="<%= (@post.rate).to_f %>"></span><%= @post.rate %>
+              </p>
+            </td>
           </tr>
           <tr>
             <th style="width: 20%">感想</th>

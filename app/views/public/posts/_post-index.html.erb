@@ -26,7 +26,11 @@
     </tr>
     <tr>
       <th style="width: 20%">評価</th>
-      <td><%= "★" * (posts.rate).to_i %></td>
+      <td>
+        <p>
+          <span class="star5_rating" data-rate="<%= (posts.rate).to_f %>"></span><%= posts.rate %>
+        </p>
+      </td>
     </tr>
     <tr>
       <th style="width: 20%">感想</th>
