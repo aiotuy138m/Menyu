@@ -15,7 +15,17 @@
         <tr>
           <th>評価</th>
           <td>
-            <input type="range" class="form-contro-l-range" id="rate" type="radio" name="post[rate]" min="0" max="5" step="1"><label for="review01"></label>
+            <p style="font-size: 15px; color: gray;">※0.5刻み</p>
+            0<input type="range" class="form-contro-l-range" id="rate" name="post[rate]" value="<%= @post.rate %>" min="0" max="5" step="0.5" list="tlist" style="accent-color: #ffcc66;">5
+            <datalist id="tlist">
+              <option value="0"></option>
+              <option value="1"></option>
+              <option value="2"></option>
+              <option value="3"></option>
+              <option value="4"></option>
+              <option value="5"></option>
+            </datalist>
+            <label for="review01"></label>
           </td>
         </tr>
         <tr>
