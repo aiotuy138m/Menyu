@@ -68,6 +68,9 @@
           <li class="nav-item mr-5 active">
             <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-outline-light" %>
           </li>
+          <li>
+            <%= render 'public/searches/search' %>
+          </li>
           <% else %>
           <li class="nav-item mr-5 active">
             <%= link_to "トップ", root_path, class:"btn btn-light" %>

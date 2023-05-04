@@ -1,7 +1,5 @@
-<% if @genre.present? %>
-  <h4>ジャンル「<%= @genre.name %>」の検索結果</h4>
-<% elsif @shop_info.present? %>
-  <h4>「<%= @shop_info.shop_name %>」の検索結果</h4>
+<% if params[:word].present? %>
+  <h4>「<%= params[:word] %>」の検索結果</h4>
 <% else %>
   <h4>レビュー一覧</h4>
 <% end %>

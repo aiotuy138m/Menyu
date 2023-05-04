@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   # 顧客用
   scope module: :public do
     root to: "homes#top"
+    get "search" => "searches#search"
     resources :customers, except: [:new, :create, :index, :edit, :update, :destroy, :show] do
       collection do
         get 'my_page', action: 'show'
