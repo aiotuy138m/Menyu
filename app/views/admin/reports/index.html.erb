@@ -17,7 +17,7 @@
               <%= link_to report.id, admin_report_path(report) %>
             </td>
             <td>
-              <%= report.reported_id %>
+              <%= report.reported.customer.nickname %>
             </td>
             <td>
               <%= report.reporter.customer.nickname %>

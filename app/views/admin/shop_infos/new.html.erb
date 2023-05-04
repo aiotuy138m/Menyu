@@ -9,15 +9,23 @@
           <table class="col-12">
             <tr>
               <th><%= f.label "店名" %></th>
-              <td><%= f.text_field :name, class:"form-control" %></td>
+              <td><%= f.text_field :shop_name, class:"form-control" %></td>
             </tr>
             <tr>
               <th><%= f.label "住所" %></th>
-              <td><%= f.text_area :shop_address, class:"form-control" %></td>
+              <td><%= f.text_area :address, class:"form-control" %></td>
             </tr>
             <tr>
               <th><%= f.label "URL" %></th>
               <td><%= f.text_field :shop_url, class:"form_control" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label "緯度" %></th>
+              <td><%= f.text_field :latitude, class:"form_control" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label "経度" %></th>
+              <td><%= f.text_field :longitude, class:"form_control" %></td>
             </tr>
           </table>
           <p class="text-center"><%= f.submit "新規登録", class:"btn btn-success col-3" %></p>

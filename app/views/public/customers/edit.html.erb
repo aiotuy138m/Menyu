@@ -10,10 +10,12 @@
       <%= form_with model: @customer, url: information_customers_path do |f| %>
       <table class="table table-borderless">
         <tr>
+          <th><%= f.label "アイコン画像" %></th>
+          <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+        </tr>
+        <tr>
           <th><%= f.label "ニックネーム" %></th>
-          <td>
-            <%= f.text_field :nickname %>
-          </td>
+          <td><%= f.text_field :nickname %></td>
         </tr>
         <tr>
           <th><%= f.label "メールアドレス" %></th>

@@ -1,10 +1,12 @@
 class Public::PostsController < ApplicationController
   def new
+    @customer = Customer.find(current_customer.id)
     @post = Post.new
     @genres = Genre.all
   end
 
   def create
+    @customer = Customer.find(current_customer.id)
     @post = Post.new(post_params)
     @genres = Genre.all
     @post.customer_id = current_customer.id
@@ -34,6 +36,7 @@ class Public::PostsController < ApplicationController
   end
 
   def index
+    @customer = Customer.find(current_customer.id)
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
       @posts = Post.left_joins(:post_genres).where(:post_genres => {:genre_id => [@genre]}).where(post_status: true).where(post_deleted: false).order("created_at DESC")
@@ -46,6 +49,7 @@ class Public::PostsController < ApplicationController
   end
 
   def show
+    @customer = Customer.find(current_customer.id)
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
     if @post.post_status == false && @post.customer != current_customer
@@ -54,10 +58,12 @@ class Public::PostsController < ApplicationController
   end
 
   def edit
+    @customer = Customer.find(current_customer.id)
     @post = Post.find(params[:id])
   end
 
   def update
+    @customer = Customer.find(current_customer.id)
     @post = Post.find(params[:id])
     if @post.update(post_params)
       redirect_to post_path, success: "投稿を更新しました"
@@ -67,16 +73,19 @@ class Public::PostsController < ApplicationController
   end
 
   def destroy
+    @customer = Customer.find(current_customer.id)
     @post = Post.find(params[:id])
     @post.delete
     redirect_to posts_path
   end
 
   def favorites # いいね機能・一覧
+    @customer = Customer.find(current_customer.id)
     @post = current_customer.favorite_posts.includes(:customer).order(created_at: :desc)
   end
 
   def not_active # 非公開一覧、Prefix：private_posts_path
+    @customer = Customer.find(current_customer.id)
     @posts = current_customer.post.where(post_status: false).order("created_at DESC")
   end
 

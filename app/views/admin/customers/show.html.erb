@@ -9,6 +9,10 @@
             <td><%= @customer.id %></td>
           </tr>
           <tr>
+            <th></th>
+            <td><%= image_tag @customer.get_profile_image(100,100), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %></td>
+          </tr>
+          <tr>
             <th class="co-1">ニックネーム</th>
             <td>
               <%= @customer.nickname %>

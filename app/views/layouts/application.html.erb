@@ -25,7 +25,11 @@
           </div>
         <% end %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color: white; color: white;">
-          <span class="navbar-toggler-icon"></span>
+          <% if customer_signed_in? %>
+            <%= image_tag @customer.get_profile_image(50, 50), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %>
+          <% else %>
+            <span class="navbar-toggler-icon"></span>
+          <% end %>
         </button>
         <div class="text-right collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav list-group-horizontal mr-auto" >

@@ -9,15 +9,14 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites ,source: :post
 
-  
+
 
   def get_image(width, hight)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no-image.png')
       image.attach(io: File.open(file_path), filename: 'no-image.png', content_type: 'image/png')
-    else
-      image.variant(resize_to_limit: [width, hight]).processed
     end
+    image.variant(resize_to_limit: [width, hight]).processed
   end
 
   validates :rate, numericality: {

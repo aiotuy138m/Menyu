@@ -7,6 +7,7 @@
         <table class="ml-5 table table-borderless col-12">
           <tr>
             <th class="col-1">会員ID</th>
+            <th class="col-2">アイコン</th>
             <th class="col-2">ニックネーム</th>
             <th class="col-2">メールアドレス</th>
             <th class="col-3">ステータス</th>
@@ -16,9 +17,10 @@
             <td><%= customers.id %></td>
             <td>
               <%= link_to admin_customer_path(customers.id), class:"border-bottom", :style=>"color:black;" do %>
-                <%= customers.nickname %>
+                <%= image_tag customers.get_profile_image(50, 50), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %>
               <% end %>
             </td>
+            <td><%= customers.nickname %></td>
             <td><%= customers.email %></td>
             <td class="<%= "text-success" if customers.is_deleted == "有効" %><%= "text-muted" if customers.is_deleted == "退会" %>"><%= customers.is_deleted ? '退会' : '有効' %></td>
           </tr>

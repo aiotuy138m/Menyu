@@ -1,7 +1,7 @@
 <h4 class="ml-5">マイページ</h4>
 <div class="container">
   <div class="row">
-    <div class="col-md-4 shadow-lg text-center" style="height: 450px;">
+    <div class="col-md-4 shadow-lg text-center" style="height: 100%;">
       <%= render 'layouts/new' %>
       <sesstion>
       <div class="d-flex p-3 mt-5">
@@ -10,11 +10,12 @@
         <% if @customer.email == 'guest@example.com' %>
           <div></div>
         <% else %>
-          <%= link_to information_edit_customers_path, class:"text-success" do %>
+          <%= link_to information_edit_customers_path, class:"text-success text-right" do %>
             <i class="fas fa-user-edit"></i>
           <% end %>
         <% end %>
       </div>
+      <p><%= image_tag @customer.get_profile_image(200, 200), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %></p>
       <div>
         <ul class="list-group list-unstyled">
           <li class="list-item">
