@@ -8,6 +8,7 @@ class Post < ApplicationRecord
   belongs_to :shop_info
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites ,source: :post
+  has_many :likes, dependent: :destroy
 
 
 
@@ -28,6 +29,8 @@ class Post < ApplicationRecord
     favorites.where(customer_id: customer.id).exists?
   end
 
-
+  def liked_by?(customer)
+    likes.where(customer_id: customer.id).exists?
+  end
 
 end
