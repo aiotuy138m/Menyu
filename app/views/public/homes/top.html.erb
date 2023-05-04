@@ -1,9 +1,39 @@
 <div class="container">
   <div class="row">
     <% if current_customer %>
-      <div class="col">
-        投稿されたお店
-        ジャンル別投稿数
+    <%= render 'layouts/new' %>
+      <div class="col-5">
+        <ul>
+          <li>現在投稿されているお店</li>
+            <% @shop_infos.each do |shop_info| %>
+              <%= link_to posts_path(shop_info_id: shop_info.id) do %>
+                <%= shop_info.shop_name %>(<%= shop_info.post.count %>)</br>
+              <% end %>
+            <% end %>
+          <li>ジャンル別投稿数</li>
+            <% @genres.each do |genre| %>
+              <%= link_to posts_path(genre_id: genre.id) do %>
+                <%= genre.name %>(<%= genre.posts.count %>)</br>
+              <% end %>
+            <% end %>
+        </ul>
+      </div>
+      <div class="col-7">
+        <h1>Menyuへようこそ！</h1></br>
+        <div class="mt-5">
+        <h4>Menyuとは</br>麺(Men)に特化したメニュー(Menu)レビューサイトです。</h4>
+        </div>
+        <div class="mt-5">
+        <h3>
+          新規投稿は
+          <%= link_to "こちら", new_post_path %>
+          からも
+          右下の＋ボタンからも可能です！
+        </h3>
+        </div>
+        <div class="mt-5">
+        <h2>※店情報が間違っている等ありましたら</br>レビューの詳細画面の通報機能でお知らせください。</h2>
+        </div>
       </div>
     <% else %>
     <div class="col">
