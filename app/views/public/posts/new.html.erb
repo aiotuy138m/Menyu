@@ -5,11 +5,11 @@
       <%= form_with model: @post do |f| %>
           <div  class="col btn-group-vertical d-flex" data-toggle="buttons">
             <label class="btn btn-outline-secondary flex-column" style="width: 100%;">
-              <%= f.radio_button :select_shop, 0 %>登録済みの店から選択
+              <%= f.radio_button :select_shop, 0, style: "display: none;" %>登録済みの店から選択
               <p class="ml-3 col-12"><%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %></p>
             </label>
             <label class="btn btn-outline-secondary flex-column">
-              <%= f.radio_button :select_shop, 1 %>新しくお店を登録
+              <%= f.radio_button :select_shop, 1, style: "display: none;" %>新しくお店を登録
             <table class="ml-3 table table-borderless talbe-sm">
               <tr>
                 <th class="col-4" style="color: white; width: 20%;">店名</th>
@@ -67,7 +67,6 @@
               <option value="4"></option>
               <option value="5"></option>
             </datalist>
-            <label for="review01"></label>
           </td>
         </tr>
         <tr>
@@ -88,10 +87,14 @@
         <tr>
           <th style="width: 20%"><%= f.label "公開設定" %></th>
           <td>
-            <%= f.radio_button :post_status, true, style: "accent-color:black;",checked: true %>
-            <%= f.label :post_status, "公開", value: true %>
-            <%= f.radio_button :post_status, false, class:"ml-5", style: "accent-color:black;" %>
-            <%= f.label :post_status, "非公開", value: false %>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-outline-success active">
+                <%= f.radio_button :post_status, true, style: "accent-color:black;",checked: true %>公開
+              </label>
+              <label class="btn btn-outline-secondary">
+                <%= f.radio_button :post_status, false, class:"ml-5", style: "accent-color:black;" %>非公開
+              </label>
+            </div>
           </td>
           </tr>
       </table>
