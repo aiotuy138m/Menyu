@@ -1,3 +1,4 @@
+<%= render 'layouts/back' %>
 <div>
   <% posts.each do |posts| %>
     <% if  posts.post_deleted == true && posts.customer_id == current_customer.id %>
