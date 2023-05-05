@@ -18,8 +18,7 @@
     z-index: 0;
     display: inline-block;
     white-space: nowrap;
-    color: #CCCCCC; /* グレーカラー 自由に設定化 */
-    /*font-size: 30px; フォントサイズ 自由に設定化 */
+    color: #CCCCCC; /* グレーカラー */
 }
 
 .star5_rating:before, .star5_rating:after{
@@ -33,7 +32,7 @@
     left: 0;
     overflow: hidden;
     white-space: nowrap;
-    color: #ffcf32; /* イエローカラー 自由に設定化 */
+    color: #ffcf32; /* イエローカラー */
 }
 
 .star5_rating[data-rate="5.0"]:after{ width: 100%; } /* 星5 */
@@ -47,3 +46,10 @@
 .star5_rating[data-rate="1.0"]:after{ width: 20%; } /* 星1 */
 .star5_rating[data-rate="0.5"]:after{ width: 10%; } /* 星0.5 */
 .star5_rating[data-rate="0.0"]:after{ width: 0%; } /* 星0 */
+
+#img {
+  border-radius: 50%;  /* 円形 */
+  width: 25px;  /* 縦横を同じ値にする */
+  height: 25px;  /* 縦横を同じ値にする */
+  object-fit: cover; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
+}

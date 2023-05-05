@@ -1,8 +1,8 @@
 <h4 class="ml-5">マイページ</h4>
 <div class="container">
   <div class="row">
+    <%= render 'layouts/new' %>
     <div class="col-md-4 shadow-lg text-center" style="height: 100%;">
-      <%= render 'layouts/new' %>
       <sesstion>
       <div class="d-flex p-3 mt-5">
         <p class="mr-4 h5 font-weight-bold">登録情報</p>
@@ -36,11 +36,44 @@
           <td><%= link_to "食べたいリスト", favorites_posts_path, class:"btn btn-success" %></td>
         </tr>
       </table>
-      <!--<h5> さんの投稿したジャンル、お店</h5>-->
-      <!--豚骨（0）、こってり（1）みたいな羅列で飛べる-->
+      <div class="container">
+        <div class="row">
+        <ul class="list-group list-group-flush col-6">
+          <li class="list-group-item">
+            <%= @customer.nickname %>さんが投稿されているお店
+          </li>
+          <p class="text-left">
+            <% @shop_infos.each do |shop_info| %>
+              <%= link_to my_page_customers_path(shop_info_id: shop_info.id) do %>
+                <%= shop_info.shop_name %><span class="badge badge-primary badge-pill"><%= shop_info.post.where(customer_id: current_customer.id).count %></span></br>
+              <% end %>
+            <% end %>
+          </p>
+        </ul>
+        <ul class="list-group list-group-flush col-6">
+          <li class="list-group-item">
+            <%= @customer.nickname %>さんジャンル別投稿数
+          </li>
+          <p class="text-left">
+            <% @genres.each do |genre| %>
+              <%= link_to my_page_customers_path(genre_id: genre.id) do %>
+                <%= genre.name %><span class="badge badge-primary badge-pill"><%= genre.posts.where(customer_id: current_customer.id).count %></span></br>
+              <% end %>
+            <% end %>
+          </p>
+        </ul>
+      </div>
+      </div><!--絞り込み一覧-->
       </sesstion>
-    </div>
-    <div class="col-8 mx-auto" style="width: 200px;">
+    </div><!--会員情報-->
+    <div class="col-7 mx-auto" style="width: 200px;">
+      <% if @genre.present? %>
+      <h4>ジャンル「<%= @genre.name %>」での絞り込み</h4>
+    <% elsif @shop_info.present? %>
+      <h4>「<%= @shop_info.shop_name %>」での絞り込み</h4>
+    <% else %>
+      <h4><%= @customer.nickname %>さんのレビュー一覧</h4>
+    <% end %>
       <% if @posts.first %>
         <%= render 'public/posts/post-index', posts: @posts %>
       <% else %>

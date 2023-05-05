@@ -1,6 +1,5 @@
 class Public::SearchesController < ApplicationController
   def search
-    @customer = Customer.find(current_customer.id)
     @range = params[:range]
     if @range == "店名"
       @shop_infos = ShopInfo.looks(params[:search],params[:word])

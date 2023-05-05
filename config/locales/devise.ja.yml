@@ -26,7 +26,7 @@ ja:
         unlock_token: ロック解除用トークン
         updated_at: 更新日
     models:
-      customer: ユーザー
+      customer: 会員
   devise:
     confirmations:
       confirmed: メールアドレスが確認できました。
@@ -47,7 +47,7 @@ ja:
     mailer:
       confirmation_instructions:
         action: メールアドレスの確認
-        greeting: "%{recipient}様"
+        greeting: "%{recipient}さん"
         instruction: 以下のリンクをクリックし、メールアドレスの確認手続を完了させてください。
         subject: メールアドレス確認メール
       email_changed:
@@ -55,19 +55,19 @@ ja:
         message: あなたのメール変更（%{email}）のお知らせいたします。
         subject: メール変更完了。
       password_change:
-        greeting: "%{recipient}様"
+        greeting: "%{recipient}さん"
         message: パスワードが再設定されたことを通知します。
         subject: パスワードの変更について
       reset_password_instructions:
         action: パスワード変更
-        greeting: "%{recipient}様"
+        greeting: "%{recipient}さん"
         instruction: パスワード再設定の依頼を受けたため、メールを送信しています。下のリンクからパスワードの再設定ができます。
         instruction_2: パスワード再設定の依頼をしていない場合、このメールを無視してください。
         instruction_3: パスワードの再設定は、上のリンクから新しいパスワードを登録するまで完了しません。
         subject: パスワードの再設定について
       unlock_instructions:
         action: アカウントのロック解除
-        greeting: "%{recipient}様"
+        greeting: "%{recipient}さん"
         instruction: アカウントのロックを解除するには下のリンクをクリックしてください。
         message: ログイン失敗が繰り返されたため、アカウントはロックされています。
         subject: アカウントの凍結解除について

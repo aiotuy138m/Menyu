@@ -12,9 +12,9 @@
           </tr>
           <tr>
             <th style="width: 20%">ジャンル</th>
-            <td class="text-primary">
+            <td>
               <% @post.genres.each do |genre| %>
-                #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
+                #<%= genre.name %>
               <% end %>
             </td>
           </tr>
@@ -38,7 +38,7 @@
                 <tr>
                   <th><%= post_comment.customer.nickname %></th>
                   <td><%= post_comment.comment %></td>
-                  <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
+                  <td><%= l post_comment.created_at %></td>
                   <td>
                     <%= link_to "削除", post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, class:"btn btn-danger" %>
                   </td>
@@ -47,14 +47,19 @@
               </table>
               <%= form_with model: @post, url: admin_post_path(@post) do |f| %>
               <td class="col-4">
-                <%= f.radio_button :post_deleted, false, style: "accent-color:black;" %>
-                <%= f.label :post_deleted, "現状維持", value: false %>
-                <%= f.radio_button :post_deleted, true, class:"ml-5", style: "accent-color:black;" %>
-                <%= f.label :post_deleted, "削除状態", value: true %>
-                <%= f.submit '変更', class:"btn btn-success ml-3", method: :post %>
+                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                  <label class="btn btn-outline-success">
+                    <%= f.radio_button :post_deleted, false %>現状維持
+                  </label>
+                  <label class="btn btn-outline-danger">
+                    <%= f.radio_button :post_deleted, true, class:"ml-5" %>削除状態
+                  </label>
+                  <%= f.submit '変更', class:"btn btn-outline-info ml-3", method: :post %>
+                </div>
               </td>
               <% end %>
-              <%= link_to "完全削除", admin_post_path(@post.id), method: :delete, class:"btn btn-danger" %>
+              <%= link_to '戻る', :back, class:"btn btn-info mr-5" %>
+              <%= link_to "完全削除", admin_post_path(@post.id), method: :delete, class:"btn btn-danger mt-5 ml-5" %>
       </div>
     </div>
   </div>
