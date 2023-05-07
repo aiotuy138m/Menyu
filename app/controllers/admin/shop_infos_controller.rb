@@ -13,7 +13,7 @@ class Admin::ShopInfosController < ApplicationController
   end
   
   def index
-    @shop_infos = ShopInfo.all
+    @shop_infos = ShopInfo.page(params[:page]).per(10)
   end
 
   def edit

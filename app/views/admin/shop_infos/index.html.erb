@@ -29,6 +29,7 @@
             <td><%= link_to "削除", admin_shop_info_path(shop_info.id), method: :delete, class:"btn btn-danger" %></td>
         <% end %>
         </table>
+      <%= paginate @shop_infos %>
       </div>
     </div>
   </div>

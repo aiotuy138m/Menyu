@@ -9,7 +9,6 @@
             <th>通報ID</th>
             <th>会員名</th>
             <th>通報者</th>
-            <th>ステータス</th>
           </tr>
         <% @reports.each do |report| %>
           <tr>
@@ -22,11 +21,10 @@
             <td>
               <%= report.reporter.customer.nickname %>
             </td>
-            <td>
-            </td>
           </tr>
         <% end %>
         </table>
+        <%= paginate @reports %>
       </div>
     </div>
   </div>

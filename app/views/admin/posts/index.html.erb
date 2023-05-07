@@ -1,5 +1,9 @@
 <% if current_admin %>
-  <h4>顧客投稿一覧</h4>
+  <% if params[:customer_id].present? %>
+    <h4><%= @customer.nickname %>のレビュー一覧</h4>
+  <% else %>
+    <h4>レビュー一覧</h4>
+  <% end %>
   <div class="container">
     <div class="row">
       <div class="col">
@@ -40,6 +44,7 @@
             <td><%= posts.post_deleted ? '済' : '未' %></td>
         <% end %>
         </table>
+        <%= paginate @posts %>
       </div>
     </div>
   </div>
