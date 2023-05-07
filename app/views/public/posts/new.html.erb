@@ -4,6 +4,7 @@
       <h5>新規投稿画面</h5>
       <%= form_with model: @post do |f| %>
         <div  class="col btn-group-vertical d-flex" data-toggle="buttons">
+          <h6 class="text-danger">※離れた時色が変わっていないと選択されてませんのでご注意ください</h6>
             <label class="btn btn-outline-secondary flex-column" style="width: 100%;">
               <%= f.radio_button :select_shop, 0, style: "display: none;" %>登録済みの店から選択
               <p class="ml-3 col-12"><%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %></p>

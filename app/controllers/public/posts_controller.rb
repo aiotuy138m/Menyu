@@ -72,12 +72,12 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path
   end
 
-  def favorites # いいね機能・一覧
-    @post = current_customer.favorite_posts.includes(:customer).order(created_at: :desc)
+  def favorites # お気に入り機能・一覧
+    @post = current_customer.favorite_posts.includes(:customer).page(params[:page]).order(created_at: :desc)
   end
 
   def not_active # 非公開一覧、Prefix：private_posts_path
-    @posts = current_customer.post.where(post_status: false).order("created_at DESC")
+    @posts = current_customer.post.where(post_status: false).page(params[:page]).order("created_at DESC")
   end
 
   private

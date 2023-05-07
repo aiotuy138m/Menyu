@@ -53,7 +53,7 @@ class Public::SessionsController < Devise::SessionsController
      @customer = Customer.find_by(email: params[:customer][:email])
      if @customer.valid_password?(params[:customer][:password])
        if @customer.is_deleted == true
-         redirect_to new_customer_registration_path
+         redirect_to new_customer_registration_path, danger: 'そのアカウントはすでに退会済みです。'
        end
      end
    end

@@ -30,7 +30,7 @@
       </div>
       <table class="table table-borderless">
         </tr>
-          <td><%= link_to "非公開一覧を見る", private_posts_path, class:"btn btn-primary" %></td>
+          <td><%= link_to "非公開リスト", private_posts_path, class:"btn btn-primary" %></td>
         </tr>
         <tr>
           <td><%= link_to "食べたいリスト", favorites_posts_path, class:"btn btn-success" %></td>
@@ -40,7 +40,7 @@
         <div class="row">
         <ul class="list-group list-group-flush col-6">
           <li class="list-group-item">
-            <%= @customer.nickname %>さんが投稿されているお店
+            <%= @customer.nickname %>さんの</br>お店別投稿数
           </li>
           <p class="text-left">
             <% @shop_infos.each do |shop_info| %>
@@ -52,7 +52,7 @@
         </ul>
         <ul class="list-group list-group-flush col-6">
           <li class="list-group-item">
-            <%= @customer.nickname %>さんジャンル別投稿数
+            <%= @customer.nickname %>さんの</br>ジャンル別投稿数
           </li>
           <p class="text-left">
             <% @genres.each do |genre| %>
@@ -68,9 +68,9 @@
     </div><!--会員情報-->
     <div class="col-7 mx-auto" style="width: 200px;">
       <% if @genre.present? %>
-      <h4>ジャンル「<%= @genre.name %>」での絞り込み</h4>
+      <h4><%= @customer.nickname %>さんのレビュー「<%= @genre.name %>」での絞り込み</h4>
     <% elsif @shop_info.present? %>
-      <h4>「<%= @shop_info.shop_name %>」での絞り込み</h4>
+      <h4><%= @customer.nickname %>さんのレビュー「<%= @shop_info.shop_name %>」での絞り込み</h4>
     <% else %>
       <h4><%= @customer.nickname %>さんのレビュー一覧</h4>
     <% end %>

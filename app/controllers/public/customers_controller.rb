@@ -3,10 +3,10 @@ class Public::CustomersController < ApplicationController
     @customer = Customer.find(current_customer.id)
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @posts = Post.left_joins(:post_genres).where(:post_genres => {:genre_id => [@genre]}).where(post_status: true).where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
+      @posts = Post.left_joins(:post_genres).where(:post_genres => {:genre_id => [@genre]}).where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
     elsif params[:shop_info_id]
       @shop_info = ShopInfo.find(params[:shop_info_id])
-      @posts = @shop_info.post.where(post_status: true).where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
+      @posts = @shop_info.post.where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
     else
       @posts = Post.where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
     end
