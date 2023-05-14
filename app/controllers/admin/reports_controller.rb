@@ -1,6 +1,7 @@
 class Admin::ReportsController < ApplicationController
   def index
     @reports = Report.page(params[:page]).per(10).order("created_at DESC")
+    
   end
 
   def show

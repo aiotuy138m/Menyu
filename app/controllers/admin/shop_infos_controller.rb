@@ -30,7 +30,7 @@ class Admin::ShopInfosController < ApplicationController
   def destroy
     @shop_info = ShopInfo.find(params[:id])
     @shop_info.destroy
-    redirect_to admin_posts_path, danger: "削除しました"
+    redirect_to admin_shop_infos_path, danger: "削除しました"
   end
   
   private

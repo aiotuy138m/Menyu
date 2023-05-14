@@ -10,8 +10,6 @@ class Post < ApplicationRecord
   has_many :favorite_posts, through: :favorites ,source: :post
   has_many :likes, dependent: :destroy
 
-
-
   def get_image(width, hight)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no-image.png')
