@@ -30,4 +30,9 @@ class Customer < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, hight]).processed
   end
+  
+  # バリデーション
+  validates :email, presence: true
+  validates :nickname, presence: true
+  validates :password, presence: true
 end
