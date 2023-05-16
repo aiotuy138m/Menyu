@@ -6,25 +6,26 @@
         <div class="d-flex">
         <div class="col-2"></div>
         <%= form_with model: ShopInfo.new, url: admin_shop_infos_path do |f| %>
+        <%= render "public/shared/error_messages", resource: @shop_info %>
           <table class="col-12">
             <tr>
-              <th><%= f.label "店名" %></th>
+              <th><%= f.label :shop_name %></th>
               <td><%= f.text_field :shop_name, class:"form-control" %></td>
             </tr>
             <tr>
-              <th><%= f.label "住所" %></th>
+              <th><%= f.label :address %></th>
               <td><%= f.text_area :address, class:"form-control" %></td>
             </tr>
             <tr>
-              <th><%= f.label "URL" %></th>
+              <th><%= f.label :shop_url %></th>
               <td><%= f.text_field :shop_url, class:"form_control" %></td>
             </tr>
             <tr>
-              <th><%= f.label "緯度" %></th>
+              <th><%= f.label :latitude %></th>
               <td><%= f.text_field :latitude, class:"form_control" %></td>
             </tr>
             <tr>
-              <th><%= f.label "経度" %></th>
+              <th><%= f.label :longitude %></th>
               <td><%= f.text_field :longitude, class:"form_control" %></td>
             </tr>
           </table>

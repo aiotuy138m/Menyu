@@ -8,8 +8,8 @@ class Admin::GenresController < ApplicationController
     if @genre.save
       redirect_to admin_genres_path, success: "保存しました"
     else
-      @genre = Genre.all
-      render :index, danger: "保存失敗しました"
+      @genres = Genre.all
+      render :index
     end
   end
 

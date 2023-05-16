@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10">
+      <h4>レビュー編集画面</h4>
       <%= render 'layouts/new' %>
       <%= form_with model: @post, url: post_path do |f| %>
       <table class="table tablebordered">
@@ -106,7 +107,7 @@
           <th></th>
           <td>
               <%= f.submit '変更を保存', method: :patch, class:"btn btn-lg btn-block btn-info mt-4" %>
-              <%= link_to "削除", post_path(@post.id), method: :delete, class:"btn btn-lg btn-block btn-danger mt-4" %>
+              <%= link_to "削除", post_path(@post.id), "data-confirm" => "本当に削除しますか？", method: :delete, class:"btn btn-lg btn-block btn-danger mt-4" %>
               <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
           </td>
         </tr><!--変更　戻る　削除-->

@@ -1,5 +1,5 @@
 <% if resource.errors.any? %>
-  <div id="error_explanation" data-turbo-cache="false">
+  <div id="error_explanation" data-turbo-cache="false" class="jumbotron text-danger" style="background-color: rgb(245,201,198,0.5); border-radius: 10%;">
     <h2>
       <%= I18n.t("errors.messages.not_saved",
                  count: resource.errors.count,

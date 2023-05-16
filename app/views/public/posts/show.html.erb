@@ -88,7 +88,7 @@
               <td><%= post_comment.created_at.strftime('%Y/%m/%d') %></td>
               <td>
                 <% if post_comment.customer_id == current_customer.id %>
-                  <%= link_to post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, class:"text-danger" do %>
+                  <%= link_to post_post_comment_path(post_comment.post_id, post_comment.id), "data-confirm" => "本当に削除しますか？", method: :delete, class:"text-danger" do %>
                     <i class="fas fa-trash-alt"></i>
                   <% end %>
                 <% end %>

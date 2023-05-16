@@ -26,7 +26,7 @@
             <td><%= shop_info.address %></td>
             <td><%= shop_info.latitude %></td>
             <td><%= shop_info.longitude %></td>
-            <td><%= link_to "削除", admin_shop_info_path(shop_info.id), method: :delete, class:"btn btn-danger" %></td>
+            <td><%= link_to "削除", admin_shop_info_path(shop_info.id), "data-confirm" => "本当に削除しますか？", method: :delete, class:"btn btn-danger" %></td>
         <% end %>
         </table>
       <%= paginate @shop_infos %>

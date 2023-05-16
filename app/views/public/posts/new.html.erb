@@ -2,7 +2,8 @@
   <div class="row">
     <div class="col-8 mx-auto" style="width: 200px;">
       <h5>新規投稿画面</h5>
-      <%= form_with model: @post do |f| %>
+      <%= form_with model: @post, local: true do |f| %>
+      <%= render "public/shared/error_messages", resource: @post %>
         <div  class="col btn-group-vertical d-flex" data-toggle="buttons">
           <h6 class="text-danger">※離れた時色が変わっていないと選択されてませんのでご注意ください</h6>
             <label class="btn btn-outline-secondary flex-column" style="width: 100%;">
@@ -15,7 +16,7 @@
               <tr>
                 <th class="col-4" style="color: white; width: 20%;">店名</th>
                 <td>
-                  <%= f.text_field :shop_name,class: "float-left", style: "border-color: white;" %>
+                  <%= f.text_field :shop_name, class: "float-left", style: "border-color: white;" %>
                 </td>
                 <td></td><td></td><td></td>
               </tr>
@@ -28,7 +29,7 @@
               <tr>
                 <th class="col-4" style="color: white; width: 20%;">店のHP等URL</th>
                 <td>
-                  <%= f.text_field :shop_url,class: "float-left", style: "border-color: white;" %>
+                  <%= f.text_field :shop_url, class: "float-left", style: "border-color: white;" %>
                 </td>
                 <td></td><td></td><td></td>
               </tr>

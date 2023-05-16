@@ -8,7 +8,7 @@ class Admin::ShopInfosController < ApplicationController
     if @shop_info.save
       redirect_to admin_shop_infos_path, success: "保存しました"
     else
-      render :new, danger: "保存失敗しました"
+      render :new
     end
   end
   

@@ -1,5 +1,23 @@
 ja:
   activerecord:
+    models:
+      genre: ジャンル
+      post: レビュー
+      shop_info: 店情報
+    attributes:
+      genre:
+        name: ジャンル名
+      post:
+        menu: メニュー名
+        rate: 評価
+        comment: 感想
+        post_status: 公開/非公開
+      shop_info:
+        shop_name: 店名
+        address: 住所
+        latitude: 緯度
+        longitude: 経度
+        shop_url: URL
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'

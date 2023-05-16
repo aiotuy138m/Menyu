@@ -17,7 +17,8 @@ class Public::PostsController < ApplicationController
       @shop_info.address = params[:post][:address]
       @shop_info.shop_url = params[:post][:shop_url]
       if shop_info = ShopInfo.where(shop_name: "#{params[:post][:shop_name]}").count >=1 # 名前被り1件以上見つけている
-        shop_info = ShopInfo.last
+        shop_info = ShopInfo.where(shop_name: "#{params[:post][:shop_name]}")
+        shop_info = shop_info.find_by_id(shop_info.ids) # whereで探したやつを１件に絞っている
         @post.shop_info_id = shop_info.id
         @post.save
         redirect_to posts_path, success: "投稿しました"
@@ -69,7 +70,7 @@ class Public::PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.delete
-    redirect_to posts_path
+    redirect_to posts_path, danger: "投稿を削除しました"
   end
 
   def favorites # お気に入り機能・一覧
