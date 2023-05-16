@@ -4,17 +4,17 @@
       <h4>レビュー編集画面</h4>
       <%= render 'layouts/new' %>
       <%= form_with model: @post, url: post_path do |f| %>
-      <table class="table tablebordered">
+      <table class="table table-borderless">
         <tr>
-          <th style="width: 20%">投稿画像</th>
+          <th style="width: 10%">投稿画像</th>
           <td><%= f.file_field :image, accept: "image/*" %></td>
         </tr><!--投稿画像-->
         <tr>
-          <th style="width: 20%">メニュー名</th>
+          <th style="width: 10%">メニュー名</th>
           <td><%= f.text_field :menu %></td>
         </tr><!--メニュー名-->
         <tr>
-          <th style="width: 20%">評価</th>
+          <th style="width: 10%">評価</th>
           <td>
             <p style="font-size: 15px; color: gray;">※0~5、0.5刻み</p>
             <input type="range" class="col-5" id="rate" name="post[rate]" value="<%= @post.rate %>" min="0" max="5" step="0.5" list="list" style="accent-color: #ffcc66;">
@@ -40,7 +40,7 @@
           </td>
         </tr><!-- 評価-->
         <tr>
-          <th style="width: 20%">店名</th>
+          <th style="width: 10%">店名</th>
           <td>
             <div  class="col btn-group-vertical d-flex" data-toggle="buttons">
               <label class="btn btn-outline-secondary flex-column" style="width: 100%;">
@@ -76,7 +76,7 @@
           </td>
         </tr><!--店名-->
         <tr>
-          <th style="width: 20%">ジャンル</th>
+          <th style="width: 10%">ジャンル</th>
           <td>
             <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name) do |genre| %>
               <%= genre.label do %>
@@ -87,11 +87,11 @@
           </td>
         </tr><!--ジャンル-->
         <tr>
-          <th style="width: 20%">感想</th>
+          <th style="width: 10%">感想</th>
           <td><%= f.text_area :comment %></td>
         </tr><!--感想-->
         <tr>
-          <th style="width: 20%"><%= f.label "公開設定" %></th>
+          <th style="width: 10%"><%= f.label "公開設定" %></th>
           <td>
             <div class="btn-group btn-group-toggle" data-toggle="buttons">
               <label class="btn btn-outline-success">
@@ -105,13 +105,13 @@
           </tr><!--公開設定-->
         <tr>
           <th></th>
-          <td>
-              <%= f.submit '変更を保存', method: :patch, class:"btn btn-lg btn-block btn-info mt-4" %>
-              <%= link_to "削除", post_path(@post.id), "data-confirm" => "本当に削除しますか？", method: :delete, class:"btn btn-lg btn-block btn-danger mt-4" %>
-              <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
+          <td class="d-flex">
+              <%= f.submit '変更を保存', method: :patch, class:"btn btn-block btn-info mt-4 mr-5 col-2" %>
+              <%= link_to "削除", post_path(@post.id), "data-confirm" => "本当に削除しますか？", method: :delete, class:"btn btn-block btn-danger mt-4 ml-5 col-2" %>
           </td>
         </tr><!--変更　戻る　削除-->
       </table>
+      <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
       <% end %>
     </div>
   </div>
