@@ -24,7 +24,11 @@
         <% @posts.each do |posts| %>
           <tr>
             <td><%= l posts.created_at %></td>
-            <td><%= posts.id %></td>
+            <td>
+              <%= link_to admin_post_path(posts.id) do %>
+                <%= posts.id %>
+              <% end %>
+            </td>
             <td><%= posts.customer.nickname %></td>
             <td>
               <%= link_to admin_post_path(posts.id) do %>

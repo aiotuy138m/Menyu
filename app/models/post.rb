@@ -9,6 +9,7 @@ class Post < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites ,source: :post
   has_many :likes, dependent: :destroy
+  has_many :reported_post, class_name: "Report", foreign_key: "reported_id", dependent: :destroy
 
   def get_image(width, hight)
     unless image.attached?

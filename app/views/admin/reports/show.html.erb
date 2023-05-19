@@ -14,7 +14,7 @@
           </tr>
           <tr>
             <td>会員名</td>
-            <td><%= @report.reported.customer.nickname %></td>
+            <td><%= @customer.nickname %></td>
           </tr>
           <tr>
             <td>理由</td>
@@ -22,9 +22,10 @@
           </tr>
           <tr>
             <td>通報者</td>
-            <td><%= @report.reporter.customer.nickname %></td>
+            <td><%= @reporter %></td>
           </tr>
         </table>
+                <%= link_to "戻る", admin_reports_path, class:"btn btn-info" %>
       </div>
     </div>
   </div>
