@@ -1,4 +1,6 @@
 class Public::PostsController < ApplicationController
+  before_action :authenticare_customer
+  before_action :ensure_correct_customer, {only: [:edit, :update]}
   def new
     @post = Post.new
     @genres = Genre.all
@@ -10,8 +12,11 @@ class Public::PostsController < ApplicationController
     @post.customer_id = current_customer.id
     @shop_info = ShopInfo.new
     if params[:post][:select_shop] == "0"  # ラジオボタン0選択した時の処理
-      @post.save
-      redirect_to posts_path, success: "投稿しました"
+      if @post.save
+        redirect_to posts_path, success: "投稿しました"
+      else
+        render :new
+      end
     elsif params[:post][:select_shop] == "1"  # ラジオボタン1選択した時の処理
       @shop_info.shop_name = params[:post][:shop_name]
       @shop_info.address = params[:post][:address]
@@ -20,17 +25,27 @@ class Public::PostsController < ApplicationController
         shop_info = ShopInfo.where(shop_name: "#{params[:post][:shop_name]}")
         shop_info = shop_info.find_by_id(shop_info.ids) # whereで探したやつを１件に絞っている
         @post.shop_info_id = shop_info.id
-        @post.save
-        redirect_to posts_path, success: "投稿しました"
+        if @post.save
+          redirect_to posts_path, success: "投稿しました"
+        else
+          render :new
+        end
       else # かぶってなかった時の処理
         @shop_info.save
         shop_info = ShopInfo.last
         @post.shop_info_id = shop_info.id
-        @post.save
-        redirect_to posts_path, success: "投稿しました"
+        if @post.save
+          redirect_to posts_path, success: "投稿しました"
+        else
+          render :new
+        end
       end
-    else
-      redirect_to new_post_path, danger: "投稿に失敗しました"
+    else # 店情報を選択しなかったときの処理
+      if @post.save
+        redirect_to posts_path, success: "投稿しました"
+      else
+        render :new
+      end
     end
   end
 

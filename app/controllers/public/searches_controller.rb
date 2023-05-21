@@ -1,4 +1,5 @@
 class Public::SearchesController < ApplicationController
+  before_action :authenticare_customer
   def search
     @range = params[:range]
     if @range == "店名"

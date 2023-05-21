@@ -3,6 +3,7 @@
     <div class="col-md-7">
       <h3>通報画面</h3>
       <%= form_with model:[@post, @report] do |f| %>
+      <%= render "public/shared/error_messages", resource: @report %>
         <div class="form-group">
           <%= f.hidden_field :reporter_id, :value => current_customer.id %>
           <%= f.hidden_field :reported_id, :value => @post.id %>

@@ -1,4 +1,5 @@
 class Public::ReportsController < ApplicationController
+  before_action :authenticare_customer
   def new
     @report = Report.new
     @post = Post.find(params[:post_id])
@@ -6,10 +7,11 @@ class Public::ReportsController < ApplicationController
 
   def create
     @report = Report.new(report_params)
-    if @report.save!
+    @post = Post.find(params[:post_id])
+    if @report.save
       redirect_to posts_path, danger: "通報しました　ご協力ありがとうございます"
     else
-      render :new
+      render "new"
     end
   end
 

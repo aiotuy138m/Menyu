@@ -1,4 +1,7 @@
 class Public::CustomersController < ApplicationController
+  before_action :authenticare_customer
+  before_action :ensure_correct_customer, {only: [:edit, :update, :withdraw]}
+  
   def show
     @customer = Customer.find(current_customer.id)
     if params[:genre_id]

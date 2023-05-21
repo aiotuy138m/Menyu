@@ -5,7 +5,7 @@ class Post < ApplicationRecord
   has_many :post_genres, dependent: :destroy
   has_many :genres, -> { order(:name) }, through: :post_genres, source: :genre
   belongs_to :customer
-  belongs_to :shop_info
+  belongs_to :shop_info, optional: true
   has_many :favorites, dependent: :destroy
   has_many :favorite_posts, through: :favorites ,source: :post
   has_many :likes, dependent: :destroy
