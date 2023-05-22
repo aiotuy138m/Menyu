@@ -1,18 +1,55 @@
 <div class="container">
   <div class="row">
-    <% if current_customer %>
-      <div class="col">
-        投稿されたお店
-        ジャンル別投稿数
+    <% if current_customer %><!--ログイン時-->
+    <%= render 'layouts/new' %>
+      <div class="col-5">
+        <ul class="list-group list-group-flush col-12">
+          <li class="list-group-item">お店別投稿数</li>
+            <% @shop_infos.each do |shop_info| %>
+              <%= link_to posts_path(shop_info_id: shop_info.id) do %>
+                <%= shop_info.shop_name %><span class="badge badge-primary badge-pill"><%= shop_info.post.where(post_status: true).where(post_deleted: false).count %></span></br>
+              <% end %>
+            <% end %>
+          <li class="list-group-item">ジャンル別投稿数</li>
+            <% @genres.each do |genre| %>
+              <%= link_to posts_path(genre_id: genre.id) do %>
+                <%= genre.name %><span class="badge badge-primary badge-pill"><%= genre.posts.where(post_status: true).where(post_deleted: false).count %></span></br>
+              <% end %>
+            <% end %>
+        </ul>
       </div>
-    <% else %>
+      <div class="col-7">
+        <h1>Menyuへようこそ！</h1></br>
+        <div class="mt-5">
+        <h4>
+          新規投稿は
+          <%= link_to "こちら", new_post_path %>
+          からも</br>
+          　右下の＋ボタンからも可能です！
+        </h4>
+        </div>
+        <div class="mt-5">
+        <p style="color: gray;">※店情報が間違っている等ありましたら</br>レビューの詳細画面の通報機能でお知らせください。</p>
+        </div>
+        <div>
+          <%= image_tag'menyulogo.png',class:"img-fluid", width:"500px", height:"500px" %>
+        </div>
+      </div>
+    <% else %><!--非ログイン時-->
     <div class="col">
       <h1>Menyuへようこそ！</h1>
-      <p>Menyuとは</br>麺(Men)に特化したメニュー(Menu)レビューサイトです。</p>
-      <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-primary" %>
-      <%= link_to "ログイン", new_customer_session_path, class:"btn btn-success" %>
-      <p>ゲストは投稿・閲覧・コメント機能が使えますが</br>ログアウト時に投稿やコメント、お気に入りデータが削除されます。</p>
-      <%= link_to 'ゲストログイン', customers_guest_sign_in_path, method: :post, class:"btn btn-outline-info" %>
+      <p>　Menyuとは</br>　麺(Men)に特化したメニュー(Menu)レビューサイトです。</p>
+      <div class="mt-5">
+        <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-primary btn-lg mr-5" %>
+        <%= link_to "ログイン", new_customer_session_path, class:"btn btn-success btn-lg" %>
+      </div>
+      <div class="mt-5">
+        <%= link_to 'ゲストログイン', customers_guest_sign_in_path, method: :post, class:"btn btn-outline-info" %>
+        <p style="font-size: 15px; color: gray;">※ゲストは投稿・閲覧・コメント機能が使えますが</br>　ログアウト時に投稿やコメント、お気に入りデータが削除されます。</p>
+      </div>
+    </div>
+    <div>
+      <%= image_tag'menyulogo.png',class:"img-fluid", width:"500px", height:"500px" %>
     </div>
     <% end %>
   </div>

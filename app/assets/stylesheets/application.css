@@ -18,8 +18,7 @@
     z-index: 0;
     display: inline-block;
     white-space: nowrap;
-    color: #CCCCCC; /* グレーカラー 自由に設定化 */
-    /*font-size: 30px; フォントサイズ 自由に設定化 */
+    color: #CCCCCC; /* グレーカラー */
 }
 
 .star5_rating:before, .star5_rating:after{
@@ -33,7 +32,7 @@
     left: 0;
     overflow: hidden;
     white-space: nowrap;
-    color: #ffcf32; /* イエローカラー 自由に設定化 */
+    color: #ffcf32; /* イエローカラー */
 }
 
 .star5_rating[data-rate="5.0"]:after{ width: 100%; } /* 星5 */
@@ -47,3 +46,74 @@
 .star5_rating[data-rate="1.0"]:after{ width: 20%; } /* 星1 */
 .star5_rating[data-rate="0.5"]:after{ width: 10%; } /* 星0.5 */
 .star5_rating[data-rate="0.0"]:after{ width: 0%; } /* 星0 */
+
+#img {
+  border-radius: 50%;  /* 円形 */
+  width: 25px;  /* 縦横を同じ値にする */
+  height: 25px;  /* 縦横を同じ値にする */
+  object-fit: cover; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
+}
+
+  /* 新規投稿ボタン */
+.post-btn {
+  position: fixed;
+  bottom: 5%;
+  right: 5%;
+  width: 70px;
+  height: 70px;
+  line-height: 70px;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  background: green;
+  border-radius: 50%;
+  text-align: center;
+  z-index: 10;
+}
+
+/*フッター固定*/
+.footer {
+  position: fixed;
+  bottom: 0;
+  background: darkslategray;
+  color: white;
+}
+
+/*非公開マーク*/
+.key {
+  position: absolute;
+  right: 78%;
+  width: 40px;
+  height: 40px;
+  font-size: x-large;
+  background-color: rgba(999,999,999, 0.5);
+  border-radius: 50%;
+  text-align: center;
+}
+
+/*戻るボタン*/
+.back-btn {
+  position: fixed;
+  bottom: 5%;
+  left: 5%; /*左下に固定 */
+}
+/*ページネーションを中央配置に*/
+.pagination {
+  justify-content: center;
+}
+
+/*ページネーション自体のデザイン*/
+.pagination>li>a {          
+  border: none;     /*枠線をなくす*/
+  color: #696969;   /*文字の色を変える*/
+}
+
+/* 表示しているページ番号のデザイン */
+.pagination>.active>a {     
+  background: #008b8b !important;     /*背景の色を変える*/
+  border-radius: 15px !important;     /*角を丸くする*/
+}
+/*ホバー時のデザイン*/
+.pagination>li>a:hover {        
+  border-radius: 15px !important;    /*角を丸くする*/
+}

@@ -30,7 +30,7 @@
             <th class="co-1"></th>
             <td>
               <%= link_to "編集する", edit_admin_customer_path, class:"btn btn-success col-2" %>
-              <%= link_to "レビュー一覧を見る", admin_posts_path, class:"btn btn-primary ml-5" %>
+              <%= link_to "レビュー一覧を見る", admin_posts_path(customer_id: @customer.id), class:"btn btn-primary ml-5" %>
             </td>
           </tr>
         </table>

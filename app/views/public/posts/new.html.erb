@@ -2,19 +2,21 @@
   <div class="row">
     <div class="col-8 mx-auto" style="width: 200px;">
       <h5>新規投稿画面</h5>
-      <%= form_with model: @post do |f| %>
-          <div  class="col btn-group-vertical d-flex" data-toggle="buttons">
+      <%= form_with model: @post, local: true do |f| %>
+      <%= render "public/shared/error_messages", resource: @post %>
+        <div  class="col btn-group-vertical d-flex" data-toggle="buttons">
+          <h6 class="text-danger">※離れた時色が変わっていないと選択されてませんのでご注意ください</h6>
             <label class="btn btn-outline-secondary flex-column" style="width: 100%;">
-              <%= f.radio_button :select_shop, 0 %>登録済みの店から選択
+              <%= f.radio_button :select_shop, 0, style: "display: none;" %>登録済みの店から選択
               <p class="ml-3 col-12"><%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %></p>
             </label>
             <label class="btn btn-outline-secondary flex-column">
-              <%= f.radio_button :select_shop, 1 %>新しくお店を登録
+              <%= f.radio_button :select_shop, 1, style: "display: none;" %>新しくお店を登録
             <table class="ml-3 table table-borderless talbe-sm">
               <tr>
                 <th class="col-4" style="color: white; width: 20%;">店名</th>
                 <td>
-                  <%= f.text_field :shop_name,class: "float-left", style: "border-color: white;" %>
+                  <%= f.text_field :shop_name, class: "float-left", style: "border-color: white;" %>
                 </td>
                 <td></td><td></td><td></td>
               </tr>
@@ -27,22 +29,22 @@
               <tr>
                 <th class="col-4" style="color: white; width: 20%;">店のHP等URL</th>
                 <td>
-                  <%= f.text_field :shop_url,class: "float-left", style: "border-color: white;" %>
+                  <%= f.text_field :shop_url, class: "float-left", style: "border-color: white;" %>
                 </td>
                 <td></td><td></td><td></td>
               </tr>
             </table>
             </label>
-          </div>
-      <table class="table table-borderless">
+          </div><!--店情報選択or登録-->
+        <table class="table table-borderless">
         <tr>
           <th style="width: 20%">投稿画像</th>
           <td><%= f.file_field :image, id: "image", accept: "image/*" %></td>
-        </tr>
+        </tr><!--投稿画像-->
         <tr>
           <th style="width: 20%">メニュー名</th>
           <td><%= f.text_field :menu, class:"col-12" %></td>
-        </tr>
+        </tr><!--メニュー名-->
         <tr>
           <th style="width: 20%">評価</th>
           <td>
@@ -67,7 +69,6 @@
               <option value="4"></option>
               <option value="5"></option>
             </datalist>
-            <label for="review01"></label>
           </td>
         </tr>
         <tr>
@@ -80,22 +81,28 @@
               <% end %>
             <% end %>
           </td>
-        </tr>
+        </tr><!--ジャンル-->
         <tr>
           <th style="width: 20%">感想</th>
           <td><%= f.text_area :comment, class: "col-12" %></td>
-        </tr>
+        </tr><!--感想-->
         <tr>
           <th style="width: 20%"><%= f.label "公開設定" %></th>
           <td>
-            <%= f.radio_button :post_status, true, style: "accent-color:black;",checked: true %>
-            <%= f.label :post_status, "公開", value: true %>
-            <%= f.radio_button :post_status, false, class:"ml-5", style: "accent-color:black;" %>
-            <%= f.label :post_status, "非公開", value: false %>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-outline-success active">
+                <%= f.radio_button :post_status, true, style: "accent-color:black;",checked: true %>公開
+              </label>
+              <label class="btn btn-outline-secondary">
+                <%= f.radio_button :post_status, false, class:"ml-5", style: "accent-color:black;" %>非公開
+              </label>
+            </div>
           </td>
-          </tr>
+          </tr><!--公開設定-->
       </table>
-      <div class="container text-center"><%= f.submit '投稿', class:"btn btn-lg btn-success mt-4 col-3" %></div>
+        <div class="container text-center">
+          <%= f.submit '投稿', class:"btn btn-lg btn-success mt-4 col-3" %>
+        </div><!--投稿ボタン-->
       <% end %>
       <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
     </div>

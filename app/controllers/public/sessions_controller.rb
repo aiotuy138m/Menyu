@@ -28,7 +28,7 @@ class Public::SessionsController < Devise::SessionsController
    end
 
    def after_sign_in_path_for(resource)
-     posts_path
+     root_path
    end
 
    def after_sign_out_path_for(resource)
@@ -38,7 +38,7 @@ class Public::SessionsController < Devise::SessionsController
    def guest_sign_in
      customer = Customer.guest
      sign_in customer
-     redirect_to posts_path, notice: 'ゲストとしてログインしました。'
+     redirect_to root_path, notice: 'ゲストとしてログインしました。'
    end
 
    protected
@@ -51,9 +51,10 @@ class Public::SessionsController < Devise::SessionsController
   # 退会しているかを判断するメソッド
    def customer_state
      @customer = Customer.find_by(email: params[:customer][:email])
-     if @customer.valid_password?(params[:customer][:password])
+     if @customer.nil? # 空白の時はフラッシュメッセージだけ表示
+     elsif @customer.valid_password?(params[:customer][:password])
        if @customer.is_deleted == true
-         redirect_to new_customer_registration_path
+         redirect_to new_customer_registration_path, danger: 'そのアカウントはすでに退会済みです。'
        end
      end
    end

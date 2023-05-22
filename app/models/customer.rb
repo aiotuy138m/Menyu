@@ -30,4 +30,6 @@ class Customer < ApplicationRecord
     end
     profile_image.variant(resize_to_limit: [width, hight]).processed
   end
+  
+  validates :nickname, presence: true
 end

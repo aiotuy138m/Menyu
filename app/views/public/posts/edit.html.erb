@@ -1,23 +1,35 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-10">
+      <h4>レビュー編集画面</h4>
       <%= render 'layouts/new' %>
       <%= form_with model: @post, url: post_path do |f| %>
-      <table class="table tablebordered">
+      <table class="table table-borderless">
         <tr>
-          <th>投稿画像</th>
+          <th style="width: 10%">投稿画像</th>
           <td><%= f.file_field :image, accept: "image/*" %></td>
-        </tr>
+        </tr><!--投稿画像-->
         <tr>
-          <th>メニュー名</th>
+          <th style="width: 10%">メニュー名</th>
           <td><%= f.text_field :menu %></td>
-        </tr>
+        </tr><!--メニュー名-->
         <tr>
-          <th>評価</th>
+          <th style="width: 10%">評価</th>
           <td>
-            <p style="font-size: 15px; color: gray;">※0.5刻み</p>
-            0<input type="range" class="form-contro-l-range" id="rate" name="post[rate]" value="<%= @post.rate %>" min="0" max="5" step="0.5" list="tlist" style="accent-color: #ffcc66;">5
-            <datalist id="tlist">
+            <p style="font-size: 15px; color: gray;">※0~5、0.5刻み</p>
+            <input type="range" class="col-5" id="rate" name="post[rate]" value="<%= @post.rate %>" min="0" max="5" step="0.5" list="list" style="accent-color: #ffcc66;">
+            <span id="value"><%= @post.rate %></span>
+            <script> //入力値を表示するjavascript
+              var elem = document.getElementById('rate');
+              var target = document.getElementById('value');
+              var rateValue = function (elem, target) {
+                return function(evt){
+                  target.innerHTML = elem.value;
+                }
+              }
+              elem.addEventListener('input', rateValue(elem, target));
+            </script>
+            <datalist id="list"> <!--目盛-->
               <option value="0"></option>
               <option value="1"></option>
               <option value="2"></option>
@@ -25,17 +37,46 @@
               <option value="4"></option>
               <option value="5"></option>
             </datalist>
-            <label for="review01"></label>
           </td>
-        </tr>
+        </tr><!-- 評価-->
         <tr>
-          <th>店名</th>
+          <th style="width: 10%">店名</th>
           <td>
-            <%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), class:"custom-select col-12" %>
+            <div  class="col btn-group-vertical d-flex" data-toggle="buttons">
+              <label class="btn btn-outline-secondary flex-column" style="width: 100%;">
+              <%= f.radio_button :select_shop, 0, style: "display: none;" %>登録済みの店から選択
+              <p class="ml-3 col-12"><%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), class:"custom-select col-12" %></p>
+            </label><!--登録済みのお店から選択-->
+              <label class="btn btn-outline-secondary flex-column">
+              <%= f.radio_button :select_shop, 1, style: "display: none;" %>新しくお店を登録
+            <table class="ml-3 table table-borderless talbe-sm">
+              <tr>
+                <th class="col-4" style="color: white; width: 20%;">店名</th>
+                <td>
+                  <%= f.text_field :shop_name,class: "float-left", style: "border-color: white;" %>
+                </td>
+                <td></td><td></td><td></td>
+              </tr>
+              <tr>
+                <th class="col-4" style="color: white; width: 20%;">店の住所</th>
+                <td colspan="4">
+                  <%= f.text_field :address, class:"col-12", style: "border-color: white;" %>
+                </td>
+              </tr>
+              <tr>
+                <th class="col-4" style="color: white; width: 20%;">店のHP等URL</th>
+                <td>
+                  <%= f.text_field :shop_url,class: "float-left", style: "border-color: white;" %>
+                </td>
+                <td></td><td></td><td></td>
+              </tr>
+            </table>
+            </label><!--新しくお店を登録-->
+            </div>
           </td>
-        </tr>
+        </tr><!--店名-->
         <tr>
-          <th>ジャンル</th>
+          <th style="width: 10%">ジャンル</th>
           <td>
             <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name) do |genre| %>
               <%= genre.label do %>
@@ -44,29 +85,33 @@
               <% end %>
             <% end %>
           </td>
-        </tr>
+        </tr><!--ジャンル-->
         <tr>
-          <th>コメント・メモ</th>
+          <th style="width: 10%">感想</th>
           <td><%= f.text_area :comment %></td>
-        </tr>
+        </tr><!--感想-->
         <tr>
-          <th><%= f.label "公開設定" %></th>
+          <th style="width: 10%"><%= f.label "公開設定" %></th>
           <td>
-            <%= f.radio_button :post_status, true, style: "accent-color:black;",checked: true %>
-            <%= f.label :post_status, "公開", value: true %>
-            <%= f.radio_button :post_status, false, class:"ml-5", style: "accent-color:black;" %>
-            <%= f.label :post_status, "非公開", value: false %>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-outline-success">
+                <%= f.radio_button :post_status, true %>公開
+              </label>
+              <label class="btn btn-outline-secondary">
+                <%= f.radio_button :post_status, false, class:"ml-5" %>非公開
+              </label>
+            </div>
           </td>
-          </tr>
+          </tr><!--公開設定-->
         <tr>
           <th></th>
-          <td>
-              <%= f.submit '変更を保存', method: :patch, class:"btn btn-lg btn-block btn-info mt-4" %>
-              <%= link_to "削除", post_path(@post.id), method: :delete, class:"btn btn-lg btn-block btn-danger mt-4" %>
-              <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
+          <td class="d-flex">
+              <%= f.submit '変更を保存', method: :patch, class:"btn btn-block btn-info mt-4 mr-5 col-2" %>
+              <%= link_to "削除", post_path(@post.id), "data-confirm" => "本当に削除しますか？", method: :delete, class:"btn btn-block btn-danger mt-4 ml-5 col-2" %>
           </td>
-        </tr>
+        </tr><!--変更　戻る　削除-->
       </table>
+      <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
       <% end %>
     </div>
   </div>

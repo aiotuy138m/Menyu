@@ -1,6 +1,11 @@
 class Admin::PostsController < ApplicationController
   def index
-    @posts = Post.all.order("created_at DESC")
+    if params[:customer_id]
+      @customer = Customer.find(params[:customer_id])
+      @posts = Post.where(customer_id: @customer.id).page(params[:page]).per(10).order("created_at DESC")
+    else
+      @posts = Post.page(params[:page]).per(10).order("created_at DESC")
+    end
   end
 
   def show

@@ -1,56 +1,68 @@
+<%= render 'layouts/back' %>
 <div>
   <% posts.each do |posts| %>
-  <div class="m-4 pt-3 shadow-lg">
-    <% if posts.post_status == false && posts.customer_id == current_customer.id %>
-      <p class="key"><i class="fas fa-lock"></i></p>
+    <% if  posts.post_deleted == true && posts.customer_id == current_customer.id %>
+      <div class="m-4 pt-3 shadow-lg text-center">
+        <h2>このレビューは通報等の理由により</br>管理者によって削除されました。</h2>
+      </div>
     <% else %>
-      <p></p>
-    <% end %>
-    <p class="text-center">
-    <%= link_to post_path(posts.id) do %>
-      <%= image_tag posts.get_image(500, 500), class:"img-fluid rounded", alt:"Responsive image" %>
-    <% end %>
-    </p>
-  <table class="table table-borderless">
-    <tr>
-      <th style="width: 20%">メニュー名</th>
-      <td><%= posts.menu %></td>
-    </tr>
-    <tr>
-      <th style="width: 20%">ジャンル</th>
-      <td class="text-primary">
-        <% posts.genres.each do |genre| %>
-          #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
+      <div class="m-4 pt-3 shadow-lg">
+        <% if posts.post_status == false && posts.customer_id == current_customer.id %><!-- もし非公開設定で投稿者だったら-->
+          <p class="key"><i class="fas fa-lock"></i></p><!--鍵マークつける-->
+        <% else %>
+          <p></p>
         <% end %>
-      </td>
-    </tr>
-    <tr>
-      <th style="width: 20%">評価</th>
-      <td>
-        <p>
-          <span class="star5_rating" data-rate="<%= (posts.rate).to_f %>"></span><%= posts.rate %>
+        <p class="text-center">
+          <%= link_to post_path(posts.id) do %>
+            <%= image_tag posts.get_image(500, 500), class:"img-fluid rounded", alt:"Responsive image" %>
+          <% end %>
         </p>
-      </td>
-    </tr>
-    <tr>
-      <th style="width: 20%">感想</th>
-      <td><%= posts.comment %></td>
-    </tr>
-    <tr>
-      <th style="width: 20%">店名</th>
-      <td class="text-primary">
-        <%= link_to posts.shop_info.shop_name, posts_path(shop_info_id: posts.shop_info.id) %>
-      </td>
-    </tr>
-    <tr>
-      <th style="width: 20%"></th>
-      <td><i class="fas fa-bookmark"></i><%= posts.favorites.count %>　　<%= "#{posts.post_comments.count} コメント" %>　　<i class="fas fa-thumbs-up"></i><%= posts.likes.count %></td>
-    </tr>
-    <tr>
-      <th></th>
-      <td class="text-right">by　<%= posts.customer.nickname %></td>
-    </tr>
-  </table>
-  </div>
+        <table class="table table-borderless">
+      <tr>
+        <th style="width: 20%">メニュー名</th>
+        <td><%= posts.menu %></td>
+      </tr>
+      <tr>
+        <th style="width: 20%">ジャンル</th>
+        <td class="text-primary">
+          <% posts.genres.each do |genre| %>
+            #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
+          <% end %>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 20%">評価</th>
+        <td>
+          <p>
+            <span class="star5_rating" data-rate="<%= (posts.rate).to_f %>"></span><%= posts.rate %>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 20%">感想</th>
+        <td><%= posts.comment %></td>
+      </tr>
+      <tr>
+        <th style="width: 20%">店名</th>
+        <td class="text-primary">
+          <%= link_to posts.shop_info.shop_name, posts_path(shop_info_id: posts.shop_info.id) %>
+        </td>
+      </tr>
+      <tr>
+        <th style="width: 20%"></th>
+        <td><i class="fas fa-bookmark"></i><%= posts.favorites.count %>　　<%= "#{posts.post_comments.count} コメント" %>　　<i class="fas fa-thumbs-up"></i><%= posts.likes.count %></td>
+      </tr>
+      <tr>
+        <th></th>
+        <td class="text-right">
+          <p><%= l posts.created_at %></p>
+          by　<%= image_tag posts.customer.get_profile_image(50, 50),id:"img", class:"img-fluid", alt:"Responsive image", style:"object-fit: cover; " %>
+          <%= posts.customer.nickname %>
+        </td>
+      </tr>
+    </table>
+      </div> <!--投稿内容-->
+    <% end %>
   <% end %>
 </div>
+<%= paginate posts %>

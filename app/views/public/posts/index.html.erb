@@ -1,7 +1,7 @@
 <% if @genre.present? %>
-  <h4>ジャンル「<%= @genre.name %>」の検索結果</h4>
+  <h4>ジャンル「<%= @genre.name %>」での絞り込み</h4>
 <% elsif @shop_info.present? %>
-  <h4>「<%= @shop_info.shop_name %>」の検索結果</h4>
+  <h4>お店「<%= @shop_info.shop_name %>」での絞り込み</h4>
 <% else %>
   <h4>レビュー一覧</h4>
 <% end %>
