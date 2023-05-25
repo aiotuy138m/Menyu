@@ -6,6 +6,7 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
@@ -14,7 +15,7 @@
       <nav class="navbar navbar-expand-xl nav-light" style="background: darkseagreen;">
         <p class="navbar-brand d-block mx-auto">
           <%= link_to root_path do %>
-            <%= image_tag'menyulogo.png', width:"100px", height:"100px" %>
+            <%= image_tag asset_path("menyulogo.png"), width:"100px", height:"100px" %>
           <% end %>
         </p>
         <% if customer_signed_in? %>
