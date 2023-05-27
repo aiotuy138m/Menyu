@@ -13,7 +13,7 @@ class Customer < ApplicationRecord
   # ゲストログイン
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |customer|
-      customer.password = SecureRandom.urlsafe_base64
+      customer.password = SecureRandom.alphanumeric(10) + [*'a'..'z'].sample(1).join + [*'0'..'9'].sample(1).join
       customer.nickname = "ゲスト"
       file_path = Rails.root.join("app/assets/images/guest.png")
       customer.profile_image.attach(io: File.open(file_path), filename: 'guest.png', content_type: 'image/png')
