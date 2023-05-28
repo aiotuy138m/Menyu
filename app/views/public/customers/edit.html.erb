@@ -1,40 +1,47 @@
+<!--会員編集画面-->
 <div class="container">
   <div class="row">
     <div class="col-8">
       <%= render 'layouts/new' %>
-    <!--ゲストには編集させない-->
-    <% if @customer.email == 'guest@example.com' %>
-      <p>ゲストはユーザー情報の編集はできません。</p>
-    <% else %>
-      <h4 class="ml-5 mb-3">会員情報編集</h4>
-      <%= form_with model: @customer, url: information_customers_path do |f| %>
-      <table class="table table-borderless">
-        <tr>
-          <th><%= f.label "アイコン画像" %></th>
-          <td><%= f.file_field :profile_image, accept: "image/*" %></td>
-        </tr>
-        <tr>
-          <th><%= f.label "ニックネーム" %></th>
-          <td><%= f.text_field :nickname %></td>
-        </tr>
-        <tr>
-          <th><%= f.label "メールアドレス" %></th>
-          <td><%= f.text_field :email %></td>
-        </tr>
-      </table>
-      <%= link_to edit_customer_registration_path, class:"btn btn-outline-primary" do %>
-        パスワード<i class="fas fa-key"></i>を変更する
+
+      <!--ゲストには編集させない-->
+      <% if @customer.email == 'guest@example.com' %>
+        <p>ゲストはユーザー情報の編集はできません。</p>
+      <% else %>
+        <h4 class="ml-5 mb-3">会員情報編集</h4>
+
+        <%= form_with model: @customer, url: information_customers_path do |f| %>
+          <table class="table table-borderless">
+            <tr>
+              <th><%= f.label "アイコン画像" %></th>
+              <td><%= f.file_field :profile_image, accept: "image/*" %></td>
+            </tr>
+
+            <tr>
+              <th><%= f.label "ニックネーム" %></th>
+              <td><%= f.text_field :nickname %></td>
+            </tr>
+
+            <tr>
+              <th><%= f.label "メールアドレス" %></th>
+              <td><%= f.text_field :email %></td>
+            </tr>
+          </table>
+
+          <%= link_to edit_customer_registration_path, class:"btn btn-outline-primary" do %>
+            パスワード<i class="fas fa-key"></i>を変更する
+          <% end %>
+
+          <table class="table table-borderless ml-5">
+            <tr>
+              <td class="col-2"></td>
+              <td><%= link_to '戻る', :back, class:"btn btn-info col-8" %></td>
+              <td><%= f.submit "編集内容を保存", url: information_customers_path, method: :patch, class:"btn btn-success col-8" %></td>
+              <td><%= link_to "退会する", confirm_customers_path, class:"btn btn-danger col-8" %></td>
+            </tr>
+          </table>
+        <% end %>
       <% end %>
-      <table class="table table-borderless ml-5">
-        <tr>
-          <td class="col-2"></td>
-          <td><%= link_to '戻る', :back, class:"btn btn-info col-8" %></td>
-          <td><%= f.submit "編集内容を保存", url: information_customers_path, method: :patch, class:"btn btn-success col-8" %></td>
-          <td><%= link_to "退会する", confirm_customers_path, class:"btn btn-danger col-8" %></td>
-        </tr>
-      </table>
-      <% end %>
-    <% end %>
     </div>
   </div>
 </div>

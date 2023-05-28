@@ -1,5 +1,9 @@
 class Post < ApplicationRecord
   has_one_attached :image
+  
+  #scope :actives, -> { where(post_status: true).where(post_deleted: false) }
+  #scope :search_by_genre, -> (genre){ left_joins(:post_genres).where(:post_genres => {:genre_id => [genre]}) }
+  #Post.actives.search_by_genre(@genre).page(params[:page]).order("created_at DESC")
 
   has_many :post_comments, dependent: :destroy
   has_many :post_genres, dependent: :destroy

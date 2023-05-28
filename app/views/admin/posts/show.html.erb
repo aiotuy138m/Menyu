@@ -1,15 +1,18 @@
-<% if current_admin %>
+<!--レビュー詳細-->
+<% if current_admin %> <!--管理者のみ閲覧可能-->
   <div class="container">
     <div class="row">
       <div class="col-md-7">
         <div class="mx-auto" style="width: 500px;">
           <%= image_tag @post.get_image(500, 500), class:"img-responsive img-rounded" %>
         </div>
+
         <table class="table table-bordered">
           <tr>
             <th style="width: 20%">メニュー名</th>
             <td><%= @post.menu %></td>
           </tr>
+
           <tr>
             <th style="width: 20%">ジャンル</th>
             <td>
@@ -18,10 +21,12 @@
               <% end %>
             </td>
           </tr>
+
           <tr>
             <th style="width: 20%">評価</th>
             <td><%= "★" * (@post.rate).to_i %></td>
           </tr>
+
           <tr>
             <th style="width: 20%">感想</th>
             <td><%= @post.comment %></td>
@@ -30,36 +35,43 @@
             <th style="width: 20%">投稿者</th>
             <td><%= @post.customer.nickname %></td>
           </tr>
+        </table>
+
+        <div>
+          <p>コメント件数：<%= @post.post_comments.count %></p>
+
+          <table class="table table-bordered">
+            <% @post.post_comments.each do |post_comment| %>
+              <tr>
+                <th><%= post_comment.customer.nickname %></th>
+                <td><%= post_comment.comment %></td>
+                <td><%= l post_comment.created_at %></td>
+                <td>
+                  <%= link_to "削除", post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, class:"btn btn-danger" %>
+                </td>
+              </tr>
+            <% end %>
           </table>
-            <div>
-              <p>コメント件数：<%= @post.post_comments.count %></p>
-              <table class="table table-bordered">
-              <% @post.post_comments.each do |post_comment| %>
-                <tr>
-                  <th><%= post_comment.customer.nickname %></th>
-                  <td><%= post_comment.comment %></td>
-                  <td><%= l post_comment.created_at %></td>
-                  <td>
-                    <%= link_to "削除", post_post_comment_path(post_comment.post_id, post_comment.id), method: :delete, class:"btn btn-danger" %>
-                  </td>
-                </tr>
-              <% end %>
-              </table>
-              <%= form_with model: @post, url: admin_post_path(@post) do |f| %>
-              <td class="col-4">
-                <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                  <label class="btn btn-outline-success">
-                    <%= f.radio_button :post_deleted, false %>現状維持
-                  </label>
-                  <label class="btn btn-outline-danger">
-                    <%= f.radio_button :post_deleted, true, class:"ml-5" %>削除状態
-                  </label>
-                  <%= f.submit '変更', class:"btn btn-outline-info ml-3", method: :post %>
-                </div>
-              </td>
-              <% end %>
-              <%= link_to '戻る', :back, class:"btn btn-info mr-5" %>
-              <%= link_to "完全削除", admin_post_path(@post.id), "data-confirm" => "本当に削除しますか？", method: :delete, class:"btn btn-danger mt-5 ml-5" %>
+
+          <%= form_with model: @post, url: admin_post_path(@post) do |f| %>
+            <td class="col-4">
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-outline-success">
+                  <%= f.radio_button :post_deleted, false %>現状維持
+                </label>
+
+                <label class="btn btn-outline-danger">
+                  <%= f.radio_button :post_deleted, true, class:"ml-5" %>削除状態
+                </label>
+
+                <%= f.submit '変更', class:"btn btn-outline-info ml-3", method: :post %>
+              </div>
+            </td>
+          <% end %>
+
+          <%= link_to '戻る', :back, class:"btn btn-info mr-5" %>
+          <%= link_to "完全削除", admin_post_path(@post.id), "data-confirm" => "本当に削除しますか？", method: :delete, class:"btn btn-danger mt-5 ml-5" %>
+        </div>
       </div>
     </div>
   </div>

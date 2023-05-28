@@ -1,4 +1,5 @@
-<% if current_admin %>
+<!--会員詳細画面-->
+<% if current_admin %> <!--管理者のみ閲覧可能-->
   <div class="container">
     <div class="row">
       <div class="col-10">
@@ -8,24 +9,29 @@
             <th class="co-1">会員ID</th>
             <td><%= @customer.id %></td>
           </tr>
+
           <tr>
             <th></th>
             <td><%= image_tag @customer.get_profile_image(100,100), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %></td>
           </tr>
+
           <tr>
             <th class="co-1">ニックネーム</th>
             <td>
               <%= @customer.nickname %>
             </td>
           </tr>
+
           <tr>
             <th class="co-1">メールアドレス</th>
             <td><%= @customer.email %></td>
           </tr>
+
           <tr>
             <th class="co-1">会員ステータス</th>
             <td><%= @customer.is_deleted ? '退会' : '有効' %></td>
           </tr>
+
           <tr>
             <th class="co-1"></th>
             <td>
