@@ -1,0 +1,40 @@
+<% if current_admin %>
+  <div class="container">
+    <div class="row">
+      <div class="col-10">
+        <h4 class="ml-5 mb-5">店情報新規登録</h4>
+        <div class="d-flex">
+        <div class="col-2"></div>
+        <%= form_with model: ShopInfo.new, url: admin_shop_infos_path do |f| %>
+        <%= render "public/shared/error_messages", resource: @shop_info %>
+          <table class="col-12">
+            <tr>
+              <th><%= f.label :shop_name %></th>
+              <td><%= f.text_field :shop_name, class:"form-control" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :address %></th>
+              <td><%= f.text_area :address, class:"form-control" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :shop_url %></th>
+              <td><%= f.text_field :shop_url, class:"form_control" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :latitude %></th>
+              <td><%= f.text_field :latitude, class:"form_control" %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :longitude %></th>
+              <td><%= f.text_field :longitude, class:"form_control" %></td>
+            </tr>
+          </table>
+          <p class="text-center"><%= f.submit "新規登録", class:"btn btn-success" %></p>
+        <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'admin/admin_only' %>
+<% end %>

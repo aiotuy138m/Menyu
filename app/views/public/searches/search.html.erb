@@ -1,0 +1,18 @@
+<% if params[:word].present? %>
+  <h4>「<%= params[:word] %>」の検索結果</h4>
+<% end %>
+<div class="container">
+  <div class="row">
+    <div class="col-8 mx-auto" style="width: 200px;">
+      <%= render 'layouts/new' %>
+      <% if @posts.first %>
+        <%= render 'public/posts/post-index', posts: @posts %>
+      <% else %>
+        <h4>見つかりませんでした。検索条件を変えて再度お試しください。</h4>
+        <h5>まだ投稿されていない店/ジャンルかもしれません！
+          <%= link_to "投稿しましょう！", new_post_path %>
+        </h5>
+      <% end %>
+    </div>
+  </div>
+</div>

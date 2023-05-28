@@ -1,0 +1,42 @@
+<% if current_admin %>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>通報一覧</h3>
+
+        <table class="table">
+          <tr>
+            <th style="width: 20%;">通報日</th>
+            <th>通報ID</th>
+            <th>投稿者</th>
+            <th>通報者</th>
+          </tr>
+        <% @reports.each do |report| %>
+          <!--会員名を出すための記述-->
+          <% @reporter = Customer.find(report.reporter_id) %>
+          <% posts = Post.find(report.reported_id) %>
+          <% @customer = Customer.find(posts.customer_id) %>
+          <tr>
+            <td>
+              <%= l report.created_at %>
+            </td>
+            <td>
+              <%= link_to report.id, admin_report_path(report) %>
+            </td>
+            <td>
+              <%= @customer.nickname %>
+            </td>
+            <td>
+              <%= @reporter.nickname %>
+            </td>
+          </tr>
+        <% end %>
+        </table>
+        <%= paginate @reports %>
+
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'admin/admin_only' %>
+<% end %>

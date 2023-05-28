@@ -5,12 +5,98 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header class="border-bottom border-dark border-3">
+      <nav class="navbar navbar-expand-xl nav-light" style="background: darkseagreen;">
+        <p class="navbar-brand d-block mx-auto">
+          <%= link_to root_path do %>
+            <%= image_tag asset_path("menyulogo.png"), width:"100px", height:"100px" %>
+          <% end %>
+        </p>
+        <% if customer_signed_in? %>
+          <div class="ml-5 mr-5" style="color: white;">
+          ようこそ、
+            <%= current_customer.nickname %>
+            さん！
+          </div>
+          <div>
+            <%= render 'public/searches/search' %>
+          </div>
+        <% end %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color: white; color: white;">
+          <% if customer_signed_in? %>
+            <%= image_tag current_customer.get_profile_image(50, 50), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %>
+          <% else %>
+            <span class="navbar-toggler-icon"></span>
+          <% end %>
+        </button>
+        <div class="text-right collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav list-group-horizontal mr-auto" >
+          <% if admin_signed_in? %>
+          <li class="nav-item mr-5 active">
+            <%= link_to "トップ", admin_root_path, class:"btn btn-info" %>
+          </li>
+          <li class="nav-item mr-5 active">
+            <%= link_to "レビュー一覧", admin_posts_path, class:"btn btn-info" %>
+          </li>
+          <li class="nav-item mr-5 active">
+            <%= link_to "会員一覧", admin_customers_path, class:"btn btn-info" %>
+          </li>
+          <li class="nav-item mr-5 active">
+            <%= link_to "ジャンル一覧", admin_genres_path, class:"btn btn-info" %>
+          </li>
+          <li class="nav-item mr-5 active">
+            <%= link_to "店情報一覧", admin_shop_infos_path, class:"btn btn-info" %>
+          </li>
+          <li class="nav-item mr-5 active">
+            <%= link_to "通報一覧", admin_reports_path, class:"btn btn-info" %>
+          </li>
+          <li class="nav-item mr-5 active">
+            <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-info" %>
+          </li>
+          <% elsif customer_signed_in? %>
+          <li class="nav-item mr-1 active">
+            <%= link_to "マイページ", my_page_customers_path, class:"btn btn-outline-light" %>
+          </li>
+          <li class="nav-item mr-1 active">
+            <%= link_to "レビュー一覧", posts_path, class:"btn btn-outline-light" %>
+          </li>
+          <li class="nav-item mr-1 active">
+            <%= link_to "新規投稿", new_post_path, class:"btn btn-outline-light" %>
+          </li>
+          <li class="nav-item mr-1 active">
+            <%= link_to "ログアウト", destroy_customer_session_path, method: :delete, class:"btn btn-outline-light" %>
+          </li>
+          <% else %>
+          <li class="nav-item mr-1 active">
+            <%= link_to "トップ", root_path, class:"btn btn-light" %>
+          </li>
+          <li class="nav-item mr-1 active">
+            <%= link_to "新規登録", new_customer_registration_path, class:"btn btn-light" %>
+          </li>
+          <li class="nav-item mr-1 active">
+            <%= link_to "ログイン", new_customer_session_path, class:"btn btn-light" %>
+          </li>
+          <% end %>
+        </ul>
+        </div>
+      </nav>
+    </header>
+    <main class="m-5">
+      <% flash.each do |key, value| %>
+  　     <% key = "info" if key == "notice" %>
+  　     <% key = "danger" if key == "alert" %>
+        <%= content_tag :div, value, class: "alert alert-#{key}" %>
+      <% end %>
     <%= yield %>
+    </main>
+    <footer class="border-top border-dark border-3 mt-auto col-12 footer">
+      <div>　menyu　</div>
+    </footer>
   </body>
 </html>

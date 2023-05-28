@@ -1,0 +1,38 @@
+<% if current_admin %>
+  <h4>店情報一覧</h4>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <div>
+          <%= link_to "+", new_admin_shop_info_path, class: "font-weight-bold btn btn-info rounded-circle shadow p-0", style: "font-size:25px;width:3rem;height:3rem;text-align:center;line-height:48px;" %>
+        </div>
+        <table class="table table-borderless">
+          <tr>
+            <th>店舗情報id</th>
+            <th>店舗名</th>
+            <th>住所</th>
+            <th>緯度</th>
+            <th>経度</th>
+            <th>削除</th>
+          </tr>
+        <% @shop_infos.each do |shop_info| %>
+          <tr>
+            <td><%= shop_info.id %></td>
+            <td>
+              <%= link_to edit_admin_shop_info_path(shop_info.id), class:"border-bottom", :style=>"color:black;" do %>
+                <%= shop_info.shop_name %>
+              <% end %>
+            </td>
+            <td><%= shop_info.address %></td>
+            <td><%= shop_info.latitude %></td>
+            <td><%= shop_info.longitude %></td>
+            <td><%= link_to "削除", admin_shop_info_path(shop_info.id), "data-confirm" => "本当に削除しますか？", method: :delete, class:"btn btn-danger" %></td>
+        <% end %>
+        </table>
+      <%= paginate @shop_infos %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <%= render 'admin/admin_only' %>
+<% end %>
