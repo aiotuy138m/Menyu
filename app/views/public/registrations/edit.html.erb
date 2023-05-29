@@ -1,3 +1,4 @@
+<!--パスワード変更画面-->
 <div class="container">
   <div class="row">
     <div class="col-8">
@@ -6,6 +7,7 @@
 
         <%= form_with model: @customer, url: customer_registration_path, id: 'edit_user', class: 'edit_user', local: true do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
+
           <table class="table table-borderless">
             <tr>
               <th style="width: 40%;"><%= f.label :current_password, "現在のパスワード" %></th>

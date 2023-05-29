@@ -1,9 +1,12 @@
+<!--通報画面-->
 <div class="container">
   <div class="row">
     <div class="col-md-7">
       <h3>通報画面</h3>
+
       <%= form_with model:[@post, @report] do |f| %>
-      <%= render "public/shared/error_messages", resource: @report %>
+        <%= render "public/shared/error_messages", resource: @report %>
+
         <div class="form-group">
           <%= f.hidden_field :reporter_id, :value => current_customer.id %>
           <%= f.hidden_field :reported_id, :value => @post.id %>
@@ -12,6 +15,7 @@
           <%= f.submit "通報する", class: "btn btn-danger" %>
         </div>
       <% end %>
+
       <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
     </div>
   </div>

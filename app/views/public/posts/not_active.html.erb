@@ -1,8 +1,10 @@
-<% if !@posts.exists? %>
- <h2>非公開設定の投稿はありません。</h2></br>
+<!--非公開リスト-->
+<% if !@posts.exists? %> <!-- 非公開設定がない時-->
+ <h2>非公開設定の投稿はありません。</h2>
  <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
 <% else %>
-<h4>非公開リスト<h4>
+  <h4>非公開リスト<h4>
+
   <div class="container">
     <div class="row">
         <div class="col-8 mx-auto" style="width: 200px;">

@@ -1,3 +1,4 @@
+<!--レビュー一覧画面-->
 <% if @genre.present? %>
   <h4>ジャンル「<%= @genre.name %>」での絞り込み</h4>
 <% elsif @shop_info.present? %>
@@ -5,6 +6,7 @@
 <% else %>
   <h4>レビュー一覧</h4>
 <% end %>
+
 <div class="container">
   <div class="row">
     <div class="col-8 mx-auto" style="width: 200px;">

@@ -26,13 +26,13 @@
               </tr>
 
               <tr>
-                <th><p>緯度</p></th>
-                <td>　<%= @shop_info.latitude %></td>
+                <th><%= f.label "緯度" %></th>
+                <td><%= f.text_field :latitude, class:"form_control" %></td>
               </tr>
 
               <tr>
-                <th><p>経度</p></th>
-                <td>　<%= @shop_info.longitude %></td>
+                <th><%= f.label "経度" %></th>
+                <td><%= f.text_field :longitude, class:"form_control" %></td>
               </tr>
             </table>
 
