@@ -1,5 +1,6 @@
 class Public::PostCommentsController < ApplicationController
-  before_action :authenticare_customer
+  before_action :authenticare_customer # 未ログインアクセス制限
+
   def create
     @post = Post.find(params[:post_id])
     comment = current_customer.post_comment.new(post_comment_params)

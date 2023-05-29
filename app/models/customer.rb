@@ -10,6 +10,9 @@ class Customer < ApplicationRecord
   has_many :favorite_posts, through: :favorites ,source: :post
   has_many :likes, dependent: :destroy
 
+  # 会員アイコン
+  has_one_attached :profile_image
+
   validates :nickname, presence: true
 
   # ゲストログイン
@@ -21,9 +24,6 @@ class Customer < ApplicationRecord
       customer.profile_image.attach(io: File.open(file_path), filename: 'guest.png', content_type: 'image/png')
     end
   end
-
-  # 会員アイコン
-  has_one_attached :profile_image
 
   def get_profile_image(width, hight)
     unless profile_image.attached?

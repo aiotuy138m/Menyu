@@ -1,5 +1,6 @@
 class Public::SearchesController < ApplicationController
-  before_action :authenticare_customer
+  before_action :authenticare_customer # 未ログインアクセス制限
+
   def search
     @range = params[:range]
     if @range == "店名"

@@ -1,6 +1,6 @@
 class Public::CustomersController < ApplicationController
-  before_action :authenticare_customer
-  before_action :ensure_correct_customer, {only: [:edit, :update, :withdraw]}
+  before_action :authenticare_customer　# 未ログインアクセス制限
+  before_action :ensure_correct_customer, {only: [:edit, :update, :withdraw]} # ログインユーザーのみが編集可能
   
   def show
     @customer = Customer.find(current_customer.id)

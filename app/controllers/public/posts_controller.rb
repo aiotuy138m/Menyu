@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticare_customer
-  before_action :ensure_correct_customer, {only: [:edit, :update]}
+  before_action :authenticare_customer # 未ログインアクセス制限
+  before_action :ensure_correct_customer, {only: [:edit, :update]} # ログインユーザーのみが編集可能
+
   def new
     @post = Post.new
     @genres = Genre.all
@@ -88,11 +89,13 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path, danger: "投稿を削除しました"
   end
 
-  def favorites # お気に入り機能・一覧
+  # お気に入り機能・一覧
+  def favorites
     @post = current_customer.favorite_posts.includes(:customer).page(params[:page]).order(created_at: :desc)
   end
 
-  def not_active # 非公開一覧、Prefix：private_posts_path
+  # 非公開一覧、Prefix：private_posts_path
+  def not_active
     @posts = current_customer.post.where(post_status: false).page(params[:page]).order("created_at DESC")
   end
 
