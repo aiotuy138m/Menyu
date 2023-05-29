@@ -14,10 +14,11 @@ class Post < ApplicationRecord
     less_than_or_equal_to: 5,
     greater_than_or_equal_to: 0
   }, presence: true
-  
+
   validates :menu, presence: true
   validates :comment, presence: true
 
+  # 画像ない時デフォルト画像入れる
   def get_image(width, hight)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no-image.png')
@@ -25,11 +26,13 @@ class Post < ApplicationRecord
     end
     image.variant(resize_to_limit: [width, hight]).processed
   end
-  
+
+  # ブックマーク
   def favorited_by?(customer)
     favorites.where(customer_id: customer.id).exists?
   end
 
+  # いいね
   def liked_by?(customer)
     likes.where(customer_id: customer.id).exists?
   end

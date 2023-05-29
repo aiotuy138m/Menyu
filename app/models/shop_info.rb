@@ -2,7 +2,11 @@ class ShopInfo < ApplicationRecord
   has_many :post, dependent: :destroy
   geocoded_by :address
   after_validation :geocode
+  
+  validates :shop_name, presence: true
+  validates :address, presence: true
 
+　# 検索
   def self.looks(search, word)
     if search == "perfect_match"
       @shop_info = ShopInfo.where("shop_name LIKE?", "#{word}")
@@ -17,6 +21,4 @@ class ShopInfo < ApplicationRecord
     end
   end
 
-  validates :shop_name, presence: true
-  validates :address, presence: true
 end

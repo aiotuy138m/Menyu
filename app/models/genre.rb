@@ -1,7 +1,10 @@
 class Genre < ApplicationRecord
   has_many :post_genres, dependent: :destroy
   has_many :posts, through: :post_genres, source: :post
-  
+
+  validates :nickname, presence: true
+
+  # 
   def self.looks(search, word)
     if search == "perfect_match"
       @genre = Genre.where("name LIKE?", "#{word}")
@@ -15,6 +18,4 @@ class Genre < ApplicationRecord
       @genre = Genre.all
     end
   end
-  
-  validates :name, presence: true
 end

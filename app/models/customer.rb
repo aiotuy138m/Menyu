@@ -10,6 +10,8 @@ class Customer < ApplicationRecord
   has_many :favorite_posts, through: :favorites ,source: :post
   has_many :likes, dependent: :destroy
 
+  validates :nickname, presence: true
+
   # ゲストログイン
   def self.guest
     find_or_create_by!(email: 'guest@example.com') do |customer|
@@ -31,5 +33,4 @@ class Customer < ApplicationRecord
     profile_image.variant(resize_to_limit: [width, hight]).processed
   end
 
-  validates :nickname, presence: true
 end
