@@ -52,7 +52,11 @@
           <tr>
             <th style="width: 20%">店名</th>
             <td class="text-primary">
-              <%= link_to posts.shop_info.shop_name, posts_path(shop_info_id: posts.shop_info.id) %>
+              <% if posts.shop_info_id.present? %>
+                <%= link_to posts.shop_info.shop_name, posts_path(shop_info_id: posts.shop_info.id) %>
+              <% else %>
+                <p>店情報登録なし</p>
+              <% end %>
             </td>
           </tr>
 

@@ -23,24 +23,22 @@
               <tr>
                 <th class="col-4" style="color: white; width: 20%;">店名</th>
                 <td>
-                  <%= f.text_field :shop_name, class: "float-left", style: "border-color: white;" %>
+                  <%= f.text_field :shop_name, class: "float-left form-control", placeholder: "店名", style: "border-color: white;" %>
                 </td>
-                <td></td><td></td><td></td>
               </tr>
 
               <tr>
                 <th class="col-4" style="color: white; width: 20%;">店の住所</th>
-                <td colspan="4">
-                  <%= f.text_field :address, class:"col-12", style: "border-color: white;" %>
+                <td>
+                  <%= f.text_field :address, class:"col-12 form-control", placeholder: "都道府県から入力してください", style: "border-color: white;" %>
                 </td>
               </tr>
 
               <tr>
                 <th class="col-4" style="color: white; width: 20%;">店のHP等URL</th>
                 <td>
-                  <%= f.text_field :shop_url, class: "float-left", style: "border-color: white;" %>
+                  <%= f.text_field :shop_url, class: "float-left form-control", placeholder: "HPなど", style: "border-color: white;" %>
                 </td>
-                <td></td><td></td><td></td>
               </tr>
             </table>
           </label>
@@ -55,7 +53,7 @@
 
           <tr>
             <th style="width: 20%">メニュー名</th>
-            <td><%= f.text_field :menu, class:"col-12" %></td>
+            <td><%= f.text_field :menu, class:"col-12 form-control" %></td>
           </tr>
 
           <tr>
@@ -101,8 +99,9 @@
 
           <tr>
             <th style="width: 20%">感想</th>
-            <td><%= f.text_area :comment, class: "col-12" %></td>
-          </tr><!--感想-->
+            <td><%= f.text_area :comment, class: "col-12 form-control" %></td>
+          </tr>
+
           <tr>
             <th style="width: 20%"><%= f.label "公開設定" %></th>
             <td>

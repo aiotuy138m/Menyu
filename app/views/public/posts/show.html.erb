@@ -79,6 +79,12 @@
               <% end %>
             </p>
           <% end %>
+          
+        <% end %>
+
+        <% if  @post.customer_id == current_customer.id %> <!-- 投稿者なら報告ボタン、それ以外は通報ボタン-->
+          <p class="col-2"><%= link_to "報告する", new_post_reports_path(@post), class: "text-success" %></p>
+        <% else %>
           <p class="col-2"><%= link_to "通報する", new_post_reports_path(@post), class: "text-danger" %></p>
         <% end %>
 
@@ -130,49 +136,59 @@
     </div>
 
     <!--店舗情報(マップ込み）-->
-    <div class="col-md-5 mt-5 pt-3 shadow-sm" style="height: 100%; background-color: #efefef;">
-      <h4>店情報</h4>
+      <div class="col-md-5 mt-5 pt-3 shadow-sm" style="height: 100%; background-color: #efefef;">
+        <% if @post.shop_info_id.present? %>
+          <h4>店情報</h4>
 
-      <table class="table table-bordered">
-        <tr>
-          <th>店名</th>
-          <td><%= @post.shop_info.shop_name %></td>
-        </tr>
+          <table class="table table-bordered">
+            <tr>
+              <th>店名</th>
+              <td><%= @post.shop_info.shop_name %></td>
+            </tr>
 
-        <tr>
-          <th>店住所</th>
-          <td><%= @post.shop_info.address %></td>
-        </tr>
+            <tr>
+              <th>店住所</th>
+              <td><%= @post.shop_info.address %></td>
+            </tr>
 
-        <tr>
-          <th>HP等</th>
-          <td><%= @post.shop_info.shop_url %></td>
-        </tr>
-      </table>
+            <tr>
+              <th>HP等</th>
+              <td>
+                <% if @post.shop_info.shop_url.present? %>
+                  <%= @post.shop_info.shop_url %>
+                <% else %>
+                  <p>no-data</p>
+                <% end %>
+              </td>
+            </tr>
+          </table>
 
-      <!--map-->
-      <div style="width:100%; height: 300px;">
-        <div id="map" style='height: 100%; width: 100%;'></div>
-        <script>
-          var map;
-          function initMap() {
-            // マップを作成
-            map = new google.maps.Map(document.getElementById('map'), {
-            // マップの中心に表示する場所の緯度経度を指定
-              center: { lat: <%= @post.shop_info.latitude %>, lng: <%= @post.shop_info.longitude %> },
-              zoom: 15,
-            });
+        <!--map-->
+          <div style="width:100%; height: 300px;">
+            <div id="map" style='height: 100%; width: 100%;'></div>
+            <script>
+              var map;
+              function initMap() {
+                // マップを作成
+                map = new google.maps.Map(document.getElementById('map'), {
+                // マップの中心に表示する場所の緯度経度を指定
+                  center: { lat: <%= @post.shop_info.latitude %>, lng: <%= @post.shop_info.longitude %> },
+                  zoom: 15,
+                });
 
-            // マーカーを立てる場所の緯度経度を指定
-            marker = new google.maps.Marker({
-              position: { lat: <%= @post.shop_info.latitude %>, lng:<%= @post.shop_info.longitude %> },
-              map: map
-            });
-          }
-        </script>
+                // マーカーを立てる場所の緯度経度を指定
+                marker = new google.maps.Marker({
+                  position: { lat: <%= @post.shop_info.latitude %>, lng:<%= @post.shop_info.longitude %> },
+                  map: map
+                });
+              }
+            </script>
 
-        <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_JS_API_KEY'] %>&callback=initMap"async defer></script>
-      </div>
+            <script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_JS_API_KEY'] %>&callback=initMap"async defer></script>
+          </div>
+      <% else %>
+        <p>店情報登録なし</p>
+      <% end %>
     </div>
   </div>
 </div>

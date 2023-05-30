@@ -2,9 +2,9 @@ class Genre < ApplicationRecord
   has_many :post_genres, dependent: :destroy
   has_many :posts, through: :post_genres, source: :post
 
-  validates :nickname, presence: true
+  validates :name, presence: true
 
-  # 
+  # 検索
   def self.looks(search, word)
     if search == "perfect_match"
       @genre = Genre.where("name LIKE?", "#{word}")

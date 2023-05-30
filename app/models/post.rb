@@ -17,6 +17,9 @@ class Post < ApplicationRecord
 
   validates :menu, presence: true
   validates :comment, presence: true
+  
+  scope :posted_genre, -> (genre){ left_joins(:post_genres).where(:post_genres => {:genre_id => [genre]}) }
+  scope :actives, -> { where(post_status: true).where(post_deleted: false) }
 
   # 画像ない時デフォルト画像入れる
   def get_image(width, hight)
