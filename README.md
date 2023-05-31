@@ -1,4 +1,4 @@
-# Menyu
+# Menyu　 <img src="https://github.com/aiotuy138m/Menyu/assets/122207424/4dc120f4-9014-44c5-a7a5-e70d82316989" width="100" height="100" >
 
 ## サイト概要
 ### サイトテーマ
