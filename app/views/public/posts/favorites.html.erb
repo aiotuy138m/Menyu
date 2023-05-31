@@ -1,9 +1,12 @@
-<% if !@post.exists? %>
- <h2>食べたいリストはありません。</h2></br>
+<!--食べたいリスト画面-->
+<% if !@post.exists? %> <!-- ブックマークしたレビューがない時-->
+ <h2>食べたいリストはありません。</h2>
  <p>　レビューの詳細画面にある<i class="far fa-bookmark"></i>ボタンを押すとこのリストに入ります！</p>
+
  <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
 <% else %>
-<h4>食べたいリスト</h4>
+  <h4>食べたいリスト</h4>
+
   <div class="container">
     <div class="row">
       <div class="col-8 mx-auto" style="width: 200px;">

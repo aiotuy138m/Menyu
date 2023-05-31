@@ -1,33 +1,39 @@
-<% if current_admin %>
+<!--管理者トップページ-->
+<% if current_admin %> <!--管理者のみ閲覧可能-->
   <div class="container">
     <div class="row">
-      <div class="col">
+      <div class="col-md">
         <h2>管理者画面トップ</h2>
-        <ul class="list-group list-group-flush col-4">
+
+        <ul class="list-group list-group-flush col-md">
           <li class="list-group-item">
             <%= link_to admin_customers_path,:style=>"color:black;" do %>
               本日の新規登録者数
               <span class="badge badge-primary badge-pill"><%= @customer.count %></span>
             <% end %>
           </li>
+
           <li class="list-group-item">
             <%= link_to admin_posts_path,:style=>"color:black;" do %>
               本日の新規レビュー数
               <span class="badge badge-primary badge-pill"><%= @post.count %></span>
             <% end %>
           </li>
+
           <li class="list-group-item">
             <%= link_to admin_reports_path,:style=>"color:black;" do %>
               本日の通報数
               <span class="badge badge-primary badge-pill"><%= @report.count %></span>
             <% end %>
           </li>
+
           <li class="list-group-item">
             <%= link_to admin_genres_path,:style=>"color:black;" do %>
               現在のジャンル数
               <span class="badge badge-primary badge-pill"><%= @genre.count %></span>
             <% end %>
           </li>
+
           <li class="list-group-item">
             <%= link_to admin_shop_infos_path,:style=>"color:black;" do %>
               現在の登録店数

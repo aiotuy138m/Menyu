@@ -1,79 +1,99 @@
+<!--マイページ画面-->
 <h4 class="ml-5">マイページ</h4>
+
 <div class="container">
   <div class="row">
     <%= render 'layouts/new' %>
+
+    <!--会員情報-->
     <div class="col-md-4 shadow-lg text-center" style="height: 100%;">
       <sesstion>
-      <div class="d-flex p-3 mt-5">
-        <p class="mr-4 h5 font-weight-bold">登録情報</p>
-        <!--ゲストには編集ボタンは表示しない-->
-        <% if @customer.email == 'guest@example.com' %>
-          <div></div>
-        <% else %>
-          <%= link_to information_edit_customers_path, class:"text-success text-right" do %>
-            <i class="fas fa-user-edit"></i>
+        <div class="d-flex p-3 mt-5">
+          <p class="mr-4 h5 font-weight-bold">登録情報</p>
+
+          <!--ゲストには編集ボタンは表示しない-->
+          <% if @customer.email == 'guest@example.com' %>
+            <div></div>
+          <% else %>
+            <%= link_to information_edit_customers_path, class:"text-success text-right" do %>
+              <i class="fas fa-user-edit"></i>
+            <% end %>
           <% end %>
-        <% end %>
-      </div>
-      <p><%= image_tag @customer.get_profile_image(200, 200), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %></p>
-      <div>
-        <ul class="list-group list-unstyled">
-          <li class="list-item">
-            <h5>ニックネーム</h5>
-            <p>　<%= @customer.nickname %><p>
-          </li>
-          <li class="list-item">
-            <h5>メールアドレス</h5>
-            <p>　<%= @customer.email %></p>
-          </li>
-        </ul>
-      </div>
-      <table class="table table-borderless">
-        </tr>
-          <td><%= link_to "非公開リスト", private_posts_path, class:"btn btn-primary" %></td>
-        </tr>
-        <tr>
-          <td><%= link_to "食べたいリスト", favorites_posts_path, class:"btn btn-success" %></td>
-        </tr>
-      </table>
-      <div class="container">
-        <div class="row">
-        <ul class="list-group list-group-flush col-6">
-          <li class="list-group-item">
-            <%= @customer.nickname %>さんの</br>お店別投稿数
-          </li>
-          <p class="text-left">
-            <% @shop_infos.each do |shop_info| %>
-              <%= link_to my_page_customers_path(shop_info_id: shop_info.id) do %>
-                <%= shop_info.shop_name %><span class="badge badge-primary badge-pill"><%= shop_info.post.where(customer_id: current_customer.id).count %></span></br>
-              <% end %>
-            <% end %>
-          </p>
-        </ul>
-        <ul class="list-group list-group-flush col-6">
-          <li class="list-group-item">
-            <%= @customer.nickname %>さんの</br>ジャンル別投稿数
-          </li>
-          <p class="text-left">
-            <% @genres.each do |genre| %>
-              <%= link_to my_page_customers_path(genre_id: genre.id) do %>
-                <%= genre.name %><span class="badge badge-primary badge-pill"><%= genre.posts.where(customer_id: current_customer.id).count %></span></br>
-              <% end %>
-            <% end %>
-          </p>
-        </ul>
-      </div>
-      </div><!--絞り込み一覧-->
+        </div>
+
+        <!--プロフィール画像-->
+        <p><%= image_tag @customer.get_profile_image(200, 200), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %></p>
+
+        <div>
+          <ul class="list-group list-unstyled">
+            <li class="list-item">
+              <h5>ニックネーム</h5>
+              <p>　<%= @customer.nickname %><p>
+            </li>
+
+            <li class="list-item">
+              <h5>メールアドレス</h5>
+              <p>　<%= @customer.email %></p>
+            </li>
+          </ul>
+        </div>
+
+        <table class="table table-borderless">
+          </tr>
+            <td><%= link_to "非公開リスト", private_posts_path, class:"btn btn-primary" %></td>
+          </tr>
+
+          <tr>
+            <td><%= link_to "食べたいリスト", favorites_posts_path, class:"btn btn-success" %></td>
+          </tr>
+        </table>
+
+        <!--絞り込み一覧-->
+        <div class="container">
+          <div class="row">
+            <ul class="list-group list-group-flush col-6">
+              <li class="list-group-item">
+                <%= @customer.nickname %>さんの</br>お店別投稿数
+              </li>
+
+              <p class="text-left">
+                <% @shop_infos.each do |shop_info| %>
+                  <%= link_to my_page_customers_path(shop_info_id: shop_info.id) do %>
+                    <%= shop_info.shop_name %><span class="badge badge-primary badge-pill"><%= shop_info.post.where(customer_id: current_customer.id).count %></span></br>
+                  <% end %>
+                <% end %>
+              </p>
+            </ul>
+
+            <ul class="list-group list-group-flush col-6">
+              <li class="list-group-item">
+                <%= @customer.nickname %>さんの</br>ジャンル別投稿数
+              </li>
+
+              <p class="text-left">
+                <% @genres.each do |genre| %>
+                  <%= link_to my_page_customers_path(genre_id: genre.id) do %>
+                    <%= genre.name %><span class="badge badge-primary badge-pill"><%= genre.posts.where(customer_id: current_customer.id).count %></span></br>
+                  <% end %>
+                <% end %>
+              </p>
+            </ul>
+          </div>
+        </div>
       </sesstion>
-    </div><!--会員情報-->
-    <div class="col-7 mx-auto" style="width: 200px;">
-      <% if @genre.present? %>
-      <h4><%= @customer.nickname %>さんのレビュー「<%= @genre.name %>」での絞り込み</h4>
-    <% elsif @shop_info.present? %>
-      <h4><%= @customer.nickname %>さんのレビュー「<%= @shop_info.shop_name %>」での絞り込み</h4>
-    <% else %>
-      <h4><%= @customer.nickname %>さんのレビュー一覧</h4>
-    <% end %>
+    </div>
+
+    <!--会員のレビュー一覧-->
+    <div class="col-md-8 mx-auto">
+      <% if @genre.present? %> <!--ジャンル絞り込み-->
+        <h4 class="mt-4"><%= @customer.nickname %>さんのレビュー「<%= @genre.name %>」での絞り込み</h4>
+      <% elsif @shop_info.present? %> <!--店情報絞り込み-->
+        <h4 class="mt-4"><%= @customer.nickname %>さんのレビュー「<%= @shop_info.shop_name %>」での絞り込み</h4>
+      <% else %>
+        <h4 class="mt-4"><%= @customer.nickname %>さんのレビュー一覧</h4>
+      <% end %>
+
+      <!--投稿あれば一覧表示、なければなし表示-->
       <% if @posts.first %>
         <%= render 'public/posts/post-index', posts: @posts %>
       <% else %>
@@ -83,7 +103,6 @@
           右下の＋マークでも投稿できます！
         </h2>
       <% end %>
-    </div>
     </div>
   </div>
 </div>

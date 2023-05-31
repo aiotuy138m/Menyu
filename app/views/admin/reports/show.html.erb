@@ -1,8 +1,10 @@
-<% if current_admin %>
+<!--通報詳細画面-->
+<% if current_admin %> <!--管理者のみ閲覧可能-->
   <div class="container">
     <div class="row">
       <div class="col-md-7">
         <h3 class="page-title">通報詳細</h3>
+
         <table class="table">
           <tr>
             <td>通報ID</td>
@@ -12,20 +14,24 @@
               <% end %>
             </td>
           </tr>
+
           <tr>
             <td>会員名</td>
             <td><%= @customer.nickname %></td>
           </tr>
+
           <tr>
             <td>理由</td>
             <td><%= @report.reason %></td>
           </tr>
+
           <tr>
             <td>通報者</td>
             <td><%= @reporter %></td>
           </tr>
         </table>
-                <%= link_to "戻る", admin_reports_path, class:"btn btn-info" %>
+
+        <%= link_to "戻る", admin_reports_path, class:"btn btn-info" %>
       </div>
     </div>
   </div>

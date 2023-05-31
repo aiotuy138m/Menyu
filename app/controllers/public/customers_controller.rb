@@ -1,12 +1,12 @@
 class Public::CustomersController < ApplicationController
-  before_action :authenticare_customer
-  before_action :ensure_correct_customer, {only: [:edit, :update, :withdraw]}
+  before_action :authenticare_customer # 未ログインアクセス制限
+  before_action :ensure_correct_customer, {only: [:edit, :update, :withdraw]} # ログインユーザーのみが編集可能
   
   def show
     @customer = Customer.find(current_customer.id)
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @posts = Post.left_joins(:post_genres).where(:post_genres => {:genre_id => [@genre]}).where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
+      @posts = Post.posted_genre(@genre).where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
     elsif params[:shop_info_id]
       @shop_info = ShopInfo.find(params[:shop_info_id])
       @posts = @shop_info.post.where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")

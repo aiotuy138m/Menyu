@@ -52,6 +52,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up.
+   # サインアップ後はマイページ
    def after_sign_up_path_for(resource)
      my_page_customers_path
    end
@@ -61,6 +62,7 @@ class Public::RegistrationsController < Devise::RegistrationsController
      super(resource)
    end
    
+   # 更新後もマイページ
    def after_update_path_for(resouce)
       my_page_customers_path
    end
