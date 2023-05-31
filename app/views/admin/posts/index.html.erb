@@ -47,7 +47,13 @@
               </td>
               <td><p><%= posts.rate %></p></td>
               <td><%= posts.comment %></td>
-              <td><%= posts.shop_info.shop_name %></td>
+              <td>
+                <% if posts.shop_info_id.present? %>
+                  <%= posts.shop_info.shop_name %>
+                <% else %>
+                  <p>店情報登録なし</p>
+                <% end %>
+              </td>
               <td><%= posts.post_status ? '公開' : '非公開' %></td>
               <td><%= posts.post_deleted ? '済' : '未' %></td>
           <% end %>
