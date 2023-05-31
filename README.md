@@ -23,6 +23,29 @@
 - 好きなラーメンのジャンルのメニューを知りたい時
 - 人気のメニューを知りたい時
 
+## 主な機能
+- ゲストログイン機能
+- 会員機能
+- ユーザー・レビュー・ジャンル・店情報・通報情報　管理機能
+- レビュー投稿機能
+- 地図表示機能
+- 非公開投稿機能
+- 食べたいリスト（ブックマーク）
+- いいね機能
+- コメント機能
+- 通報（報告）機能
+- ジャンルと店での絞り機能
+- ジャンルと店での検索機能
+
+### イメージ画像
+
+#### トップページ
+<img width="1433" alt="スクリーンショット 2023-05-31 20 11 53" src="https://github.com/aiotuy138m/Menyu/assets/122207424/766cc0c8-f69d-4d86-bdbc-af5f1d2b2688">
+
+#### マイページ
+<img width="1230" alt="スクリーンショット 2023-05-31 20 15 48" src="https://github.com/aiotuy138m/Menyu/assets/122207424/dd29852c-9984-40c1-908c-b1d35fb01950">
+
+
 ## 設計書
 - ER図: https://drive.google.com/file/d/1Z0__T6A3wLPwbE2l34Kb1yRJl7Mic9Wc/view?usp=sharing
 - テーブル定義書: https://docs.google.com/spreadsheets/d/1k_ecqGaVn0pGaQPHsIItygX_U4OYDOF-JGHHlVtRyxE/edit?usp=sharing
