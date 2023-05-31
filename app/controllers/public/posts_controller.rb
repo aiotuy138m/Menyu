@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticare_customer
-  before_action :ensure_correct_customer, {only: [:edit, :update]}
+  before_action :authenticare_customer # 未ログインアクセス制限
+  before_action :ensure_correct_customer, {only: [:edit, :update]} # ログインユーザーのみが編集可能
+
   def new
     @post = Post.new
     @genres = Genre.all
@@ -32,8 +33,7 @@ class Public::PostsController < ApplicationController
         end
       else # かぶってなかった時の処理
         @shop_info.save
-        shop_info = ShopInfo.last
-        @post.shop_info_id = shop_info.id
+        @post.shop_info_id = @shop_info.id
         if @post.save
           redirect_to posts_path, success: "投稿しました"
         else
@@ -52,12 +52,12 @@ class Public::PostsController < ApplicationController
   def index
     if params[:genre_id]
       @genre = Genre.find(params[:genre_id])
-      @posts = Post.left_joins(:post_genres).where(:post_genres => {:genre_id => [@genre]}).where(post_status: true).where(post_deleted: false).page(params[:page]).order("created_at DESC")
+      @posts = Post.posted_genre(@genre).actives.page(params[:page]).order("created_at DESC")
     elsif params[:shop_info_id]
       @shop_info = ShopInfo.find(params[:shop_info_id])
-      @posts = @shop_info.post.where(post_status: true).where(post_deleted: false).page(params[:page]).order("created_at DESC")
+      @posts = @shop_info.post.actives.page(params[:page]).order("created_at DESC")
     else
-      @posts = Post.where(post_status: true).where(post_deleted: false).page(params[:page]).order("created_at DESC")
+      @posts = Post.actives.page(params[:page]).order("created_at DESC")
     end
   end
 
@@ -88,11 +88,13 @@ class Public::PostsController < ApplicationController
     redirect_to posts_path, danger: "投稿を削除しました"
   end
 
-  def favorites # お気に入り機能・一覧
+  # お気に入り機能・一覧
+  def favorites
     @post = current_customer.favorite_posts.includes(:customer).page(params[:page]).order(created_at: :desc)
   end
 
-  def not_active # 非公開一覧、Prefix：private_posts_path
+  # 非公開一覧、Prefix：private_posts_path
+  def not_active
     @posts = current_customer.post.where(post_status: false).page(params[:page]).order("created_at DESC")
   end
 

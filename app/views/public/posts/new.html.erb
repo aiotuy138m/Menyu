@@ -1,109 +1,128 @@
+<!--新規投稿画面-->
 <div class="container">
   <div class="row">
-    <div class="col-8 mx-auto" style="width: 200px;">
+    <div class="col-md mx-auto">
       <h5>新規投稿画面</h5>
+
       <%= form_with model: @post, local: true do |f| %>
-      <%= render "public/shared/error_messages", resource: @post %>
+        <%= render "public/shared/error_messages", resource: @post %>
+
+        <!--店情報選択or登録-->
         <div  class="col btn-group-vertical d-flex" data-toggle="buttons">
           <h6 class="text-danger">※離れた時色が変わっていないと選択されてませんのでご注意ください</h6>
-            <label class="btn btn-outline-secondary flex-column" style="width: 100%;">
-              <%= f.radio_button :select_shop, 0, style: "display: none;" %>登録済みの店から選択
-              <p class="ml-3 col-12"><%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %></p>
-            </label>
-            <label class="btn btn-outline-secondary flex-column">
-              <%= f.radio_button :select_shop, 1, style: "display: none;" %>新しくお店を登録
-            <table class="ml-3 table table-borderless talbe-sm">
+
+          <label class="btn btn-outline-secondary flex-column" style="width: 100%;">
+            <%= f.radio_button :select_shop, 0, style: "display: none;" %>登録済みの店から選択
+            <p class=""><%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %></p>
+          </label>
+
+          <label class="btn btn-outline-secondary flex-column">
+            <%= f.radio_button :select_shop, 1, style: "display: none;" %>新しくお店を登録
+
+            <table class="col-md">
               <tr>
-                <th class="col-4" style="color: white; width: 20%;">店名</th>
+                <th style="color: white;">店名</th>
                 <td>
-                  <%= f.text_field :shop_name, class: "float-left", style: "border-color: white;" %>
-                </td>
-                <td></td><td></td><td></td>
-              </tr>
-              <tr>
-                <th class="col-4" style="color: white; width: 20%;">店の住所</th>
-                <td colspan="4">
-                  <%= f.text_field :address, class:"col-12", style: "border-color: white;" %>
+                  <%= f.text_field :shop_name, class: "float-left form-control", placeholder: "店名", style: "border-color: white;" %>
                 </td>
               </tr>
+
               <tr>
-                <th class="col-4" style="color: white; width: 20%;">店のHP等URL</th>
+                <th style="color: white;">店の住所</th>
                 <td>
-                  <%= f.text_field :shop_url, class: "float-left", style: "border-color: white;" %>
+                  <%= f.text_field :address, class:"col-12 form-control", placeholder: "都道府県から入力してください", style: "border-color: white;" %>
                 </td>
-                <td></td><td></td><td></td>
+              </tr>
+
+              <tr>
+                <th style="color: white;">店のHP等URL</th>
+                <td>
+                  <%= f.text_field :shop_url, class: "float-left form-control", placeholder: "HPなど", style: "border-color: white;" %>
+                </td>
               </tr>
             </table>
-            </label>
-          </div><!--店情報選択or登録-->
-        <table class="table table-borderless">
-        <tr>
-          <th style="width: 20%">投稿画像</th>
-          <td><%= f.file_field :image, id: "image", accept: "image/*" %></td>
-        </tr><!--投稿画像-->
-        <tr>
-          <th style="width: 20%">メニュー名</th>
-          <td><%= f.text_field :menu, class:"col-12" %></td>
-        </tr><!--メニュー名-->
-        <tr>
-          <th style="width: 20%">評価</th>
-          <td>
-            <p style="font-size: 15px; color: gray;">※0~5、0.5刻み</p>
-            <input type="range" class="col-5" id="rate" name="post[rate]" value="3.5" min="0" max="5" step="0.5" list="list" style="accent-color: #ffcc66;" >
-            <span id="value">3.5</span>
-            <script> //入力値を表示するjavascript
-              var elem = document.getElementById('rate');
-              var target = document.getElementById('value');
-              var rateValue = function (elem, target) {
-                return function(evt){
+          </label>
+        </div>
+
+        <!--レビュー部分-->
+        <table style="table-layout: fixed;">
+          <tr>
+            <th>投稿画像</th>
+            <td class="from_font_size"><%= f.file_field :image, id: "image", accept: "image/*" %></td>
+          </tr>
+
+          <tr>
+            <th>メニュー名</th>
+            <td><%= f.text_field :menu %></td>
+          </tr>
+
+          <tr>
+            <th>評価</th>
+            <td>
+              <p style="font-size: 15px; color: gray;">※0~5、0.5刻み</p>
+              <input type="range" class="col-5" id="rate" name="post[rate]" value="3.5" min="0" max="5" step="0.5" list="list" style="accent-color: #ffcc66;" >
+
+              <span id="value">3.5</span>
+              <script> //入力値を表示するjavascript
+                var elem = document.getElementById('rate');
+                var target = document.getElementById('value');
+                var rateValue = function (elem, target) {
+                  return function(evt){
                   target.innerHTML = elem.value;
+                  }
                 }
-              }
-              elem.addEventListener('input', rateValue(elem, target));
-            </script>
-            <datalist id="list"> <!--目盛-->
-              <option value="0"></option>
-              <option value="1"></option>
-              <option value="2"></option>
-              <option value="3"></option>
-              <option value="4"></option>
-              <option value="5"></option>
-            </datalist>
-          </td>
-        </tr>
-        <tr>
-          <th style="width: 20%">ジャンル</th>
-          <td>
-            <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name) do |genre| %>
-              <%= genre.label do %>
-                <%= genre.check_box %>
-                <%= genre.text %>
+                elem.addEventListener('input', rateValue(elem, target));
+              </script>
+
+              <datalist id="list"> <!--目盛-->
+                <option value="0"></option>
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+              </datalist>
+            </td>
+          </tr>
+
+          <tr>
+            <th>ジャンル</th>
+            <td class="from_font_size">
+              <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name) do |genre| %>
+                <%= genre.label do %>
+                  <%= genre.check_box %>
+                  <%= genre.text %>
+                <% end %>
               <% end %>
-            <% end %>
-          </td>
-        </tr><!--ジャンル-->
-        <tr>
-          <th style="width: 20%">感想</th>
-          <td><%= f.text_area :comment, class: "col-12" %></td>
-        </tr><!--感想-->
-        <tr>
-          <th style="width: 20%"><%= f.label "公開設定" %></th>
-          <td>
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
-              <label class="btn btn-outline-success active">
-                <%= f.radio_button :post_status, true, style: "accent-color:black;",checked: true %>公開
-              </label>
-              <label class="btn btn-outline-secondary">
-                <%= f.radio_button :post_status, false, class:"ml-5", style: "accent-color:black;" %>非公開
-              </label>
-            </div>
-          </td>
-          </tr><!--公開設定-->
-      </table>
+            </td>
+          </tr>
+
+          <tr>
+            <th>感想</th>
+            <td><%= f.text_area :comment %></td>
+          </tr>
+
+          <tr>
+            <th><%= f.label "公開設定" %></th>
+            <td>
+              <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-outline-success active">
+                  <%= f.radio_button :post_status, true, style: "accent-color:black;",checked: true %>公開
+                </label>
+
+                <label class="btn btn-outline-secondary">
+                  <%= f.radio_button :post_status, false, class:"ml-5", style: "accent-color:black;" %>非公開
+                </label>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
         <div class="container text-center">
-          <%= f.submit '投稿', class:"btn btn-lg btn-success mt-4 col-3" %>
-        </div><!--投稿ボタン-->
+          <%= f.submit '投稿', class:"btn btn-lg btn-success" %>
+        </div>
       <% end %>
+
       <%= link_to '戻る', :back, class:"btn btn-info mt-4" %>
     </div>
   </div>

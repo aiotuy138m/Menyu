@@ -1,7 +1,9 @@
-<% if current_admin %>
+<!--会員一覧画面-->
+<% if current_admin %> <!--管理者のみ閲覧可能-->
   <div class="container">
     <div class="row">
       <div class="col-2"></div>
+
       <div class="col-8">
         <h4 class="ml-3 mb-5">会員一覧</h4>
         <table class="ml-5 table table-borderless col-12">
@@ -12,20 +14,22 @@
             <th class="col-2">メールアドレス</th>
             <th class="col-3">ステータス</th>
           </tr>
-        <% @customers.each do |customers| %>
-          <tr>
-            <td><%= customers.id %></td>
-            <td>
-              <%= link_to admin_customer_path(customers.id), class:"border-bottom", :style=>"color:black;" do %>
-                <%= image_tag customers.get_profile_image(50, 50), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %>
-              <% end %>
-            </td>
-            <td><%= customers.nickname %></td>
-            <td><%= customers.email %></td>
-            <td class="<%= "text-success" if customers.is_deleted == "有効" %><%= "text-muted" if customers.is_deleted == "退会" %>"><%= customers.is_deleted ? '退会' : '有効' %></td>
-          </tr>
-        <% end %>
+
+          <% @customers.each do |customers| %>
+            <tr>
+              <td><%= customers.id %></td>
+              <td>
+                <%= link_to admin_customer_path(customers.id), class:"border-bottom", :style=>"color:black;" do %>
+                  <%= image_tag customers.get_profile_image(50, 50), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %>
+                <% end %>
+              </td>
+              <td><%= customers.nickname %></td>
+              <td><%= customers.email %></td>
+              <td class="<%= "text-success" if customers.is_deleted == "有効" %><%= "text-muted" if customers.is_deleted == "退会" %>"><%= customers.is_deleted ? '退会' : '有効' %></td>
+            </tr>
+          <% end %>
         </table>
+
         <%= paginate @customers %>
       </div>
     </div>

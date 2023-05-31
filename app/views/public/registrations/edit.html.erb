@@ -1,29 +1,31 @@
+<!--パスワード変更画面-->
 <div class="container">
   <div class="row">
-    <div class="col-8">
+    <div class="col-md">
       <section class="inner">
         <h2>パスワード編集</h2>
 
         <%= form_with model: @customer, url: customer_registration_path, id: 'edit_user', class: 'edit_user', local: true do |f| %>
           <%= render "public/shared/error_messages", resource: resource %>
+
           <table class="table table-borderless">
             <tr>
-              <th style="width: 40%;"><%= f.label :current_password, "現在のパスワード" %></th>
+              <th style="width: 26%;"><%= f.label :current_password, "現在のパスワード" %></th>
               <td><%= f.password_field :current_password, autocomplete: "current-password" %></td>
             </tr>
 
             <tr>
-              <th><%= f.label :password, "新しいパスワード(#{@minimum_password_length}文字以上)" %></th>
+              <th style="width: 26%;"><%= f.label :password, "新しいパスワード(#{@minimum_password_length}文字以上)" %></th>
               <td><%= f.password_field :password, autocomplete: "new-password" %></td>
             </tr>
 
             <tr>
-              <th><%= f.label :password_confirmation, "新しいパスワード(確認用)" %></th>
+              <th style="width: 26%;"><%= f.label :password_confirmation, "新しいパスワード(確認用)" %></th>
               <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
             </tr>
 
             <tr>
-              <td><%= link_to '戻る', my_page_customers_path, class:"btn btn-info" %></td>
+              <td><%= link_to '戻る', my_page_customers_path, class:"btn btn-info btn-sm" %></td>
               <td><%= f.submit "パスワード更新", class: "btn btn-success" %></td>
             </tr>
           </table>

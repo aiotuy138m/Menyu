@@ -1,5 +1,6 @@
-<% if customer_signed_in? %>
-  <div class="seach_form">
+<!--検索フォーム-->
+<% if customer_signed_in? %> <!-- 会員ログイン時のみ表示-->
+  <div class="seach_form col-md">
     <%= form_with url: search_path, method: :get do |f| %>
       <%= f.text_field :word, placeholder: "店名やジャンル名を入力"%>
       <%= f.select :range, options_for_select([['店名'],['ジャンル']]) %>

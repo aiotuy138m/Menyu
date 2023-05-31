@@ -1,18 +1,21 @@
-<% if current_admin %>
+<!--ジャンル編集画面-->
+<% if current_admin %> <!--管理者のみ閲覧可能-->
   <div class="container">
     <div class="row">
       <div class="col">
         <h4 class="ml-5 mb-5">ジャンル編集</h4>
+
         <%= form_with model: @genre, url: admin_genre_path do |f| %>
-        <table>
-          <tr>
-            <th class="pr-5">ジャンル名</th>
-            <td><%= f.text_field :name, class:"col-12" %></td>
-            <td><%= f.submit "変更を保存", method: :patch, class:"btn btn-success ml-5 col-10" %></td>
-            <td><%= link_to "削除", admin_genre_path, "data-confirm" => "本当に削除しますか？", class:"btn btn-danger ml-5 col-10", method: :delete %></td>
-          </tr>
-        </table>
+          <table>
+            <tr>
+              <th class="pr-5">ジャンル名</th>
+              <td><%= f.text_field :name, class:"col-12" %></td>
+              <td><%= f.submit "変更を保存", method: :patch, class:"btn btn-success ml-5 col-10" %></td>
+              <td><%= link_to "削除", admin_genre_path, "data-confirm" => "本当に削除しますか？", class:"btn btn-danger ml-5 col-10", method: :delete %></td>
+            </tr>
+          </table>
         <% end %>
+
         <%= link_to "戻る", :back, class:"btn btn-info" %>
       </div>
     </div>

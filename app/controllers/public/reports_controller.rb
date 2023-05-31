@@ -1,5 +1,6 @@
 class Public::ReportsController < ApplicationController
-  before_action :authenticare_customer
+  before_action :authenticare_customer # 未ログインアクセス制限
+
   def new
     @report = Report.new
     @post = Post.find(params[:post_id])
@@ -9,12 +10,11 @@ class Public::ReportsController < ApplicationController
     @report = Report.new(report_params)
     @post = Post.find(params[:post_id])
     if @report.save
-      redirect_to posts_path, danger: "通報しました　ご協力ありがとうございます"
+      redirect_to posts_path, info: "送信しました。ご協力ありがとうございます"
     else
       render "new"
     end
   end
-
 
   private
 
