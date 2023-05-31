@@ -23,12 +23,12 @@
         <table class="col-md">
           <tr>
             <th>メニュー名</th>
-            <td class="pl-3"><%= posts.menu %></td>
+            <td class="pl-2 text-left"><%= posts.menu %></td>
           </tr>
 
           <tr>
             <th>ジャンル</th>
-            <td class="text-primary pl-3">
+            <td class="text-primary pl-2 text-left">
               <% posts.genres.each do |genre| %>
                 #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
               <% end %>
@@ -37,7 +37,7 @@
 
           <tr>
             <th>評価</th>
-            <td class="pl-3">
+            <td class="pl-2 text-left">
               <p>
                 <span class="star5_rating" data-rate="<%= (posts.rate).to_f %>"></span><%= posts.rate %>
               </p>
@@ -46,12 +46,12 @@
 
           <tr>
             <th>感想</th>
-            <td class="pl-3"><%= posts.comment %></td>
+            <td class="pl-2 text-left"><%= posts.comment %></td>
           </tr>
 
           <tr>
             <th>店名</th>
-            <td class="text-primary pl-3">
+            <td class="text-primary pl-2 text-left">
               <% if posts.shop_info_id.present? %>
                 <%= link_to posts.shop_info.shop_name, posts_path(shop_info_id: posts.shop_info.id) %>
               <% else %>

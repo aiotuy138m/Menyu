@@ -13,21 +13,21 @@
         <table class="col-12 m-3">
           <tr>
             <th>メニュー名</th>
-            <td class="pl-3"><%= @post.menu %></td>
+            <td class="pl-2 text-left"><%= @post.menu %></td>
           </tr>
 
           <tr>
             <th>ジャンル</th>
-            <td class="text-primary pl-3">
+            <td class="text-primary pl-2 text-left d-flex flex-wrap">
               <% @post.genres.each do |genre| %>
-                #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
+                <div>#<%= link_to genre.name, posts_path(genre_id: genre.id) %></div>
               <% end %>
             </td>
           </tr>
 
           <tr>
             <th>評価</th>
-            <td class="pl-3">
+            <td class="pl-2 text-left">
               <p>
                 <span class="star5_rating" data-rate="<%= (@post.rate).to_f %>"></span><%= @post.rate %>
               </p>
@@ -36,7 +36,7 @@
 
           <tr>
             <th>感想</th>
-            <td class="pl-3"><%= @post.comment %></td>
+            <td class="pl-2 text-left"><%= @post.comment %></td>
           </tr>
         </table>
       </div>

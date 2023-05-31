@@ -8,7 +8,7 @@ class Public::SearchesController < ApplicationController
       @posts = Post.where(shop_info_id: [@shop_infos.ids]).actives.page(params[:page]).order("created_at DESC")
     else
       @genres = Genre.looks(params[:search], params[:word])
-      @posts = Post.posted_genre(@genre).actives.page(params[:page]).order("created_at DESC")
+      @posts = Post.posted_genre(@genres).actives.page(params[:page]).order("created_at DESC")
     end
   end
 

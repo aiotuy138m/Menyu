@@ -10,7 +10,7 @@ class Public::ReportsController < ApplicationController
     @report = Report.new(report_params)
     @post = Post.find(params[:post_id])
     if @report.save
-      redirect_to posts_path, danger: "通報しました　ご協力ありがとうございます"
+      redirect_to posts_path, info: "送信しました。ご協力ありがとうございます"
     else
       render "new"
     end

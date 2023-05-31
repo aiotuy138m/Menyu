@@ -10,17 +10,17 @@
 
           <table class="table table-borderless">
             <tr>
-              <th><%= f.label :current_password, "現在のパスワード" %></th>
+              <th style="width: 26%;"><%= f.label :current_password, "現在のパスワード" %></th>
               <td><%= f.password_field :current_password, autocomplete: "current-password" %></td>
             </tr>
 
             <tr>
-              <th><%= f.label :password, "新しいパスワード(#{@minimum_password_length}文字以上)" %></th>
+              <th style="width: 26%;"><%= f.label :password, "新しいパスワード(#{@minimum_password_length}文字以上)" %></th>
               <td><%= f.password_field :password, autocomplete: "new-password" %></td>
             </tr>
 
             <tr>
-              <th><%= f.label :password_confirmation, "新しいパスワード(確認用)" %></th>
+              <th style="width: 26%;"><%= f.label :password_confirmation, "新しいパスワード(確認用)" %></th>
               <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
             </tr>
 

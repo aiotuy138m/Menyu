@@ -2,7 +2,7 @@ class Genre < ApplicationRecord
   has_many :post_genres, dependent: :destroy
   has_many :posts, through: :post_genres, source: :post
 
-  validates :name, presence: true
+  validates :name, presence: true, uniqueness: true
 
   # 検索
   def self.looks(search, word)
