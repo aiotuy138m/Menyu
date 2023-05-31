@@ -32,7 +32,7 @@
           </div>
         <% end %>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color: white; color: white;">
+        <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="border-color: white; color: white;">
           <!--会員ログイン時に表示-->
           <% if customer_signed_in? %>
             <%= image_tag current_customer.get_profile_image(50, 50), class:"img-fluid rounded", alt:"Responsive image", style:"object-fit: cover; " %>
@@ -45,35 +45,39 @@
           <ul class="navbar-nav list-group-horizontal mr-auto" >
             <!--管理者ログイン時に表示-->
             <% if admin_signed_in? %>
-              <li class="nav-item mr-5 active">
+              <li class="nav-item mr-1 active">
                 <%= link_to "トップ", admin_root_path, class:"btn btn-info" %>
               </li>
 
-              <li class="nav-item mr-5 active">
+              <li class="nav-item mr-1 active">
                 <%= link_to "レビュー一覧", admin_posts_path, class:"btn btn-info" %>
               </li>
 
-              <li class="nav-item mr-5 active">
+              <li class="nav-item mr-1 active">
                 <%= link_to "会員一覧", admin_customers_path, class:"btn btn-info" %>
               </li>
 
-              <li class="nav-item mr-5 active">
+              <li class="nav-item mr-1 active">
                 <%= link_to "ジャンル一覧", admin_genres_path, class:"btn btn-info" %>
               </li>
 
-              <li class="nav-item mr-5 active">
+              <li class="nav-item mr-1 active">
                 <%= link_to "店情報一覧", admin_shop_infos_path, class:"btn btn-info" %>
               </li>
 
-              <li class="nav-item mr-5 active">
+              <li class="nav-item mr-1 active">
                 <%= link_to "通報一覧", admin_reports_path, class:"btn btn-info" %>
               </li>
 
-              <li class="nav-item mr-5 active">
+              <li class="nav-item mr-1 active">
                 <%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class:"btn btn-info" %>
               </li>
             <!--会員ログイン時に表示-->
             <% elsif customer_signed_in? %>
+              <li class="nav-item mr-1 active">
+                <%= link_to "トップ", admin_root_path, class:"btn btn-outline-light" %>
+              </li>
+
               <li class="nav-item mr-1 active">
                 <%= link_to "マイページ", my_page_customers_path, class:"btn btn-outline-light" %>
               </li>

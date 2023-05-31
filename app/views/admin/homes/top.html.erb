@@ -2,10 +2,10 @@
 <% if current_admin %> <!--管理者のみ閲覧可能-->
   <div class="container">
     <div class="row">
-      <div class="col">
+      <div class="col-md">
         <h2>管理者画面トップ</h2>
 
-        <ul class="list-group list-group-flush col-4">
+        <ul class="list-group list-group-flush col-md">
           <li class="list-group-item">
             <%= link_to admin_customers_path,:style=>"color:black;" do %>
               本日の新規登録者数

@@ -3,32 +3,32 @@
 <div>
   <% posts.each do |posts| %>
     <% if  posts.post_deleted == true && posts.customer_id == current_customer.id %> <!-- 削除状態だった場合-->
-      <div class="m-4 pt-3 shadow-lg text-center">
+      <div class="shadow-lg text-center">
         <h2>このレビューは通報等の理由により</br>管理者によって削除されました。</h2>
       </div>
     <% else %>
        <!--投稿内容-->
-      <div class="m-4 pt-3 shadow-lg">
+      <div class="text-center shadow-lg">
         <% if posts.post_status == false && posts.customer_id == current_customer.id %> <!-- もし非公開設定で投稿者だったら-->
           <p class="key"><i class="fas fa-lock"></i></p> <!--鍵マークつける-->
         <% else %>
           <p></p>
         <% end %>
-        <p class="text-center">
+        <p class="mt-4 p-3 text-center">
           <%= link_to post_path(posts.id) do %>
             <%= image_tag posts.get_image(500, 500), class:"img-fluid rounded", alt:"Responsive image" %>
           <% end %>
         </p>
 
-        <table class="table table-borderless">
+        <table class="col-md">
           <tr>
-            <th style="width: 20%">メニュー名</th>
-            <td><%= posts.menu %></td>
+            <th>メニュー名</th>
+            <td class="pl-3"><%= posts.menu %></td>
           </tr>
 
           <tr>
-            <th style="width: 20%">ジャンル</th>
-            <td class="text-primary">
+            <th>ジャンル</th>
+            <td class="text-primary pl-3">
               <% posts.genres.each do |genre| %>
                 #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
               <% end %>
@@ -36,8 +36,8 @@
           </tr>
 
           <tr>
-            <th style="width: 20%">評価</th>
-            <td>
+            <th>評価</th>
+            <td class="pl-3">
               <p>
                 <span class="star5_rating" data-rate="<%= (posts.rate).to_f %>"></span><%= posts.rate %>
               </p>
@@ -45,13 +45,13 @@
           </tr>
 
           <tr>
-            <th style="width: 20%">感想</th>
-            <td><%= posts.comment %></td>
+            <th>感想</th>
+            <td class="pl-3"><%= posts.comment %></td>
           </tr>
 
           <tr>
-            <th style="width: 20%">店名</th>
-            <td class="text-primary">
+            <th>店名</th>
+            <td class="text-primary pl-3">
               <% if posts.shop_info_id.present? %>
                 <%= link_to posts.shop_info.shop_name, posts_path(shop_info_id: posts.shop_info.id) %>
               <% else %>
@@ -61,12 +61,12 @@
           </tr>
 
           <tr>
-            <th style="width: 20%"></th>
-            <td>
+            <td colspan="2">
               <i class="fas fa-bookmark"></i><%= posts.favorites.count %>
-              　　<%= "#{posts.post_comments.count} コメント" %>
-              　　<i class="fas fa-thumbs-up"></i><%= posts.likes.count %>
+              <%= "#{posts.post_comments.count} コメント" %>
+              <i class="fas fa-thumbs-up"></i><%= posts.likes.count %>
             </td>
+            <td></td>
           </tr>
 
           <tr>
@@ -82,4 +82,6 @@
     <% end %>
   <% end %>
 </div>
+<div class="mt-4">
 <%= paginate posts %>
+</div>

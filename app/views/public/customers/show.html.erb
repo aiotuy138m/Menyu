@@ -84,13 +84,13 @@
     </div>
 
     <!--会員のレビュー一覧-->
-    <div class="col-7 mx-auto" style="width: 200px;">
+    <div class="col-md-8 mx-auto">
       <% if @genre.present? %> <!--ジャンル絞り込み-->
-        <h4><%= @customer.nickname %>さんのレビュー「<%= @genre.name %>」での絞り込み</h4>
+        <h4 class="mt-4"><%= @customer.nickname %>さんのレビュー「<%= @genre.name %>」での絞り込み</h4>
       <% elsif @shop_info.present? %> <!--店情報絞り込み-->
-        <h4><%= @customer.nickname %>さんのレビュー「<%= @shop_info.shop_name %>」での絞り込み</h4>
+        <h4 class="mt-4"><%= @customer.nickname %>さんのレビュー「<%= @shop_info.shop_name %>」での絞り込み</h4>
       <% else %>
-        <h4><%= @customer.nickname %>さんのレビュー一覧</h4>
+        <h4 class="mt-4"><%= @customer.nickname %>さんのレビュー一覧</h4>
       <% end %>
 
       <!--投稿あれば一覧表示、なければなし表示-->

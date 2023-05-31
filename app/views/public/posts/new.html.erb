@@ -1,7 +1,7 @@
 <!--新規投稿画面-->
 <div class="container">
   <div class="row">
-    <div class="col-8 mx-auto" style="width: 200px;">
+    <div class="col-md mx-auto">
       <h5>新規投稿画面</h5>
 
       <%= form_with model: @post, local: true do |f| %>
@@ -13,29 +13,29 @@
 
           <label class="btn btn-outline-secondary flex-column" style="width: 100%;">
             <%= f.radio_button :select_shop, 0, style: "display: none;" %>登録済みの店から選択
-            <p class="ml-3 col-12"><%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %></p>
+            <p class=""><%= f.select :shop_info_id, options_from_collection_for_select(ShopInfo.all, :id, :shop_name), { include_blank: "--選択してください--" }, class:"custom-select col-12" %></p>
           </label>
 
           <label class="btn btn-outline-secondary flex-column">
             <%= f.radio_button :select_shop, 1, style: "display: none;" %>新しくお店を登録
 
-            <table class="ml-3 table table-borderless talbe-sm">
+            <table class="col-md">
               <tr>
-                <th class="col-4" style="color: white; width: 20%;">店名</th>
+                <th style="color: white;">店名</th>
                 <td>
                   <%= f.text_field :shop_name, class: "float-left form-control", placeholder: "店名", style: "border-color: white;" %>
                 </td>
               </tr>
 
               <tr>
-                <th class="col-4" style="color: white; width: 20%;">店の住所</th>
+                <th style="color: white;">店の住所</th>
                 <td>
                   <%= f.text_field :address, class:"col-12 form-control", placeholder: "都道府県から入力してください", style: "border-color: white;" %>
                 </td>
               </tr>
 
               <tr>
-                <th class="col-4" style="color: white; width: 20%;">店のHP等URL</th>
+                <th style="color: white;">店のHP等URL</th>
                 <td>
                   <%= f.text_field :shop_url, class: "float-left form-control", placeholder: "HPなど", style: "border-color: white;" %>
                 </td>
@@ -45,19 +45,19 @@
         </div>
 
         <!--レビュー部分-->
-        <table class="table table-borderless">
+        <table style="table-layout: fixed;">
           <tr>
-            <th style="width: 20%">投稿画像</th>
-            <td><%= f.file_field :image, id: "image", accept: "image/*" %></td>
+            <th>投稿画像</th>
+            <td class="from_font_size"><%= f.file_field :image, id: "image", accept: "image/*" %></td>
           </tr>
 
           <tr>
-            <th style="width: 20%">メニュー名</th>
-            <td><%= f.text_field :menu, class:"col-12 form-control" %></td>
+            <th>メニュー名</th>
+            <td><%= f.text_field :menu %></td>
           </tr>
 
           <tr>
-            <th style="width: 20%">評価</th>
+            <th>評価</th>
             <td>
               <p style="font-size: 15px; color: gray;">※0~5、0.5刻み</p>
               <input type="range" class="col-5" id="rate" name="post[rate]" value="3.5" min="0" max="5" step="0.5" list="list" style="accent-color: #ffcc66;" >
@@ -86,8 +86,8 @@
           </tr>
 
           <tr>
-            <th style="width: 20%">ジャンル</th>
-            <td>
+            <th>ジャンル</th>
+            <td class="from_font_size">
               <%= f.collection_check_boxes(:genre_ids, Genre.all, :id, :name) do |genre| %>
                 <%= genre.label do %>
                   <%= genre.check_box %>
@@ -98,12 +98,12 @@
           </tr>
 
           <tr>
-            <th style="width: 20%">感想</th>
-            <td><%= f.text_area :comment, class: "col-12 form-control" %></td>
+            <th>感想</th>
+            <td><%= f.text_area :comment %></td>
           </tr>
 
           <tr>
-            <th style="width: 20%"><%= f.label "公開設定" %></th>
+            <th><%= f.label "公開設定" %></th>
             <td>
               <div class="btn-group btn-group-toggle" data-toggle="buttons">
                 <label class="btn btn-outline-success active">
@@ -117,9 +117,9 @@
             </td>
           </tr>
         </table>
-
+      </div>
         <div class="container text-center">
-          <%= f.submit '投稿', class:"btn btn-lg btn-success mt-4 col-3" %>
+          <%= f.submit '投稿', class:"btn btn-lg btn-success" %>
         </div>
       <% end %>
 

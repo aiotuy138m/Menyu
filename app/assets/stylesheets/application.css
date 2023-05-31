@@ -117,3 +117,7 @@
 .pagination>li>a:hover {        
   border-radius: 15px !important;    /*角を丸くする*/
 }
+
+input,from_font_size {
+  font-size: revert !important;
+}

@@ -5,20 +5,20 @@
       <%= render 'layouts/new' %>
 
       <!--投稿内容-->
-      <div class="shadow-sm pt-5">
-        <div class="text-center">
+      <div class="shadow-sm pt-4">
+        <div class="text-center p-3">
           <%= image_tag @post.get_image(500, 500), class:"img-fluid", alt:"Responsive image" %>
         </div>
 
-        <table class="table table-borderless">
+        <table class="col-12 m-3">
           <tr>
-            <th style="width: 20%">メニュー名</th>
-            <td><%= @post.menu %></td>
+            <th>メニュー名</th>
+            <td class="pl-3"><%= @post.menu %></td>
           </tr>
 
           <tr>
-            <th style="width: 20%">ジャンル</th>
-            <td class="text-primary">
+            <th>ジャンル</th>
+            <td class="text-primary pl-3">
               <% @post.genres.each do |genre| %>
                 #<%= link_to genre.name, posts_path(genre_id: genre.id) %>
               <% end %>
@@ -26,8 +26,8 @@
           </tr>
 
           <tr>
-            <th style="width: 20%">評価</th>
-            <td>
+            <th>評価</th>
+            <td class="pl-3">
               <p>
                 <span class="star5_rating" data-rate="<%= (@post.rate).to_f %>"></span><%= @post.rate %>
               </p>
@@ -35,60 +35,60 @@
           </tr>
 
           <tr>
-            <th style="width: 20%">感想</th>
-            <td><%= @post.comment %></td>
+            <th>感想</th>
+            <td class="pl-3"><%= @post.comment %></td>
           </tr>
         </table>
       </div>
 
       <!--ブックマーク、いいね、編集、通報 投稿日-->
-      <div class="d-flex col-12">
+      <div class="d-flex justify-content-between">
         <% if @post.favorited_by?(current_customer) %> <!-- ブックマーク-->
-          <p class="col-2">
+          <div>
             <%= link_to post_favorites_path(@post), method: :delete do %>
               <i class="fas fa-bookmark"></i><%= @post.favorites.count %>
             <% end %>
-          </p>
+          </div>
         <% else %>
-          <p class="col-2">
+          <div>
             <%= link_to post_favorites_path(@post), method: :post do %>
               <i class="far fa-bookmark"></i><%= @post.favorites.count %>
             <% end %>
-          </p>
+          </div>
         <% end %>
 
         <% if  @post.customer_id == current_customer.id %> <!-- もし投稿者なら編集ボタン -->
-          <p class="col-1 text-right">
+          <div>
             <%= link_to edit_post_path(@post.id), class:"text-success" do %>
               <i class="fas fa-edit"></i>
             <% end %>
-          </p>
+          </div>
         <% end %>
 
         <% if  @post.customer_id != current_customer.id %> <!-- もし投稿者じゃないならいいねボタン-->
           <% if @post.liked_by?(current_customer) %>
-            <p class="col-2">
+            <div>
               <%= link_to post_likes_path(@post), method: :delete do %>
                 <i class="fas fa-thumbs-up"></i><%= @post.likes.count %>
               <% end %>
-            </p>
+            </div>
           <% else %>
-            <p class="col-2">
+            <div>
               <%= link_to post_likes_path(@post), method: :post do %>
                 <i class="far fa-thumbs-up"></i><%= @post.likes.count %>
               <% end %>
-            </p>
+            </div>
           <% end %>
           
         <% end %>
 
         <% if  @post.customer_id == current_customer.id %> <!-- 投稿者なら報告ボタン、それ以外は通報ボタン-->
-          <p class="col-2"><%= link_to "報告する", new_post_reports_path(@post), class: "text-success" %></p>
+          <div class="text-wrap"><%= link_to "報告する", new_post_reports_path(@post), class: "text-success" %></div>
         <% else %>
-          <p class="col-2"><%= link_to "通報する", new_post_reports_path(@post), class: "text-danger" %></p>
+          <div class="text-wrap"><%= link_to "通報する", new_post_reports_path(@post), class: "text-danger" %></div>
         <% end %>
 
-        <p class="col-6 text-right"><%= l @post.created_at %></p>
+        <div class="text-right text-wrap"><%= l @post.created_at %></div>
       </div>
 
       <!--投稿者-->
@@ -122,9 +122,9 @@
 
       <!--コメント投稿画面-->
       <div>
-        <%= form_with model: [@post, @post_comment], class:"d-flex col-12" do |f| %>
-          <%= f.text_area :comment, rows: '1', placeholder: "このレビューに対してコメント", class:"form-control col-10" %>
-          <%= f.button :type => "submit", style: 'background: none; border-radius: 50%; border-color: green; color: green; padding: 0px 10px 0px 10px' do %>
+        <%= form_with model: [@post, @post_comment], class:"d-flex align-items-end" do |f| %>
+          <%= f.text_area :comment, placeholder: "このレビューに対してコメント", class:"form-control text-wrap" %>
+          <%= f.button :type => "submit", style: 'height: 45px; background: none; border-radius: 50%; border-color: green; color: green; padding: 0px 10px 0px 10px' do %>
             <i class="fas fa-paper-plane"></i>
           <% end %>
         <% end %>

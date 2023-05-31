@@ -1,7 +1,7 @@
 <!--会員編集画面-->
 <div class="container">
   <div class="row">
-    <div class="col-8">
+    <div class="col">
       <%= render 'layouts/new' %>
 
       <!--ゲストには編集させない-->
@@ -11,7 +11,7 @@
         <h4 class="ml-5 mb-3">会員情報編集</h4>
 
         <%= form_with model: @customer, url: information_customers_path do |f| %>
-          <table class="table table-borderless">
+          <table class="">
             <tr>
               <th><%= f.label "アイコン画像" %></th>
               <td><%= f.file_field :profile_image, accept: "image/*" %></td>
@@ -32,12 +32,11 @@
             パスワード<i class="fas fa-key"></i>を変更する
           <% end %>
 
-          <table class="table table-borderless ml-5">
+          <table>
             <tr>
-              <td class="col-2"></td>
-              <td><%= link_to '戻る', :back, class:"btn btn-info col-8" %></td>
-              <td><%= f.submit "編集内容を保存", url: information_customers_path, method: :patch, class:"btn btn-success col-8" %></td>
-              <td><%= link_to "退会する", confirm_customers_path, class:"btn btn-danger col-8" %></td>
+              <td><%= link_to '戻る', :back, class:"btn btn-info btn-sm" %></td>
+              <td><%= f.submit "編集内容を保存", url: information_customers_path, method: :patch, class:"btn btn-success" %></td>
+              <td><%= link_to "退会する", confirm_customers_path, class:"btn btn-danger btn-sm" %></td>
             </tr>
           </table>
         <% end %>

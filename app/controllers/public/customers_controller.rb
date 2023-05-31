@@ -9,7 +9,7 @@ class Public::CustomersController < ApplicationController
       @posts = Post.posted_genre(@genre).where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
     elsif params[:shop_info_id]
       @shop_info = ShopInfo.find(params[:shop_info_id])
-      @posts = @shop_info.where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
+      @posts = @shop_info.post.where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
     else
       @posts = Post.where(customer_id: current_customer.id).includes(:customer).page(params[:page]).order("created_at DESC")
     end
