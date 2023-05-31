@@ -33,8 +33,7 @@ class Public::PostsController < ApplicationController
         end
       else # かぶってなかった時の処理
         @shop_info.save
-        shop_info = ShopInfo.last
-        @post.shop_info_id = shop_info.id
+        @post.shop_info_id = @shop_info.id
         if @post.save
           redirect_to posts_path, success: "投稿しました"
         else
