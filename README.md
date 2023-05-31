@@ -47,7 +47,7 @@
 
 
 ## 設計書
-- ER図: https://drive.google.com/file/d/1Z0__T6A3wLPwbE2l34Kb1yRJl7Mic9Wc/view?usp=sharing
+- ER図: https://drive.google.com/file/d/1xLwRkQPFP6Vsbiel7aLqNjrNmUkEPsmG/view?usp=sharing
 - テーブル定義書: https://docs.google.com/spreadsheets/d/1k_ecqGaVn0pGaQPHsIItygX_U4OYDOF-JGHHlVtRyxE/edit?usp=sharing
 - 実装機能リスト: https://docs.google.com/spreadsheets/d/1TiYwpm9_Yw4ipzxSmeHwZfcB7a7sslbdahmEhNVXS7g/edit?usp=sharing
 - テスト仕様書: https://docs.google.com/spreadsheets/d/1EGOKVGawufm87fTbCnQ2G9u8kyqn7K85YhZkTsGsyfY/edit#gid=2096043569
