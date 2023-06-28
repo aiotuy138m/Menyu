@@ -1,5 +1,5 @@
 class Public::ReportsController < ApplicationController
-  before_action :authenticare_customer # 未ログインアクセス制限
+  before_action :authenticate_customer! # 未ログインアクセス制限
 
   def new
     @report = Report.new

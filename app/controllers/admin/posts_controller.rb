@@ -1,4 +1,5 @@
 class Admin::PostsController < ApplicationController
+  before_action :authenticate_admin!
   def index
     if params[:customer_id]
       @customer = Customer.find(params[:customer_id])

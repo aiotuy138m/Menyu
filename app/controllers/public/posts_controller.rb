@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticare_customer # 未ログインアクセス制限
-  before_action :ensure_correct_customer, {only: [:edit, :update]} # ログインユーザーのみが編集可能
+  before_action :authenticate_customer! # 未ログインアクセス制限
+  before_action :post_ensure_correct_customer, {only: [:edit, :update, :destroy]} # ログインユーザーのみが編集可能
 
   def new
     @post = Post.new
@@ -102,6 +102,14 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:menu,:rate, :comment, :post_status, :shop_info_id, :image, genre_ids: [])
+  end
+
+    # ログインユーザーのみが編集可能
+  def post_ensure_correct_customer
+    @post = Post.find(params[:id])
+    if @post.customer_id != current_customer.id
+      redirect_to my_page_customers_path, danger: "投稿ユーザーのみが編集できます"
+    end
   end
 
 end

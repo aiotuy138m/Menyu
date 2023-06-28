@@ -1,5 +1,5 @@
 class Public::LikesController < ApplicationController
-  before_action :authenticare_customer # 未ログインアクセス制限
+  before_action :authenticate_customer! # 未ログインアクセス制限
 
   def create
     posts = Post.find(params[:post_id])
